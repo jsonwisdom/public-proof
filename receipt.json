@@ -1,0 +1,9 @@
+{
+  "actor_ref": "jaywisdom.base.eth",
+  "resolved_address": "0xA380552a27b0a5a2874Ea7AA52CAC09f542002E8",
+  "claim_hash": "0x51a2b8b82eeef4e0603e9c4bb15d30b5354f303d654448e6a1c3a879f36851c6",
+  "classification": "MATCH",
+  "timestamp_utc": "2026-03-22T20:30:00Z",
+  "signer": "jaywisdom.base.eth",
+  "schema_version": "receipt.v0.0.1"
+}
