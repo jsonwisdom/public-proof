@@ -1,0 +1,19 @@
+{
+  "coordinate_id": "001",
+  "version": "1.0",
+  "entity": "FlamingChina 10PB Exfil",
+  "jay_score": 1.93,
+  "verdict": "PARTIAL_BREACH_PLAUSIBLE_FULL_10PB_EXFIL_UNLIKELY",
+  "anchors": {
+    "l0_vault_intent": "gs://jaywisdom-vault/l0/coordinates/001/v1/",
+    "l2_ledger_ens": "jaywisdom.base.eth"
+  },
+  "audit_trail": {
+    "gravity": 0.95,
+    "fragility": 0.60,
+    "lag": 0.85,
+    "exposure": 0.90,
+    "contradiction": 0.80,
+    "verification": 0.25
+  }
+}
