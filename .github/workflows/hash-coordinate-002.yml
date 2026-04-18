@@ -1,0 +1,37 @@
+name: Hash Coordinate 002 PDF
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/hash-coordinate-002.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  hash-coordinate-002:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare directories
+        run: mkdir -p coordinates/002/source coordinates/002/v1
+
+      - name: Download MMB February 2026 PDF
+        run: |
+          curl -L "https://mn.gov/mmb-stat/000/az/forecast/2026/budget-and-economic-forecast/february.pdf" -o coordinates/002/source/mn_feb_2026.pdf
+
+      - name: Compute SHA256
+        run: |
+          sha256sum coordinates/002/source/mn_feb_2026.pdf | tee coordinates/002/v1/hash.txt
+
+      - name: Commit hash artifact
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add coordinates/002/source/mn_feb_2026.pdf coordinates/002/v1/hash.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "ci: hash Coordinate_002 source PDF"
+          git push
