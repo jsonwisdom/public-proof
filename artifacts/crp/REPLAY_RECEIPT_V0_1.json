@@ -1,0 +1,28 @@
+{
+  "receipt_type": "REPLAY_RECEIPT_V0_1",
+  "replay_target": "CRP_V0.1_SPECIFICATION_ARCHIVE",
+  "replay_scope": "SPECIFICATION_LAYER_ONLY",
+  "replay_result": "GREEN",
+  "membrane_preserved": true,
+  "verifiable": true,
+  "repository": "jsonwisdom/public-proof",
+  "receipts": {
+    "spec_freeze": "e3b4b520c420936b86a879de59e1c783b9781367",
+    "fixture_set": "a11475bd4ec8dc9365c41acff72346af6b72ccce",
+    "runner_source": "1d72bc2a45956ce80a8d10b25ec63ea045a2bd12",
+    "ci_workflow": "fd1fc265d33cf4908fadc77b9e45154c42562827",
+    "archive_receipt": "3fdfdecd6a17f53681d838c9eac8eb3d995487d9",
+    "text_receipt": "262f4bb230053c5b3c9740f19bf05ce30e8602cc"
+  },
+  "verification_method": [
+    "commit_reachable",
+    "artifact_path_present",
+    "archive_chain_consistent"
+  ],
+  "execution": false,
+  "implementation": false,
+  "certification": false,
+  "authority": false,
+  "witness_id": "GOBLIN_COURT_V0_1",
+  "receipt_status": "RECORDED"
+}
