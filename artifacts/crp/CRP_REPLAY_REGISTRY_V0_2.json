@@ -29,6 +29,30 @@
       "authority": false,
       "no_fake_green": true,
       "notes": "Initial V0.2 registry entry for Seed 002. Replay outcome remains UNKNOWN pending external replay."
+    },
+    {
+      "entry_id": "crp-seed-002-the-second-witness-external-replay-001",
+      "entry_type": "REPLAY_WITNESS",
+      "schema_version": "CRP_REPLAY_REGISTRY_SCHEMA_V0_2",
+      "protocol_version": "CRP_REPLAY_REGISTRY_UPDATE_PROTOCOL_V0_2",
+      "registry_entry_created_at": "2026-06-11T20:00:00Z",
+      "registry_entry_commit_sha": "TBD_SELF_BINDING_COMMIT_SHA",
+      "supersedes": {
+        "entry_index": 0,
+        "reason": "External replay matched Seed 002 preimage hash."
+      },
+      "subject_entry_id": "crp-seed-002-the-second-witness",
+      "subject_sha256": "5ab3d2bfc864710f48188fd1f89ebe3d76304a15ed414c0a8e058d0b0b0e4108",
+      "replay_outcome": "GREEN_MATCH",
+      "witnesses": [
+        {
+          "witness_scope": "SELF",
+          "witness_claim": "REPLAY_EXECUTED",
+          "notes": "Canonical replay performed in Google Cloud Shell using CRP_CANONICAL_PREIMAGE_V0_2 and sha256sum. HEAD was 3415ed9673786fc8b08cfd94e05b38dd3ebfc564."
+        }
+      ],
+      "authority": false,
+      "no_fake_green": true
     }
   ]
 }
