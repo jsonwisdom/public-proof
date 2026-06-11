@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.jaywisdom.base.eth/replays/next_state_transition_blueprint.v0.1.json",
+  "artifact": "NEXT_STATE_TRANSITION_BLUEPRINT_V0_1",
+  "version": "0.1",
+  "description": "Conditional logic for advancing from AWAITING_EXTERNAL_WITNESS to EXTERNAL_WITNESS_ADMITTED, with authority locked false and a separate repository-inside-membrane evaluation required.",
+  "precondition": {
+    "witness_state": "AWAITING_EXTERNAL_WITNESS",
+    "gate_closure_allowed": false,
+    "authority": false,
+    "no_fake_green": true
+  },
+  "transition_rules": [
+    {
+      "id": "ALL_CHECKS_TRUE",
+      "condition": "ALL checks in EXTERNAL_WITNESS_ADMISSION_CHECK_V0_1 have current_value = true",
+      "action": "Set gate_closure_allowed = true",
+      "next_state": "EXTERNAL_WITNESS_ADMITTED",
+      "authority_after": false,
+      "requires": "REPOSITORY_INSIDE_MEMBRANE_EVALUATION as a separate run before any further operational move"
+    },
+    {
+      "id": "ANY_CHECK_FALSE_OR_NULL",
+      "condition": "ANY check in EXTERNAL_WITNESS_ADMISSION_CHECK_V0_1 has current_value = false or null",
+      "action": "Maintain gate_closure_allowed = false",
+      "next_state": "AWAITING_EXTERNAL_WITNESS",
+      "authority_after": false
+    }
+  ],
+  "permanent_invariants": {
+    "authority": false,
+    "no_fake_green": true,
+    "side_channels_allowed": false,
+    "membrane_status": "SEALED_UNTIL_RE_EVALUATION"
+  },
+  "critical_constraint": "Even after EXTERNAL_WITNESS_ADMITTED, no authority is granted. A separate repository-inside-membrane evaluation must run to determine the next operational move.",
+  "current_state_after_blueprint": {
+    "witness_state": "AWAITING_EXTERNAL_WITNESS",
+    "gate_closure_allowed": false,
+    "authority": false,
+    "no_fake_green": true
+  },
+  "notes": [
+    "This blueprint is conditional design only.",
+    "It does not admit the witness.",
+    "It does not close the gate.",
+    "It does not elevate authority."
+  ],
+  "authority": false,
+  "no_fake_green": true
+}
