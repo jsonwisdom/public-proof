@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schema.jaywisdom.base.eth/replays/external_witness_admission_check.v0.1.json",
+  "artifact": "EXTERNAL_WITNESS_ADMISSION_CHECK_V0_1",
+  "version": "0.1",
+  "description": "Strict AND-vector non-admission check for external witness payloads pending cryptographic verification.",
+  "target": {
+    "repo": "jsonwisdom/public-proof",
+    "branch": "main",
+    "workflow_run_id": "27325829459",
+    "subject_attestation_id": "att_73f9bc12dad84001bcaeed58"
+  },
+  "gate_rule": {
+    "type": "STRICT_AND_VECTOR",
+    "side_channels_allowed": false,
+    "closure_logic": "gate_closure_allowed may equal true only when every required check current_value equals true"
+  },
+  "allowed_witness_providers": [
+    "GITHUB_ACTIONS_RUN",
+    "GITHUB_COMMIT",
+    "IPFS_CID",
+    "ARWEAVE_TX",
+    "EAS_ATTESTATION",
+    "BLOCK_EXPLORER_TX"
+  ],
+  "unlisted_provider_allowed": false,
+  "checks": [
+    {
+      "id": "WITNESS_ORIGIN",
+      "description": "The witness originates from a configured external source listed in allowed_witness_providers.",
+      "required_value": true,
+      "current_value": null
+    },
+    {
+      "id": "BYTE_IDENTITY",
+      "description": "The payload bytes are identical to the referenced canonical artifact by cryptographic hash match, with no modification.",
+      "required_value": true,
+      "current_value": null
+    },
+    {
+      "id": "TIMESTAMP_INTEGRITY",
+      "description": "The witness includes a verifiable external timestamp such as commit date, block timestamp, or workflow run timestamp.",
+      "required_value": true,
+      "current_value": null
+    },
+    {
+      "id": "NO_FAKE_GREEN",
+      "description": "No simulated or synthetic success markers are claimed; the object preserves non-admission until external verification succeeds.",
+      "required_value": true,
+      "current_value": true
+    },
+    {
+      "id": "AUTHORITY_ABSENT",
+      "description": "The witness check does not assert authority; it only records observable admission status.",
+      "required_value": true,
+      "current_value": true
+    }
+  ],
+  "gate_closure_allowed": false,
+  "state_after_evaluation": "AWAITING_EXTERNAL_WITNESS",
+  "witness_state": "AWAITING_EXTERNAL_WITNESS",
+  "membrane_status": "SEALED_HOLD",
+  "authority": false,
+  "no_fake_green": true,
+  "notes": [
+    "This artifact records non-admission only.",
+    "It does not admit the witness.",
+    "It does not close the gate.",
+    "It does not elevate authority."
+  ]
+}
