@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.jaywisdom.base.eth/replays/structural_replay_receipt.v0.1.json",
+  "artifact": "STRUCTURAL_REPLAY_RECEIPT_V0_1",
+  "version": "0.1",
+  "evaluation_id": "run_27325829459",
+  "purpose": "Tamper-evident receipt for structural replay non-admission state after EXTERNAL_WITNESS_ADMISSION_CHECK_V0_1 commit.",
+  "bound_to": {
+    "repo": "jsonwisdom/public-proof",
+    "branch": "main",
+    "commit_sha": "d87d87d791910ffe7e243019706c59739fe539c1",
+    "git_head": "d87d87d791910ffe7e243019706c59739fe539c1",
+    "timestamp": "2026-06-11T00:00:00Z",
+    "workflow_run_id": "27325829459"
+  },
+  "source_artifact": {
+    "path": "audits/structural-replay/v0_1/EXTERNAL_WITNESS_ADMISSION_CHECK_V0_1.json",
+    "commit_sha": "d87d87d791910ffe7e243019706c59739fe539c1",
+    "status": "COMMITTED_NON_ADMISSION"
+  },
+  "evaluation_state": {
+    "gate_closure_allowed": false,
+    "witness_state": "AWAITING_EXTERNAL_WITNESS",
+    "membrane_status": "SEALED_HOLD",
+    "authority": false,
+    "no_fake_green": true
+  },
+  "checks_summary": {
+    "required_files_present": "PASS",
+    "external_admission_check_present": "PASS",
+    "binary_tarball_absent": "PASS",
+    "workflow_guardrail_present": "PASS",
+    "authority_claim_absent": "PASS",
+    "gate_closure_claim_absent": "PASS",
+    "witness_file_present": "FAIL_NOT_FOUND",
+    "latest_workflow_status": "NOT_VERIFIED"
+  },
+  "tamper_evidence": {
+    "hash_algorithm": "SHA-256",
+    "hash_domain": "STRUCTURAL_REPLAY_RECEIPT_V0_1|run_27325829459|jsonwisdom/public-proof|main|d87d87d791910ffe7e243019706c59739fe539c1|AWAITING_EXTERNAL_WITNESS|gate_closure_allowed=false|authority=false|no_fake_green=true",
+    "receipt_hash_sha256": "PENDING_REPLAY_RECOMPUTE"
+  },
+  "non_admission_invariants": [
+    "This receipt does not admit the witness.",
+    "This receipt does not close the gate.",
+    "This receipt does not elevate authority.",
+    "This receipt is bound to the observed repository commit only."
+  ],
+  "authority": false,
+  "no_fake_green": true
+}
