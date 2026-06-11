@@ -1,0 +1,15 @@
+{
+  "id": "crp-seed-002-the-second-witness",
+  "content_type": "text/plain",
+  "content_uri": "artifacts/crp/crp-seed-002-the-second-witness.txt",
+  "canonicalization_rule": "CRP_CANONICAL_PREIMAGE_V0_2",
+  "intended_anchors": [
+    "timestamp",
+    "github_blob",
+    "optional_zora"
+  ],
+  "authority": false,
+  "no_fake_green": true,
+  "created_at": "2026-06-11T15:00:00Z",
+  "notes": "Minimal second seed. Replay outcome unknown. External replay required for GREEN."
+}
