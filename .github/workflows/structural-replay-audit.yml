@@ -17,17 +17,16 @@ permissions:
   contents: read
 
 jobs:
-  verify-structural-replay-audit:
+  verify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify required files exist
+      - name: Verify required files
         run: |
           set -euo pipefail
-
           BASE="audits/structural-replay/v0_1"
 
           test -f "$BASE/index.html"
@@ -37,40 +36,30 @@ jobs:
           test -f "$BASE/STRUCTURAL_REPLAY_MAP_V0_1.json"
           test -f "$BASE/STRUCTURAL_REPLAY_SUMMARY_V0_1.md"
 
-      - name: Block binary archive from repo
+      - name: Block tarball leakage
         run: |
           set -euo pipefail
-
           if find audits/structural-replay/v0_1 -name "*.tar.gz" | grep -q .; then
-            echo "ERROR: tar.gz archive found in repo. Binary archive must stay out of public-proof."
+            echo "ERROR: tarball found in repo"
             exit 1
           fi
-
           echo "TARBALL_NOT_IN_REPO_OK"
 
-      - name: Verify known SHA-256 commitments
+      - name: Verify SHA256 commitments
         run: |
           set -euo pipefail
-
           BASE="audits/structural-replay/v0_1"
 
-          cat > /tmp/expected.sha256 <<EOF_HASHES
-          a74cad0ef4827716baa8e61bf6983f632efc92b448e65b1a008de3ae40031c6e  $BASE/MASTER_REPLAY_AUDIT_INDEX_V0_1.json
-          16a049c85675caa4b142de1c21be1c737cdabe8175b45012934f0753568f7f96  $BASE/REPLAY_SURFACE_INDEX_V0_1.json
-          87a3c258a4600d6dc7e268a02f1d8fd30d6adfbecccfb007266b0a82ac3d74e1  $BASE/STRUCTURAL_REPLAY_AUDIT_PUBLICATION_DECISION_V0_1.json
-          bc3c8d1ed202b80d4777ad174d5c7dd1f59362ee895eeb286ffba2fe9a7981d3  $BASE/STRUCTURAL_REPLAY_MAP_V0_1.json
-          6fa0b248aa63a77e0de653435da070b97be002de25ad7b1aea5e98fc749f5b4f  $BASE/STRUCTURAL_REPLAY_SUMMARY_V0_1.md
-          EOF_HASHES
-
-          sed -i 's/^          //' /tmp/expected.sha256
-          sha256sum -c /tmp/expected.sha256
+          echo "a74cad0ef4827716baa8e61bf6983f632efc92b448e65b1a008de3ae40031c6e  $BASE/MASTER_REPLAY_AUDIT_INDEX_V0_1.json" | sha256sum -c -
+          echo "16a049c85675caa4b142de1c21be1c737cdabe8175b45012934f0753568f7f96  $BASE/REPLAY_SURFACE_INDEX_V0_1.json" | sha256sum -c -
+          echo "87a3c258a4600d6dc7e268a02f1d8fd30d6adfbecccfb007266b0a82ac3d74e1  $BASE/STRUCTURAL_REPLAY_AUDIT_PUBLICATION_DECISION_V0_1.json" | sha256sum -c -
+          echo "bc3c8d1ed202b80d4777ad174d5c7dd1f59362ee895eeb286ffba2fe9a7981d3  $BASE/STRUCTURAL_REPLAY_MAP_V0_1.json" | sha256sum -c -
+          echo "6fa0b248aa63a77e0de653435da070b97be002de25ad7b1aea5e98fc749f5b4f  $BASE/STRUCTURAL_REPLAY_SUMMARY_V0_1.md" | sha256sum -c -
 
       - name: Emit boundary status
         run: |
-          cat <<'EOF_STATUS'
-          STRUCTURAL_REPLAY_AUDIT: VERIFIED
-          INDEX_HTML: PRESENT
-          TARBALL_IN_REPO: FALSE
-          AUTHORITY: FALSE
-          NO_FAKE_GREEN: TRUE
-          EOF_STATUS
+          echo "STRUCTURAL_REPLAY_AUDIT=VERIFIED"
+          echo "INDEX_HTML=PRESENT"
+          echo "TARBALL_IN_REPO=FALSE"
+          echo "AUTHORITY=FALSE"
+          echo "NO_FAKE_GREEN=TRUE"
