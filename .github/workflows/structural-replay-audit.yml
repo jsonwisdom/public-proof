@@ -54,7 +54,7 @@ jobs:
           echo "16a049c85675caa4b142de1c21be1c737cdabe8175b45012934f0753568f7f96  $BASE/REPLAY_SURFACE_INDEX_V0_1.json" | sha256sum -c -
           echo "87a3c258a4600d6dc7e268a02f1d8fd30d6adfbecccfb007266b0a82ac3d74e1  $BASE/STRUCTURAL_REPLAY_AUDIT_PUBLICATION_DECISION_V0_1.json" | sha256sum -c -
           echo "bc3c8d1ed202b80d4777ad174d5c7dd1f59362ee895eeb286ffba2fe9a7981d3  $BASE/STRUCTURAL_REPLAY_MAP_V0_1.json" | sha256sum -c -
-          echo "6fa0b248aa63a77e0de653435da070b97be002de25ad7b1aea5e98fc749f5b4f  $BASE/STRUCTURAL_REPLAY_SUMMARY_V0_1.md" | sha256sum -c -
+          echo "6fa0b248aa63a77e0de654345da070b97be002de25ad7b1aea5e98fc749f5b4f  $BASE/STRUCTURAL_REPLAY_SUMMARY_V0_1.md" | sha256sum -c -
 
       - name: Emit boundary status
         run: |
