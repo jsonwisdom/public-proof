@@ -1,0 +1,6 @@
+CRP seed 002 — simple external anchor test.
+Timestamp: 2026-06-11T15:00:00Z
+Canonicalization rule: CRP_CANONICAL_PREIMAGE_V0_2
+Authority: false
+No fake green: true
+Purpose: Second witness anchor for V0.2 registry.
