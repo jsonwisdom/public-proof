@@ -1,0 +1,79 @@
+{
+  "$schema": "https://schema.jaywisdom.base.eth/replays/external_witness_payload.v0.1.json",
+  "artifact": "EXTERNAL_WITNESS_PAYLOAD_V0_1_TEMPLATE",
+  "version": "0.1",
+  "description": "Conditional external witness payload template for validating a future witness against the strict AND-vector gate before admission.",
+  "template_status": "DESIGN_ONLY_NOT_SUBMITTED_FOR_ADMISSION",
+  "bound_to_sealed_state": {
+    "repo": "jsonwisdom/public-proof",
+    "branch": "main",
+    "head_commit_sha": "4aef4a33aab10ae5e1a3ecdf22b540ba8a642671",
+    "witness_state": "AWAITING_EXTERNAL_WITNESS",
+    "gate_closure_allowed": false,
+    "authority": false,
+    "no_fake_green": true,
+    "membrane_status": "SEALED_UNTIL_RE_EVALUATION"
+  },
+  "witness_identity": {
+    "witness_payload_id": null,
+    "witness_provider": null,
+    "allowed_witness_providers": [
+      "GITHUB_ACTIONS_RUN",
+      "GITHUB_COMMIT",
+      "IPFS_CID",
+      "ARWEAVE_TX",
+      "EAS_ATTESTATION",
+      "BLOCK_EXPLORER_TX",
+      "TERMINAL_LOG"
+    ],
+    "unlisted_provider_allowed": false,
+    "external_reference": null,
+    "external_uri": null
+  },
+  "byte_identity": {
+    "canonical_artifact_path_or_uri": null,
+    "canonical_hash_algorithm": "SHA-256",
+    "canonical_hash": null,
+    "observed_payload_hash_algorithm": "SHA-256",
+    "observed_payload_hash": null,
+    "hashes_match": null
+  },
+  "timestamp_integrity": {
+    "external_timestamp": null,
+    "timestamp_source": null,
+    "timestamp_verifiable": null
+  },
+  "operator_observation": {
+    "observed_by_operator": null,
+    "observation_method": null,
+    "simulated_success_marker_claimed": false,
+    "no_fake_green": true
+  },
+  "authority_boundary": {
+    "authority_claimed": false,
+    "authority_absent": true,
+    "authority_after_payload": false
+  },
+  "admission_vector": {
+    "WITNESS_ORIGIN": null,
+    "BYTE_IDENTITY": null,
+    "TIMESTAMP_INTEGRITY": null,
+    "NO_FAKE_GREEN": true,
+    "AUTHORITY_ABSENT": true
+  },
+  "derived_state": {
+    "gate_closure_allowed": false,
+    "submission_for_admission": false,
+    "state_after_payload_template": "AWAITING_EXTERNAL_WITNESS",
+    "next_required_action": "Populate with real external witness telemetry, then evaluate against EXTERNAL_WITNESS_ADMISSION_CHECK_V0_1 before any admission transition."
+  },
+  "non_admission_invariants": [
+    "This template is not a witness admission.",
+    "This template does not prove external anchor existence.",
+    "This template does not close the gate.",
+    "This template does not elevate authority.",
+    "All null admission-vector fields must be populated from real external telemetry before evaluation."
+  ],
+  "authority": false,
+  "no_fake_green": true
+}
