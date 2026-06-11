@@ -1,0 +1,30 @@
+{
+  "artifact": "REPLAY_SURFACE_INDEX_V0_1",
+  "status": "DRAFT_INDEX_CREATED_FROM_CONTENT_REPLAY_AUDIT",
+  "mode": "LOCAL_AUDIT_WORKSPACE_ONLY",
+  "authority": false,
+  "no_fake_green": true,
+  "replay_count_total": 9,
+  "major_replay_lanes": [
+    "STRUCTURAL_REPLAY_MAP_V0_1",
+    "CONTENT_REPLAY_AUDIT_V0_1",
+    "CONTENT_REPLAY_AUDIT_V0_2",
+    "Phase-3 Continuity Replay",
+    "GitHub Goblin Replay Witness"
+  ],
+  "supporting_replay_or_verify_surfaces": [
+    "CASE_STUDY_001 Digest",
+    "CASE_STUDY_001 Independent Verify",
+    "CASE_STUDY_001 Tally Verifiers / Consensus",
+    "jay-agent Golden Mode Replay Gate"
+  ],
+  "core_engine": "receipts-engine-v1",
+  "core_engine_status": "CORE_RECEIPT_REPLAY_ENGINE_CONFIRMED_WITH_BOUNDED_AUTHORITY_FALSE",
+  "known_blockers": [
+    "CASE_STUDY_001 needs exactly 3 independent verifier reports",
+    "hello_world lane has registered D005 deterministic divergence",
+    "ENS equality must be live-run/read back before external green",
+    "jay-agent golden mode requires real Base transaction before proven"
+  ],
+  "source_audit": "CONTENT_REPLAY_AUDIT_V0_2.md"
+}

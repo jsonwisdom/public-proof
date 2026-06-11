@@ -1,0 +1,17 @@
+{
+  "artifact": "MASTER_REPLAY_AUDIT_INDEX_V0_1",
+  "status": "LOCAL_AUDIT_INDEX_COMPLETE",
+  "authority": false,
+  "no_fake_green": true,
+  "artifacts": {
+    "STRUCTURAL_REPLAY_MAP_V0_1.json": "bc3c8d1ed202b80d4777ad174d5c7dd1f59362ee895eeb286ffba2fe9a7981d3",
+    "CONTENT_REPLAY_AUDIT_V0_1.md": "49b9e9c0b496c7ee611375f6bdcb24e99c2f34fbb7554af25ca521da0d9d673d",
+    "CONTENT_REPLAY_AUDIT_V0_2.md": "bca5ede16ebb4b2f0ff9fd82dafc3214c960ca107005e9b7164d0fc5d3997f53",
+    "REPLAY_SURFACE_INDEX_V0_1.json": "16a049c85675caa4b142de1c21be1c737cdabe8175b45012934f0753568f7f96",
+    "STRUCTURAL_REPLAY_SUMMARY_V0_1.md": "6fa0b248aa63a77e0de654345da070b97be002de25ad7b1aea5e98fc749f5b4f"
+  },
+  "repos_classified": 5,
+  "replay_surfaces": 9,
+  "core_engine": "receipts-engine-v1",
+  "verdict": "COHERENT_PARTIAL_GREEN_NO_AUTHORITY_ESCALATION"
+}

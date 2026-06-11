@@ -1,0 +1,41 @@
+{
+  "$schema": "https://jsonwisdom.computerwisdom/schemas/STRUCTURAL_REPLAY_AUDIT_PUBLICATION_DECISION_V0_1.json",
+  "artifact": "STRUCTURAL_REPLAY_AUDIT_PUBLICATION_DECISION_V0_1",
+  "layer": "L5_LOCAL_AUDIT_BOUNDARY",
+  "posture": "LOCAL_ONLY_UNEMITTED",
+  "source_bundle": {
+    "filename": "jay_structural_replay_audit_v0_1.tar.gz",
+    "sha256": "e71c8021f54a0c7ebeab3a537a4942772eed94ffa5aad8286ce4de74d9f7ba1d",
+    "file_count": 6
+  },
+  "publication_strategy": {
+    "selected_path": "HYBRID_INDEX_FIRST",
+    "rationale": "Commit textual metadata index to the repo tree to secure provenance, reserving the heavy archival tarball for target-specific cloud or decentralized object storage.",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Extract summary telemetry and compile manifest index"
+      },
+      {
+        "step": 2,
+        "action": "Stage index patch to repository tracking branch"
+      },
+      {
+        "step": 3,
+        "action": "Hold binary tarball within local enclave pending GCS/Base transport triggers"
+      }
+    ]
+  },
+  "external_surfaces": {
+    "github_tree": "UNMUTATED",
+    "gcs_vault": "HOLDING_LOCAL",
+    "base_ledger": "DORMANT"
+  },
+  "operational_hygiene": {
+    "authority": false,
+    "no_fake_green": true,
+    "public_green_status": "BLOCKED",
+    "sovereignty_target": "jaywisdom.base.eth",
+    "membrane": "INTACT"
+  }
+}

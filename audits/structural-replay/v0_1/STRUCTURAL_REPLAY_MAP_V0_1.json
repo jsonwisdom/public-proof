@@ -1,0 +1,36 @@
+{
+  "artifact": "STRUCTURAL_REPLAY_MAP_V0_1",
+  "operator": "jaywisdom44@cloudshell",
+  "root": "~/jsonwisdom-proof-replay",
+  "mode": "READ_ONLY_STRUCTURAL_DISCOVERY",
+  "status": "STRUCTURAL_DISCOVERY_COMPLETE",
+  "mutation_allowed": false,
+  "repos": {
+    "public-proof": {
+      "branch": "main",
+      "head": "6f35e15f9501c9d8f40c679276ae9612e6306182",
+      "role": "PUBLIC_PROOF_FRONT_DOOR"
+    },
+    "prooflayer-repo": {
+      "branch": "main",
+      "head": "68c284cebc771d2cc22bf389a2ad957312acb854",
+      "role": "DEPLOYMENT_AND_POINTER_LAYER"
+    },
+    "layered-proofing-state-level-alms": {
+      "branch": "main",
+      "head": "2664d1b5a20db23bb7568f2b02a7151452953654",
+      "role": "ALMS_STATE_LEVEL_PROOF_MODEL"
+    },
+    "receipts-engine-v1": {
+      "branch": "main",
+      "head": "665d76021619f11245cf2a5c6309bbd88fab871f",
+      "role": "CORE_RECEIPT_ENGINE_AND_VERIFIER"
+    },
+    "receipt-arcade": {
+      "branch": "master",
+      "head": "5725bc19d20780fa1607060990f68205aa40db87",
+      "role": "LIGHTWEIGHT_STATE_OR_GAME_SURFACE"
+    }
+  },
+  "next_gate": "CONTENT_REPLAY_AUDIT_V0_1"
+}
