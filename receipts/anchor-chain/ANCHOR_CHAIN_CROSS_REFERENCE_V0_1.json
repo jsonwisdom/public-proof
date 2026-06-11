@@ -1,0 +1,67 @@
+{
+  "artifact": "ANCHOR_CHAIN_CROSS_REFERENCE_V0_1",
+  "version": "0.1",
+  "status": "CROSS_REFERENCE_CANDIDATE",
+  "green_status": "BLOCKED_PENDING_EXPLICIT_REFERENCES",
+  "authority": false,
+  "no_fake_green": true,
+  "repo": "jsonwisdom/public-proof",
+  "declared_chain": [
+    {
+      "id": "IDENTITY_NAMES",
+      "value": [
+        "jaywisdom.eth",
+        "jaywisdom.base.eth"
+      ],
+      "role": "identity namespace / name surface",
+      "evidence_required": [
+        "resolver record",
+        "profile/address linkage",
+        "public explorer URL or committed verification receipt"
+      ],
+      "status": "DECLARED_REQUIRES_PINNED_REFERENCE"
+    },
+    {
+      "id": "JAYWISDOM_CREATOR_COIN_REGISTRY_ANCHOR",
+      "role": "creator coin registry / market surface anchor",
+      "evidence_required": [
+        "creator coin contract address",
+        "chain id",
+        "registry or Zora public URL",
+        "metadata hash or pinned registry receipt"
+      ],
+      "status": "DECLARED_REQUIRES_PINNED_REFERENCE"
+    },
+    {
+      "id": "EAS_SCHEMA_ATTESTATION_ROUTING",
+      "role": "schema and attestation routing layer",
+      "evidence_required": [
+        "schema UID",
+        "attestation UID",
+        "recipient address",
+        "attester address",
+        "transaction hash",
+        "chain"
+      ],
+      "status": "DECLARED_REQUIRES_PINNED_REFERENCE"
+    },
+    {
+      "id": "COMPUTERWISDOM_OBSERVER_REPLAY_SURFACE",
+      "role": "read-only observer and replay verification layer",
+      "evidence_required": [
+        "repository URL",
+        "commit SHA",
+        "public index path",
+        "replay artifact hash"
+      ],
+      "status": "DECLARED_REQUIRES_PINNED_REFERENCE"
+    }
+  ],
+  "boundary_rules": {
+    "public_proof_repo_boundary": "This file is a cross-reference candidate only. It does not convert coordinate proof artifacts into Anchor 001.",
+    "no_ghost_anchor": true,
+    "no_implied_equivalence": true,
+    "full_green_condition": "Every declared arrow must be pinned to explicit public evidence: contract address, UID, transaction hash, commit SHA, or content hash."
+  },
+  "next_gate": "PIN_EXPLICIT_PUBLIC_REFERENCES"
+}
