@@ -1,0 +1,39 @@
+{
+  "receipt_type": "EXTERNAL_REPLAY_GREEN_RECEIPT",
+  "version": "1.0",
+  "status": "EXTERNAL_REPLAY_GREEN_ISSUED",
+  "scope": "technical_reproducibility_only",
+  "witness_repository": "jsonwisdom/AL",
+  "target_repository": "jsonwisdom/public-proof",
+  "target_commit": "26d255899241a3f5cdfcb6d3b3be7333e380fae8",
+  "workflow_run_id": "27386089192",
+  "workflow_job_id": "80933304118",
+  "workflow_sha": "d274716a4c5251e324b6524870eb8402c24c17cb",
+  "artifact_id": "7580104955",
+  "artifact_zip_sha256": "8e67bda7da4f0684ab6ceaad2c23f19c31fe3bc29c74562697cb828e0420d78b",
+  "inventory_sha256": "3cdd931bdeb5cad4c498421f1a3cfcc6c9de2d0713cec6d7f55e8f3abb7ea4a7",
+  "verified_properties": [
+    "clone_fidelity",
+    "inventory_integrity",
+    "commit_pinning",
+    "fsck_cleanliness",
+    "working_tree_purity"
+  ],
+  "observed_results": {
+    "git_status": "CLEAN",
+    "inventory_check": "ALL_OK",
+    "git_fsck": "NO_OUTPUT_NO_ERRORS",
+    "garbage": 0,
+    "external_replay_stdout_complete": true
+  },
+  "claims_excluded": {
+    "authority": false,
+    "semantic_truth_claims": false,
+    "institutional_claims": false,
+    "green_implied": false
+  },
+  "directives": [
+    "PROTECT_OUR_ASSETS",
+    "DENY_OUTSIDE_INFLUENCE"
+  ]
+}
