@@ -8,16 +8,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: External replay witness
+        shell: bash
         run: |
           set -euo pipefail
+
+          RECEIPT="$GITHUB_WORKSPACE/external-replay-receipt.txt"
+          exec > >(tee "$RECEIPT") 2>&1
+
+          echo "=== WITNESS ==="
+          echo "runner_os=${RUNNER_OS}"
+          echo "runner_arch=${RUNNER_ARCH}"
+          echo "github_repository=${GITHUB_REPOSITORY}"
+          echo "github_run_id=${GITHUB_RUN_ID}"
+          echo "github_run_attempt=${GITHUB_RUN_ATTEMPT}"
+          echo "workflow_sha=${GITHUB_SHA}"
 
           cd ~
           rm -rf public-proof-external-replay
 
+          echo
+          echo "=== CLONE ==="
           git clone https://github.com/jsonwisdom/public-proof.git public-proof-external-replay
           cd public-proof-external-replay
           git checkout 26d255899241a3f5cdfcb6d3b3be7333e380fae8
 
+          echo
           echo "=== HEAD ==="
           git rev-parse HEAD
 
@@ -44,3 +59,13 @@ jobs:
           echo
           echo "=== OBJECT COUNT ==="
           git count-objects -vH
+
+          echo
+          echo "=== VERDICT_HINT ==="
+          echo "EXTERNAL_REPLAY_STDOUT_COMPLETE"
+
+      - name: Upload external replay receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-replay-receipt
+          path: external-replay-receipt.txt
