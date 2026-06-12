@@ -1,0 +1,46 @@
+name: External Replay Gate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: External replay witness
+        run: |
+          set -euo pipefail
+
+          cd ~
+          rm -rf public-proof-external-replay
+
+          git clone https://github.com/jsonwisdom/public-proof.git public-proof-external-replay
+          cd public-proof-external-replay
+          git checkout 26d255899241a3f5cdfcb6d3b3be7333e380fae8
+
+          echo "=== HEAD ==="
+          git rev-parse HEAD
+
+          echo
+          echo "=== STATUS ==="
+          git status --short
+
+          echo
+          echo "=== INVENTORY HASH ==="
+          sha256sum repo_inventory.sha256
+
+          echo
+          echo "=== INVENTORY CHECK ==="
+          sha256sum -c repo_inventory.sha256
+
+          echo
+          echo "=== FSCK ==="
+          git fsck --full
+
+          echo
+          echo "=== REFS ==="
+          git show-ref
+
+          echo
+          echo "=== OBJECT COUNT ==="
+          git count-objects -vH
