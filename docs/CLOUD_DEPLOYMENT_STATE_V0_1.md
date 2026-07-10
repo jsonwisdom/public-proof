@@ -11,13 +11,31 @@ PROJECT_DISPLAY_NAME = JayWisdom Boardroom
 PROJECT_NUMBER = 311690651351
 PROJECT_ID = UNOBSERVED
 BILLING_RELATIONSHIP = OBSERVED_ACTIVE
-MONTH_TO_DATE_COST = USD 0.02
-FORECAST_END_OF_MONTH_COST = USD 0.16
+CURRENT_MONTH_TO_DATE_COST = USD 0.02
+CURRENT_MONTH_FORECAST_END_OF_MONTH_COST = USD 0.16
 BUDGETS_EXCEEDED = 0_OF_1
 CREDITS_AVAILABLE = USD 0.00
 ```
 
 The screenshots establish the project display name and project number. They do **not** independently establish that the canonical project ID is `jaywisdom-boardroom`; that value remains planned until directly observed in project metadata or CLI output.
+
+## Observed billing overview
+
+A separate billing overview screenshot uses the date range `2025-07-01` through `2026-07-31` and shows:
+
+```text
+BILLING_OVERVIEW_DATE_RANGE = 2025-07-01_TO_2026-07-31
+BILLING_OVERVIEW_ACTUAL_COST = USD 0.55
+BILLING_OVERVIEW_FORECAST_ADDITIONAL_COST = USD 0.14
+ARTIFACT_REGISTRY_ACTUAL_COST = USD 0.34
+ARTIFACT_REGISTRY_FORECAST_ADDITIONAL_COST = USD 0.09
+CLOUD_KMS_ACTUAL_COST = USD 0.21
+CLOUD_KMS_FORECAST_ADDITIONAL_COST = USD 0.04
+CLOUD_BUILD_ACTUAL_COST = USD 0.00
+CLOUD_BUILD_FORECAST_ADDITIONAL_COST = USD 0.00
+```
+
+The `$0.55` overview value and `$0.02` month-to-date value come from different billing views and time windows. They must not be treated as contradictory or interchangeable.
 
 ## Observed resources
 
@@ -97,6 +115,7 @@ Before any deployment is enabled, the following must be independently observed a
 ```text
 CONFIGURATION_INTENT != OBSERVED_CLOUD_STATE
 PROJECT_DISPLAY_NAME != PROJECT_ID
+BILLING_VIEW_TOTAL != CURRENT_MONTH_TOTAL
 PRINCIPAL_LISTING != WALLET_CONTROL
 NO_FAKE_GREEN = TRUE
 NO_FAKE_RED = TRUE
