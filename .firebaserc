@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "jaywisdom-boardroom-preview": {
+      "hosting": {
+        "preview": [
+          "jaywisdom-boardroom-preview"
+        ]
+      }
+    },
+    "jaywisdom-boardroom": {
+      "hosting": {
+        "production": [
+          "jaywisdom-boardroom"
+        ]
+      }
+    }
+  }
+}
