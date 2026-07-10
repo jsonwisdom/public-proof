@@ -1,0 +1,38 @@
+{
+  "artifact_type": "BRIDGE_NODE_SYNTAX_CHECK_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_TERMINAL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "command": "npm run check",
+  "resolved_command": "node --check laughter-oracle-bridge.js",
+  "observed_exit_code": 0,
+  "result": "PASS",
+  "dependency_install": {
+    "status": "OBSERVED_SUCCESS_IN_PRIOR_TERMINAL_OUTPUT",
+    "audit_vulnerabilities_reported": 0
+  },
+  "dependency_lock": {
+    "commit": "7dec4342143f2530c54f2ec3301f253069874871",
+    "package_lock_committed": true,
+    "node_modules_ignored": true,
+    "bridge_env_ignored": true
+  },
+  "limitations": [
+    "This receipt preserves user-provided terminal output; no GitHub Actions execution is claimed.",
+    "Syntax success does not prove runtime correctness, EAS compatibility, contract compatibility, chain connectivity, or transaction success.",
+    "The full UWDiploma128 contract remains unobserved; only a validation patch is committed.",
+    "Local executable-bit modifications to capture scripts were visible in git status and were not included in commit 7dec434."
+  ],
+  "current_state": {
+    "NODE_SYNTAX_CHECK": "OBSERVED_PASS_USER_TERMINAL",
+    "PACKAGE_LOCK": "COMMITTED",
+    "LIVE_RUNTIME": "NOT_STARTED",
+    "FIXTURE_TESTS": "NOT_EXECUTED",
+    "EAS_SCHEMA": "NOT_REGISTERED",
+    "ORACLE_ROLE": "NOT_GRANTED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
