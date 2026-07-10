@@ -1,0 +1,17 @@
+{
+  "artifact_type": "CLOUD_VELOCITY_CAPTURE_STATE",
+  "version": "0.2",
+  "run_id": "20260710T223832Z",
+  "project_number": "311690651351",
+  "project_id_reported": "jaywisdom-boardroom",
+  "cloud_resource_manager_state": "SEE_PROJECT_DESCRIBE_RECEIPT",
+  "enabled_services_state": "SEE_ENABLED_SERVICES_RECEIPT",
+  "billing_link_state": "SEE_BILLING_PROJECT_LINK_RECEIPT",
+  "local_json_trial": "EXECUTED",
+  "local_hash_trial": "EXECUTED",
+  "production_capacity": "UNPROVEN",
+  "marketplace_income": "UNPROVEN",
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}
