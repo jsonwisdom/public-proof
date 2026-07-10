@@ -1,0 +1,111 @@
+name: UWDiploma128 Local Gate
+
+on:
+  pull_request:
+    paths:
+      - "contracts/UWDiploma128.sol"
+      - "test/UWDiploma128.t.sol"
+      - "foundry.toml"
+      - ".github/workflows/uwdiploma128-local-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Foundry v1.7.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L https://foundry.paradigm.xyz | bash
+          source "$HOME/.bashrc"
+          foundryup --install v1.7.1
+          echo "$HOME/.foundry/bin" >> "$GITHUB_PATH"
+          "$HOME/.foundry/bin/forge" --version
+
+      - name: Install pinned Solidity dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p lib
+
+          git clone https://github.com/OpenZeppelin/openzeppelin-contracts.git lib/openzeppelin-contracts
+          git -C lib/openzeppelin-contracts checkout 5fd1781b1454fd1ef8e722282f86f9293cacf256
+
+          git clone https://github.com/foundry-rs/forge-std.git lib/forge-std
+          git -C lib/forge-std checkout bf647bd6046f2f7da30d0c2bf435e5c76a780c1b
+
+      - name: Build contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          forge clean
+          forge build
+
+      - name: Run 12-case test matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          forge test -vvv
+
+      - name: Verify ABI and creation-bytecode hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          artifact = Path("out/UWDiploma128.sol/UWDiploma128.json")
+          data = json.loads(artifact.read_text())
+
+          abi_json = json.dumps(data["abi"], separators=(",", ":"), ensure_ascii=False)
+          bytecode_hex = data["bytecode"]["object"]
+          if bytecode_hex.startswith("0x"):
+              bytecode_hex = bytecode_hex[2:]
+          if not bytecode_hex:
+              raise SystemExit("creation bytecode is empty")
+
+          bytecode = bytes.fromhex(bytecode_hex)
+          abi_hash = hashlib.sha256(abi_json.encode()).hexdigest()
+          bytecode_hash = hashlib.sha256(bytecode).hexdigest()
+          bytecode_bytes = len(bytecode)
+
+          expected_abi = "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f"
+          expected_bytecode = "16b4ee600f7ac7cb5e7d6c4f17cba8bf744ce1d4acf142d016eef284280496e1"
+          expected_bytes = 8060
+
+          print(f"ABI_SHA256={abi_hash}")
+          print(f"CREATION_BYTECODE_SHA256={bytecode_hash}")
+          print(f"CREATION_BYTECODE_BYTES={bytecode_bytes}")
+
+          if abi_hash != expected_abi:
+              raise SystemExit("ABI hash mismatch")
+          if bytecode_hash != expected_bytecode:
+              raise SystemExit("creation bytecode hash mismatch")
+          if bytecode_bytes != expected_bytes:
+              raise SystemExit("creation bytecode length mismatch")
+          PY
+
+      - name: Emit governed summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## UWDiploma128 Local Gate"
+            echo
+            echo "- Authority: false"
+            echo "- Broadcast: not performed"
+            echo "- Deployment: not claimed"
+            echo "- Runtime bytecode: unobserved"
+            echo "- Role grants: not performed"
+          } >> "$GITHUB_STEP_SUMMARY"
