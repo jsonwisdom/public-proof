@@ -19,6 +19,22 @@ CREDITS_AVAILABLE = USD 0.00
 
 The screenshots establish the project display name and project number. They do **not** independently establish that the canonical project ID is `jaywisdom-boardroom`; that value remains planned until directly observed in project metadata or CLI output.
 
+## Observed billing account linkage
+
+A billing-account management screenshot shows:
+
+```text
+BILLING_ACCOUNT_PRESENT = TRUE
+BILLING_ACCOUNT_ID = OBSERVED_BUT_REDACTED
+BILLING_ADMIN_PRESENT = TRUE
+BILLING_ADMIN_IDENTITY = OBSERVED_BUT_REDACTED
+LINKED_PROJECT_DISPLAY_NAME = JayWisdom Boardroom
+LINKED_PROJECT_NUMBER = 311690651351
+PROJECT_LINKED_TO_BILLING_ACCOUNT = TRUE
+```
+
+The billing account identifier and billing administrator email are intentionally omitted from this public artifact. Their presence is recorded, but the raw identifiers are not republished.
+
 ## Observed billing overview
 
 A separate billing overview screenshot uses the date range `2025-07-01` through `2026-07-31` and shows:
@@ -115,6 +131,7 @@ Before any deployment is enabled, the following must be independently observed a
 ```text
 CONFIGURATION_INTENT != OBSERVED_CLOUD_STATE
 PROJECT_DISPLAY_NAME != PROJECT_ID
+BILLING_ACCOUNT_PRESENT != PUBLICATION_REQUIRED
 BILLING_VIEW_TOTAL != CURRENT_MONTH_TOTAL
 PRINCIPAL_LISTING != WALLET_CONTROL
 NO_FAKE_GREEN = TRUE
