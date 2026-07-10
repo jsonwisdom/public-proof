@@ -1,0 +1,43 @@
+{
+  "artifact_type": "UWDIPLOMA128_UNSIGNED_DEPLOYMENT_BUNDLE_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "observed": {
+    "generator": "scripts/export_uwdiploma128_deployment_bundle.py",
+    "bundle_path": "receipts/local/uwdiploma128_unsigned_deployment_bundle.json",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "16b4ee600f7ac7cb5e7d6c4f17cba8bf744ce1d4acf142d016eef284280496e1",
+    "creation_bytecode_bytes": 8060,
+    "unsigned_deployment_bundle": "READY",
+    "broadcast": "NOT_PERFORMED",
+    "authority": false
+  },
+  "security_boundary": {
+    "private_key_present": false,
+    "signature_present": false,
+    "rpc_call_performed_by_generator": false,
+    "broadcast_performed": false,
+    "deployment_claimed": false
+  },
+  "limitations": [
+    "This receipt preserves user-provided Cloud Shell output; the generated local bundle file was not uploaded or independently inspected here.",
+    "The bundle contains unsigned contract creation data only and is not a deployable proof by itself.",
+    "No deployer address, nonce, gas parameters, signature, transaction hash, contract address, runtime bytecode, role grant, live bridge execution, attestation validation, or diploma mint is claimed."
+  ],
+  "current_state": {
+    "PUBLIC_PREFLIGHT": "OBSERVED_PASS",
+    "UNSIGNED_DEPLOYMENT_BUNDLE": "OBSERVED_READY_USER_TERMINAL",
+    "SIGNATURE": "ABSENT",
+    "BROADCAST": "NOT_PERFORMED",
+    "DEPLOYMENT_TX": "UNOBSERVED",
+    "CONTRACT_ADDRESS": "UNOBSERVED",
+    "RUNTIME_BYTECODE_HASH": "UNOBSERVED",
+    "ORACLE_ROLE_GRANT": "BLOCKED",
+    "LIVE_BRIDGE": "NOT_STARTED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
