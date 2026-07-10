@@ -1,0 +1,67 @@
+{
+  "artifact_type": "UWDIPLOMA128_CI_TWO_BUILD_REPRODUCIBILITY_RECEIPT",
+  "version": "0.1",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "commit": "f0bcf6f7c7a496b58f3faaff509bfc15371e0676",
+  "workflow": {
+    "name": "UWDiploma128 Local Gate",
+    "run_id": 29131155802,
+    "run_number": 7,
+    "status": "completed",
+    "conclusion": "success",
+    "job_id": 86486623848
+  },
+  "observed_steps": {
+    "foundry_install": "PASS",
+    "forge_version": "PASS",
+    "pinned_dependencies": "PASS",
+    "build_pass_1": "PASS",
+    "test_matrix_12_cases": "PASS",
+    "capture_pass_1_artifact": "PASS",
+    "build_pass_2": "PASS",
+    "two_build_reproducibility": "PASS",
+    "artifact_upload": "PASS"
+  },
+  "artifact": {
+    "artifact_id": 8242064432,
+    "artifact_name": "uwdiploma128-ci-artifacts-29131155802",
+    "artifact_digest": "sha256:f4e5526b378802059eff2c304ac65442dcf0e458ce36a460e9aee113e52a69e7",
+    "expires_at": "2026-07-24T23:47:24Z"
+  },
+  "build_1": {
+    "full_artifact_json_sha256": "a06f2547bbeba77e9dd545764fbda5dcc62b8dfd0ee488dea828f52ff595ce06",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "27f852a32bb9298e2465d4978aa8112fd0a5b547b2799f10e66ee538d329293a",
+    "creation_bytecode_bytes": 8006,
+    "runtime_bytecode_sha256": "e6cf0e0645277f95d1db858bbe39d187f24228d5e6ee046d215fd0294f05225a",
+    "runtime_bytecode_bytes": 7292
+  },
+  "build_2": {
+    "full_artifact_json_sha256": "a06f2547bbeba77e9dd545764fbda5dcc62b8dfd0ee488dea828f52ff595ce06",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "27f852a32bb9298e2465d4978aa8112fd0a5b547b2799f10e66ee538d329293a",
+    "creation_bytecode_bytes": 8006,
+    "runtime_bytecode_sha256": "e6cf0e0645277f95d1db858bbe39d187f24228d5e6ee046d215fd0294f05225a",
+    "runtime_bytecode_bytes": 7292
+  },
+  "exact_match": true,
+  "limitations": [
+    "This proves exact reproducibility across two clean builds inside one GitHub-hosted runner environment.",
+    "It does not yet prove equality with a fresh local Cloud Shell build using the hardened foundry.toml.",
+    "It does not prove deployment, signer control, runtime code at an address, role assignment, bridge execution, attestation validation, or diploma minting."
+  ],
+  "current_state": {
+    "CI_GATE": "GREEN",
+    "CI_TWO_BUILD_EXACT_MATCH": true,
+    "CI_TESTS": "PASS_12_OF_12",
+    "LOCAL_HARDENED_REBUILD_MATCH": "UNOBSERVED",
+    "DRY_PREPARATION": "BLOCKED_PENDING_LOCAL_HARDENED_REBUILD_MATCH_AND_SAFE_SIGNER_METHOD",
+    "BROADCAST": "NOT_AUTHORIZED",
+    "DEPLOYMENT_TX": "UNOBSERVED",
+    "CONTRACT_ADDRESS": "UNOBSERVED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
