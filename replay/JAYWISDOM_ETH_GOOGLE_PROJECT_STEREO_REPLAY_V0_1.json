@@ -1,0 +1,124 @@
+{
+  "artifact_type": "JAYWISDOM_ETH_GOOGLE_PROJECT_STEREO_REPLAY",
+  "version": "0.1",
+  "title": "JayWisdom.eth — Google Project by jaywisdom.base.eth — Live in Stereo",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "replay_mode": "DUAL_CHANNEL_MACHINE_AND_HUMAN",
+  "channel_left": {
+    "label": "IDENTITY_AND_REPUTATION",
+    "human_name": "Jay Wisdom",
+    "public_names": [
+      {
+        "name": "jaywisdom.eth",
+        "status": "PUBLIC_IDENTITY_CLAIM",
+        "control": "UNPROVEN_IN_THIS_REPLAY"
+      },
+      {
+        "name": "jaywisdom.base.eth",
+        "status": "PUBLIC_BASE_IDENTITY_CLAIM",
+        "control": "UNPROVEN_IN_THIS_REPLAY"
+      }
+    ],
+    "repository_evidence": [
+      {
+        "repository": "jsonwisdom/JOY",
+        "path": "README.md",
+        "git_blob_sha": "6fa34a738d9ccfa7659dddef4e97a33f711d80e9",
+        "observed_statement": "JOY identifies jaywisdom.base.eth and jaywisdom.eth as the project identity and public metadata root."
+      },
+      {
+        "repository": "jsonwisdom/COMPUTERWISDOM",
+        "path": "README.md",
+        "git_blob_sha": "a858154dbc65ba0bc9a02098967a53bd1cac73fd",
+        "observed_statement": "COMPUTERWISDOM identifies Jason Wisdom / Jay Wisdom and jaywisdom.base.eth while preserving authority=false."
+      },
+      {
+        "repository": "jsonwisdom/ENS",
+        "path": "README.md",
+        "git_blob_sha": "afd66c7d4211451b23380bda00fccc6c44b7eeb4",
+        "observed_statement": "ENS is a placeholder namespace and explicitly does not prove active ENS or Basename records."
+      }
+    ],
+    "doctrine": [
+      "GitHub contextualizes",
+      "EAS witnesses",
+      "ENS discovers",
+      "No replay, no promotion",
+      "No ghost ENS anchor"
+    ]
+  },
+  "channel_right": {
+    "label": "GOOGLE_PROJECT_AND_ACCESS_FRICTION",
+    "project": {
+      "display_name": "JayWisdom Boardroom",
+      "project_number": "311690651351",
+      "project_id": "UNOBSERVED"
+    },
+    "byte_evidence": [
+      {
+        "artifact": "active_identity.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "status": "HASH_REPORTED_AND_PREVIOUSLY_OBSERVED"
+      },
+      {
+        "artifact": "active_identity_receipt.json",
+        "sha256": "855180329cacaa7fea96b3705d56a8033cbc1bf967f31e792f2062bab93b1263",
+        "status": "HASH_REPORTED_AND_PREVIOUSLY_OBSERVED"
+      },
+      {
+        "artifact": "receipts/jay_identity_50_50_manifest.json",
+        "sha256": "cc95205df81ac7934228931993eac79a4fd88af45c881e589fb25e04196bf206",
+        "status": "GITHUB_PUBLIC_ARTIFACT_HASH"
+      }
+    ],
+    "session_observations": [
+      "Cloud Shell mobile session repeatedly disconnected.",
+      "gcloud storage buckets list exited 1 because no active account was selected.",
+      "gcloud auth list returned no account rows.",
+      "Cloud Shell browser authorization handoff was not established in the observed session."
+    ],
+    "unproven": [
+      "Google IAM ownership",
+      "active account to Owner-role binding",
+      "project ID",
+      "resource inventory",
+      "Firebase deployment",
+      "live hosting URL"
+    ]
+  },
+  "stereo_mix": {
+    "machine_channel": {
+      "purpose": "Emit hashes, repository anchors, statuses, and explicit non-conclusions.",
+      "status": "PRESENT"
+    },
+    "human_channel": {
+      "purpose": "Explain what the evidence means and prevent narrative promotion.",
+      "status": "PRESENT"
+    },
+    "permitted_convergence": "A public GitHub evidence surface links Jay Wisdom identity claims to a documented Google Cloud access-friction record.",
+    "forbidden_convergence": [
+      "GitHub evidence does not prove Google IAM ownership.",
+      "A public name does not prove wallet or name control.",
+      "A Cloud Shell failure does not prove misconduct or intent.",
+      "An EAS reference does not prove binding unless independently replayed.",
+      "A hash proves byte identity only for the bytes actually hashed."
+    ]
+  },
+  "replay_verdict": {
+    "identity_surface": "CONTEXTUALIZED",
+    "google_project_surface": "PARTIALLY_OBSERVED",
+    "cross_binding": "UNPROVEN",
+    "live_public_endpoint": "UNOBSERVED",
+    "full_replay": "INCOMPLETE_BUT_BOUNDARIED"
+  },
+  "satire_track": {
+    "enabled": true,
+    "caption": "JayWisdom live in stereo: left speaker says receipts, right speaker says reconnect, and the bass refuses fake green.",
+    "legal_finding": false,
+    "proof_of_intent": false
+  },
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}
