@@ -1,6 +1,6 @@
-# UWDiploma128 Base Deployment Runbook v0.1
+# UWDiploma128 Base Deployment Runbook v0.2
 
-**Mode:** review-first, signer-safe, no automatic broadcast  
+**Mode:** reconnect-safe, review-first, signer-safe, no automatic broadcast  
 **Network:** Base mainnet (`chain_id = 8453`)  
 **Authority:** false
 
@@ -8,11 +8,11 @@
 
 Do **not** pass a raw private key through `--private-key`, shell history, `.env`, chat, CI logs, or command-line arguments.
 
-Use a Foundry-managed encrypted account or a hardware/managed signer. This runbook assumes an encrypted Foundry keystore account named `uwdiploma-deployer`.
+Do **not** run `cast wallet import ... --interactive` from an unstable mobile Cloud Shell session. A dropped session at a secret-entry prompt creates avoidable risk and provides no durable deployment state.
+
+Use a browser wallet, hardware wallet, managed signer, or a stable desktop environment for the signing lane. Cloud Shell remains suitable for public RPC checks, builds, tests, hashes, and non-signing preparation.
 
 ## Preconditions
-
-The following must remain true before any broadcast:
 
 ```text
 LOCAL_COMPILE = PASS
@@ -24,82 +24,128 @@ BASE_CHAIN_ID = 8453
 BROADCAST_AUTHORIZED_BY_HUMAN = FALSE
 ```
 
-## 1. Refresh and re-verify the local artifact
+## 1. One-shot reconnect-safe preflight
+
+Paste this entire block after reconnecting. It performs only public, non-signing checks and writes a resumable local receipt. It does not prompt for secrets and does not broadcast.
+
+```bash
+set -u
+cd ~/public-proof || exit 1
+mkdir -p receipts/local
+
+export BASE_RPC_URL="${BASE_RPC_URL:-https://mainnet.base.org}"
+OUT="receipts/local/uwdiploma128_preflight_$(date -u +%Y%m%dT%H%M%SZ).txt"
+
+{
+  echo "PRECHECK_STARTED_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  echo "REPO=$(pwd)"
+  echo "GIT_HEAD=$(git rev-parse HEAD)"
+  echo "BASE_RPC_URL=$BASE_RPC_URL"
+
+  CHAIN_ID="$(cast chain-id --rpc-url "$BASE_RPC_URL")" || {
+    echo "CHAIN_ID_CHECK=FAIL"
+    exit 21
+  }
+  echo "CHAIN_ID=$CHAIN_ID"
+  test "$CHAIN_ID" = "8453" || {
+    echo "CHAIN_ID_CHECK=FAIL_EXPECTED_8453"
+    exit 22
+  }
+  echo "CHAIN_ID_CHECK=PASS"
+
+  forge build || {
+    echo "FORGE_BUILD=FAIL"
+    exit 31
+  }
+  echo "FORGE_BUILD=PASS"
+
+  forge test -q || {
+    echo "FORGE_TEST=FAIL"
+    exit 32
+  }
+  echo "FORGE_TEST=PASS"
+
+  python3 - <<'PY'
+import hashlib
+import json
+from pathlib import Path
+
+artifact = Path("out/UWDiploma128.sol/UWDiploma128.json")
+data = json.loads(artifact.read_text())
+abi_json = json.dumps(data["abi"], separators=(",", ":"), ensure_ascii=False)
+bytecode_hex = data["bytecode"]["object"]
+if bytecode_hex.startswith("0x"):
+    bytecode_hex = bytecode_hex[2:]
+if not bytecode_hex:
+    raise SystemExit("ERROR: creation bytecode is empty")
+bytecode = bytes.fromhex(bytecode_hex)
+print("ABI_SHA256=" + hashlib.sha256(abi_json.encode()).hexdigest())
+print("CREATION_BYTECODE_SHA256=" + hashlib.sha256(bytecode).hexdigest())
+print("CREATION_BYTECODE_BYTES=" + str(len(bytecode)))
+PY
+
+  echo "SIGNER_CHECK=SKIPPED_UNSAFE_MOBILE_SESSION"
+  echo "DRY_PREPARATION=NOT_EXECUTED"
+  echo "BROADCAST=NOT_AUTHORIZED"
+  echo "PRECHECK_FINISHED_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+} 2>&1 | tee "$OUT"
+
+STATUS=${PIPESTATUS[0]}
+echo "PRECHECK_EXIT_CODE=$STATUS"
+echo "PRECHECK_RECEIPT=$OUT"
+exit "$STATUS"
+```
+
+A disconnect after the block finishes does not erase the receipt because it is written under `receipts/local/`.
+
+## 2. Resume after reconnect
 
 ```bash
 cd ~/public-proof
-git pull --ff-only
-forge clean
-forge build
-forge test -vvv
+ls -1t receipts/local/uwdiploma128_preflight_*.txt | head -n 1
+LATEST="$(ls -1t receipts/local/uwdiploma128_preflight_*.txt | head -n 1)"
+cat "$LATEST"
 ```
 
-Stop if any command fails.
+Required successful lines:
 
-## 2. Confirm Base RPC and chain identity
-
-```bash
-: "${BASE_RPC_URL:?BASE_RPC_URL is required}"
-CHAIN_ID="$(cast chain-id --rpc-url "$BASE_RPC_URL")"
-printf 'CHAIN_ID=%s\n' "$CHAIN_ID"
-test "$CHAIN_ID" = "8453"
+```text
+CHAIN_ID=8453
+CHAIN_ID_CHECK=PASS
+FORGE_BUILD=PASS
+FORGE_TEST=PASS
+ABI_SHA256=ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f
+CREATION_BYTECODE_SHA256=16b4ee600f7ac7cb5e7d6c4f17cba8bf744ce1d4acf142d016eef284280496e1
+CREATION_BYTECODE_BYTES=8060
+PRECHECK_EXIT_CODE=0
 ```
+
+## 3. Signing lane remains separate
+
+Do not attempt signer import in mobile Cloud Shell.
+
+A future signing lane must use one of:
+
+- browser wallet deployment UI that shows the exact contract creation transaction,
+- hardware wallet connected to a stable machine,
+- managed signer with policy controls,
+- encrypted Foundry keystore created and used only in a stable terminal.
 
 Project selection in Google Cloud is not wallet control and is not deployment authority.
 
-## 3. Create or inspect an encrypted Foundry account
+## 4. Non-broadcast preparation
 
-Create once, interactively, without pasting the secret into chat:
-
-```bash
-cast wallet import uwdiploma-deployer --interactive
-```
-
-Inspect only the public address:
-
-```bash
-DEPLOYER_ADDRESS="$(cast wallet address --account uwdiploma-deployer)"
-printf 'DEPLOYER_ADDRESS=%s\n' "$DEPLOYER_ADDRESS"
-cast balance "$DEPLOYER_ADDRESS" --rpc-url "$BASE_RPC_URL"
-```
-
-Do not continue if the displayed address is not the intended deployer.
-
-## 4. Non-broadcast transaction preparation
-
-First confirm the locally installed CLI options:
+The exact preparation syntax must be confirmed from the installed CLI:
 
 ```bash
 forge create --help | sed -n '1,220p'
 ```
 
-Then prepare the deployment without broadcasting:
-
-```bash
-forge create \
-  --rpc-url "$BASE_RPC_URL" \
-  --account uwdiploma-deployer \
-  contracts/UWDiploma128.sol:UWDiploma128
-```
-
-**Required observation:** the output must not contain a transaction hash or deployed contract address. If the installed Foundry version requires a distinct simulation flag, use only the flag documented by the local `forge create --help` output. Do not add `--broadcast` during this stage.
-
-Capture the preparation output locally:
-
-```bash
-mkdir -p receipts/local
-forge create \
-  --rpc-url "$BASE_RPC_URL" \
-  --account uwdiploma-deployer \
-  contracts/UWDiploma128.sol:UWDiploma128 \
-  2>&1 | tee receipts/local/uwdiploma128_deploy_prepare.txt
-```
-
-Do not commit local files if they contain sensitive account metadata.
+Do not supply `--private-key`. Do not add `--broadcast`. If the selected signing method cannot safely provide a public deployer address without secret entry, stop.
 
 ## 5. Human review gate
 
-Before broadcast, record and review:
+Before any broadcast, review:
 
 - deployer public address
 - Base chain ID `8453`
@@ -115,23 +161,7 @@ Before broadcast, record and review:
 
 No role grant should be bundled into the deployment transaction.
 
-## 6. Broadcast only after explicit human authorization
-
-The live command must be constructed from the locally displayed `forge create --help` syntax and use the encrypted account. A valid broadcast command will include the installed version's explicit broadcast option and must not include `--private-key`.
-
-Template, subject to local help confirmation:
-
-```bash
-forge create \
-  --rpc-url "$BASE_RPC_URL" \
-  --account uwdiploma-deployer \
-  --broadcast \
-  contracts/UWDiploma128.sol:UWDiploma128
-```
-
-Contract verification is a separate step. Do not combine deployment and verification until the correct Base explorer verifier configuration and API credential handling have been reviewed.
-
-## 7. Post-deployment receipt capture
+## 6. Post-deployment receipt capture
 
 After a real broadcast, capture only public values:
 
@@ -169,7 +199,7 @@ cast code "$DIPLOMA_CONTRACT_ADDRESS" --rpc-url "$BASE_RPC_URL"
 cast call "$DIPLOMA_CONTRACT_ADDRESS" "supportsInterface(bytes4)(bool)" 0x80ac58cd --rpc-url "$BASE_RPC_URL"
 ```
 
-## 8. Role grants are a separate governed lane
+## 7. Role grants are a separate governed lane
 
 Do not grant `ORACLE_ROLE` or `REGISTRAR_ROLE` until:
 
@@ -184,7 +214,9 @@ A bridge signer address must never be inferred from a schema creator, project se
 ## State membrane
 
 ```text
-DEPLOYMENT_RUNBOOK = PRESENT
+DEPLOYMENT_RUNBOOK = RECONNECT_SAFE_V0_2
+PUBLIC_PREFLIGHT = READY
+INTERACTIVE_SECRET_IMPORT = BLOCKED_ON_MOBILE_CLOUD_SHELL
 DRY_PREPARATION = NOT_EXECUTED
 BROADCAST = NOT_AUTHORIZED
 DEPLOYMENT_TX = UNOBSERVED
