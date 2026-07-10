@@ -1,0 +1,69 @@
+{
+  "authority": false,
+  "base": {
+    "attestation_status": "UNOBSERVED",
+    "eas_binding": "UNPROVEN",
+    "name": "jaywisdom.base.eth",
+    "wallet_control": "UNPROVEN"
+  },
+  "card_type": "JAY_IDENTITY_50_50",
+  "evidence_balance": {
+    "unverified_half": [
+      "project_id",
+      "machine_exported_iam_policy",
+      "owner_binding_to_active_account",
+      "wallet_control",
+      "eas_binding",
+      "firebase_linkage",
+      "wif_state",
+      "live_hosting_url"
+    ],
+    "verified_half": [
+      "active_identity_export_exists",
+      "active_identity_export_hashed",
+      "redacted_identity_receipt_exists",
+      "redacted_identity_receipt_hashed",
+      "project_display_name_visually_observed",
+      "project_number_visually_observed",
+      "owner_role_visually_observed"
+    ]
+  },
+  "google_cloud": {
+    "active_identity_export": {
+      "file": "active_identity.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "status": "HASHED"
+    },
+    "iam_policy": "UNOBSERVED",
+    "owner_role": {
+      "bound_to_exported_active_identity": "UNPROVEN",
+      "status": "VISUALLY_OBSERVED"
+    },
+    "project_display_name": "JayWisdom Boardroom",
+    "project_id": "UNOBSERVED",
+    "project_number": "311690651351",
+    "redacted_identity_receipt": {
+      "file": "active_identity_receipt.json",
+      "sha256": "855180329cacaa7fea96b3705d56a8033cbc1bf967f31e792f2062bab93b1263",
+      "status": "HASHED"
+    }
+  },
+  "no_fake_green": true,
+  "no_fake_red": true,
+  "public_identity": {
+    "eas_binding": "UNPROVEN",
+    "name": "jaywisdom.base.eth",
+    "network": "Base",
+    "status": "PUBLIC_IDENTITY_CLAIM",
+    "wallet_control": "UNPROVEN"
+  },
+  "shareability": {
+    "contains_full_billing_id": false,
+    "contains_private_keys": false,
+    "contains_tokens": false,
+    "contains_unredacted_email": false,
+    "safe_for_ai_systems": true
+  },
+  "subject_display_name": "Jay Wisdom",
+  "version": "0.1"
+}
