@@ -1,0 +1,44 @@
+{
+  "artifact_type": "UWDIPLOMA128_UNSIGNED_DEPLOYMENT_BUNDLE_RECEIPT",
+  "version": "0.2",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "observed": {
+    "bundle_path": "deployment/uwdiploma128_unsigned_v0_2.json",
+    "creation_bytecode_sha256": "27f852a32bb9298e2465d4978aa8112fd0a5b547b2799f10e66ee538d329293a",
+    "creation_bytecode_bytes": 8006,
+    "runtime_bytecode_sha256": "e6cf0e0645277f95d1db858bbe39d187f24228d5e6ee046d215fd0294f05225a",
+    "runtime_bytecode_bytes": 7292,
+    "unsigned_bundle_v0_2": "READY",
+    "signature": "ABSENT",
+    "broadcast": "NOT_PERFORMED",
+    "authority": false
+  },
+  "security_boundary": {
+    "private_key_present": false,
+    "signature_present": false,
+    "rpc_call_performed": false,
+    "broadcast_performed": false,
+    "deployment_claimed": false
+  },
+  "limitations": [
+    "This receipt preserves user-provided Cloud Shell output and does not independently inspect the local bundle file contents.",
+    "The bundle contains unsigned contract-creation data only.",
+    "No deployer address, nonce, gas estimate, fee parameters, simulation result, signature, transaction hash, contract address, deployed runtime code, role grant, bridge execution, attestation validation, or diploma mint is claimed."
+  ],
+  "current_state": {
+    "CI_GATE": "GREEN",
+    "LOCAL_CI_HARDENED_MATCH": true,
+    "UNSIGNED_DEPLOYMENT_BUNDLE_V0_2": "OBSERVED_READY_USER_TERMINAL",
+    "PUBLIC_DEPLOYER_ADDRESS": "UNSET",
+    "SAFE_SIGNING_METHOD": "UNSET",
+    "DRY_PREPARATION": "BLOCKED_PENDING_PUBLIC_DEPLOYER_ADDRESS_AND_SAFE_SIGNING_METHOD",
+    "BROADCAST": "NOT_AUTHORIZED",
+    "DEPLOYMENT_TX": "UNOBSERVED",
+    "CONTRACT_ADDRESS": "UNOBSERVED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
