@@ -1,0 +1,38 @@
+{
+  "artifact_type": "FOUNDRY_CAST_INSTALL_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_TERMINAL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "observed": {
+    "foundryup_status": "SUCCESS",
+    "release_tag": "v1.7.1",
+    "cast_path": "/home/jaywisdom44/.foundry/bin/cast",
+    "cast_version": "1.7.1",
+    "commit_sha": "4072e48705af9d93e3c0f6e29e93b5e9a40caed8",
+    "build_timestamp": "2026-05-08T07:50:55.527285345Z",
+    "build_profile": "dist",
+    "binary_verification": {
+      "forge": "VERIFIED",
+      "cast": "VERIFIED",
+      "anvil": "VERIFIED",
+      "chisel": "VERIFIED"
+    }
+  },
+  "limitations": [
+    "This receipt preserves user-provided terminal output; no GitHub Actions execution is claimed.",
+    "Tool installation does not prove schema registration, contract deployment, role assignment, or live bridge operation.",
+    "The Base Schema Registry address remains unverified in this receipt.",
+    "No transaction was sent and no wallet key material was requested or recorded."
+  ],
+  "current_state": {
+    "FOUNDRYUP": "OBSERVED_SUCCESS",
+    "CAST_AVAILABLE": "OBSERVED_SUCCESS",
+    "SCHEMA_REGISTRY_ADDRESS": "UNVERIFIED",
+    "SCHEMA_DRY_RUN": "NOT_EXECUTED",
+    "SCHEMA_TRANSACTION": "NOT_SENT",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
