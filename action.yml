@@ -1,0 +1,37 @@
+name: GitHub Proof
+
+description: Verify receipt-first proof manifests without promoting authority.
+
+author: jsonwisdom
+
+branding:
+  icon: check-circle
+  color: blue
+
+inputs:
+  manifest:
+    description: Path to the proof manifest JSON file.
+    required: true
+    default: receipts/JAY_WISDOM_50_50_PROOF_V0_1.json
+  allocation-policy:
+    description: Path to the marketplace allocation policy JSON file.
+    required: true
+    default: marketplace/JAY_WALLET_ALLOCATION_V0_1.json
+
+outputs:
+  status:
+    description: Structural verification result.
+    value: ${{ steps.verify.outputs.status }}
+  authority:
+    description: Always false for this action.
+    value: ${{ steps.verify.outputs.authority }}
+
+runs:
+  using: composite
+  steps:
+    - id: verify
+      shell: bash
+      run: |
+        python3 "${{ github.action_path }}/scripts/github-proof-marketplace-verify.py" \
+          "${{ inputs.manifest }}" \
+          "${{ inputs.allocation-policy }}"
