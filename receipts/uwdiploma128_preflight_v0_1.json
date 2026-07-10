@@ -1,0 +1,53 @@
+{
+  "artifact_type": "UWDIPLOMA128_BASE_PREFLIGHT_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "observed": {
+    "precheck_started_utc": "2026-07-10T23:29:49Z",
+    "precheck_finished_utc": "2026-07-10T23:29:50Z",
+    "repository_path": "/home/jaywisdom44/public-proof",
+    "git_head": "dee3f8ea1d6ff606c88fff9f27f44bdf16d2e896",
+    "base_rpc_url": "https://mainnet.base.org",
+    "chain_id": 8453,
+    "chain_id_check": "PASS",
+    "forge_build": "PASS",
+    "forge_test": "PASS",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "16b4ee600f7ac7cb5e7d6c4f17cba8bf744ce1d4acf142d016eef284280496e1",
+    "creation_bytecode_bytes": 8060,
+    "precheck_exit_code": 0,
+    "local_receipt_path": "receipts/local/uwdiploma128_preflight_20260710T232949Z.txt"
+  },
+  "security_boundary": {
+    "signer_check": "SKIPPED_UNSAFE_MOBILE_SESSION",
+    "interactive_secret_import": "NOT_PERFORMED",
+    "private_key_observed": false,
+    "private_key_requested": false,
+    "dry_preparation": "NOT_EXECUTED",
+    "broadcast": "NOT_AUTHORIZED"
+  },
+  "limitations": [
+    "This receipt preserves user-provided Cloud Shell output and does not claim independent GitHub Actions execution.",
+    "The local text receipt was not uploaded; only its reported path and output values are recorded.",
+    "No deployer signer, deployment transaction, contract address, runtime bytecode, role grant, live bridge execution, attestation validation, or diploma mint is claimed."
+  ],
+  "current_state": {
+    "PUBLIC_PREFLIGHT": "OBSERVED_PASS",
+    "BASE_CHAIN_ID": "OBSERVED_8453",
+    "LOCAL_COMPILE": "OBSERVED_PASS",
+    "LOCAL_TESTS": "OBSERVED_PASS",
+    "ARTIFACT_HASHES": "MATCH_PREVIOUS_RECEIPT",
+    "SIGNER_LANE": "BLOCKED_PENDING_SAFE_METHOD",
+    "DRY_PREPARATION": "NOT_EXECUTED",
+    "BROADCAST": "NOT_AUTHORIZED",
+    "DEPLOYMENT_TX": "UNOBSERVED",
+    "CONTRACT_ADDRESS": "UNOBSERVED",
+    "RUNTIME_BYTECODE_HASH": "UNOBSERVED",
+    "LIVE_BRIDGE": "NOT_STARTED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
