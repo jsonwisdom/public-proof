@@ -1,0 +1,112 @@
+{
+  "artifact_type": "GOOGLE_IAM_DAY_CLOSEOUT_RECEIPT",
+  "version": "0.1",
+  "title": "Google IAM Closeout — JayWisdom Boardroom",
+  "public_identity_claim": "jaywisdom.base.eth",
+  "research_anchor_claim": "jaywisdom.eth",
+  "project": {
+    "display_name": "JayWisdom Boardroom",
+    "project_number": "311690651351",
+    "project_id": "UNOBSERVED"
+  },
+  "repository_doctrine_ingested": [
+    {
+      "repository": "jsonwisdom/receiptos-base",
+      "role": "Base-native receipt engine",
+      "boundary": "No crisis label without receipts."
+    },
+    {
+      "repository": "jsonwisdom/receipts-engine-v1",
+      "role": "Prototype verifier surface",
+      "boundary": "GitHub commit to canonical bytes to hashes to EAS; no ENS claim unless independently visible."
+    },
+    {
+      "repository": "jsonwisdom/prooflayer-repo",
+      "role": "Deployment scaffold",
+      "boundary": "No live deployment truth without committed deployment artifacts."
+    },
+    {
+      "repository": "jsonwisdom/layered-proofing-state-level-alms",
+      "role": "Layered claim and replay doctrine",
+      "boundary": "AI may propose; repo must verify; missing evidence means INDETERMINATE."
+    },
+    {
+      "repository": "jsonwisdom/public-proof",
+      "role": "Current Google Cloud and proof portal evidence surface",
+      "boundary": "Configuration intent is not observed cloud state."
+    }
+  ],
+  "observed_today": {
+    "project_display_name": true,
+    "project_number": true,
+    "billing_relationship_active": true,
+    "owner_role_present": true,
+    "default_compute_editor_present": true,
+    "cloud_build_builder_present": true,
+    "google_managed_service_agents_present": true,
+    "storage_bucket_count_observed": 1,
+    "cloud_shell_active_account": "NONE",
+    "cloud_shell_mobile_session_stability": "UNSTABLE",
+    "firebase_deployment_enabled": false,
+    "live_url": "UNOBSERVED"
+  },
+  "not_observed_today": [
+    "canonical project ID",
+    "owner principal identity in public artifact",
+    "active gcloud account",
+    "complete project resource inventory",
+    "Workload Identity pool",
+    "Workload Identity provider",
+    "Firebase deployer service account",
+    "Firebase Hosting site ID",
+    "GitHub repository deployment variables",
+    "protected production approval settings",
+    "successful Firebase workflow run",
+    "public deployment URL"
+  ],
+  "iam_disposition": {
+    "state": "CLOSED_FOR_DAY_WITH_OPEN_EVIDENCE_GAPS",
+    "incident_label": "ACCESS_AND_AUTH_HANDOFF_FRICTION",
+    "misconduct_claim": false,
+    "ownership_claim": false,
+    "containment_status": "UNPROVEN",
+    "field_promotion": "NONE"
+  },
+  "minimum_next_session_sequence": [
+    "Use a stable desktop browser session.",
+    "Observe and record the canonical project ID from project metadata.",
+    "Establish one active gcloud account and record only redacted identity posture.",
+    "Export IAM policy to a local redacted artifact.",
+    "Hash the exact exported bytes.",
+    "Confirm the observed Owner binding without publishing private identifiers.",
+    "Inventory Workload Identity Federation and Firebase resources.",
+    "Only then consider enabling deployment variables."
+  ],
+  "deployment_gate": {
+    "required_before_enable": [
+      "production project ID",
+      "preview project ID",
+      "Firebase linkage",
+      "Hosting site IDs",
+      "WIF pool and provider",
+      "deployment service accounts",
+      "IAM bindings",
+      "GitHub repository variables",
+      "protected production approval settings"
+    ],
+    "firebase_deployment_enabled": false
+  },
+  "final_state": {
+    "identity_surface": "CONTEXTUALIZED",
+    "billing_surface": "OBSERVED_WITH_REDACTION",
+    "iam_role_surface": "PARTIALLY_OBSERVED",
+    "active_cli_identity": "ABSENT_IN_OBSERVED_SESSION",
+    "project_ownership": "UNPROVEN",
+    "live_deployment": "UNOBSERVED",
+    "return_prompt_ready": true,
+    "full_replay": "INCOMPLETE_BUT_BOUNDARIED"
+  },
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}
