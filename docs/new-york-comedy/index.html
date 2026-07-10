@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#090909" />
+  <title>New York Comedy — Mathematical Proof of Comedy</title>
+  <style>
+    :root{--bg:#090909;--panel:#151515;--ink:#fff;--muted:#a9a9a9;--line:#2c2c2c;--hot:#ff4d00;--ok:#60ff8b}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    main{max-width:760px;margin:auto;padding:24px 16px 64px} h1{font-size:clamp(2rem,10vw,4.5rem);line-height:.92;margin:22px 0 10px;letter-spacing:-.05em}
+    .kicker{font-weight:800;color:var(--hot);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem}.sub{color:var(--muted);font-size:1rem;line-height:1.5}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:16px;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+    label{display:block;font-weight:800;margin:12px 0 7px} textarea,input,select{width:100%;background:#0d0d0d;color:white;border:1px solid #343434;border-radius:13px;padding:14px;font:inherit}
+    textarea{min-height:120px;resize:vertical} input[type=range]{padding:0;accent-color:var(--hot)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row{display:flex;gap:10px;flex-wrap:wrap}
+    button{border:0;border-radius:999px;padding:14px 18px;font-weight:900;font-size:1rem;cursor:pointer;background:var(--hot);color:white;flex:1;min-width:145px}
+    button.secondary{background:#262626} .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#050505;border:1px solid var(--line);padding:14px;border-radius:14px;overflow-wrap:anywhere}
+    .score{font-size:4rem;font-weight:950;letter-spacing:-.06em}.meter{height:13px;background:#252525;border-radius:999px;overflow:hidden}.meter>div{height:100%;width:0;background:linear-gradient(90deg,var(--hot),var(--ok));transition:width .35s}
+    .beat{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:14px 0}.beat span{height:10px;border-radius:99px;background:#292929}.beat span.on{background:var(--hot)}
+    pre{white-space:pre-wrap;word-break:break-word;background:#050505;padding:14px;border-radius:14px;border:1px solid var(--line);font-size:.86rem}
+    .fine{color:var(--muted);font-size:.78rem;line-height:1.45}.pill{display:inline-block;padding:7px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:.75rem;margin:4px 4px 0 0}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}.score{font-size:3.3rem}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">Jay’s New York Comedy · 128 BPM</div>
+  <h1>Mathematical Proof of Comedy</h1>
+  <p class="sub">Comedians prompt the bit. The page measures structure, timing, reversal, compression, and truth. It does not prove that humans will laugh. It proves that the joke has a replayable shape.</p>
+
+  <section class="card">
+    <label for="premise">Premise</label>
+    <textarea id="premise" placeholder="I’m an American one-percenter. I own one percent of JayWisdom.eth..."></textarea>
+
+    <label for="audience">Audience</label>
+    <input id="audience" placeholder="New York club, tech crowd, women with iPhones..." />
+
+    <div class="grid">
+      <div><label for="truth">Truth</label><input id="truth" type="range" min="0" max="10" value="7" /></div>
+      <div><label for="tension">Tension</label><input id="tension" type="range" min="0" max="10" value="6" /></div>
+      <div><label for="surprise">Surprise</label><input id="surprise" type="range" min="0" max="10" value="8" /></div>
+      <div><label for="compression">Compression</label><input id="compression" type="range" min="0" max="10" value="7" /></div>
+    </div>
+
+    <label for="form">Comedy form</label>
+    <select id="form">
+      <option>Bit / Bot Flip-Flop</option>
+      <option>Setup → Turn → Punch → Tag</option>
+      <option>Rule of Three</option>
+      <option>Callback</option>
+      <option>One-Liner</option>
+    </select>
+
+    <div class="beat" aria-label="128 beats per minute pulse"><span></span><span></span><span></span><span></span></div>
+
+    <div class="row">
+      <button id="prove">Run the Proof</button>
+      <button class="secondary" id="copy">Copy Comedian Prompt</button>
+    </div>
+  </section>
+
+  <section class="card" id="result" hidden>
+    <div class="kicker">Comedy Proof Score</div>
+    <div class="score"><span id="score">0</span>/100</div>
+    <div class="meter"><div id="bar"></div></div>
+    <p id="verdict" class="sub"></p>
+    <div class="formula" id="formula"></div>
+    <div id="tags"></div>
+    <h2>Generated comedian prompt</h2>
+    <pre id="prompt"></pre>
+    <h2>Replay receipt</h2>
+    <pre id="receipt"></pre>
+    <p class="fine">SATIRE / COMIC EXAGGERATION / NOT A LEGAL FINDING / NOT PROOF OF INTENT / AUTHORITY_FALSE</p>
+  </section>
+</main>
+<script>
+  const $ = id => document.getElementById(id);
+  let lastPrompt = '';
+  let pulse = 0;
+  setInterval(() => {
+    document.querySelectorAll('.beat span').forEach((el,i)=>el.classList.toggle('on',i===pulse));
+    pulse=(pulse+1)%4;
+  }, 60000/128);
+
+  function words(s){return s.trim()?s.trim().split(/\s+/).length:0}
+  function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+  function analyze(){
+    const premise=$('premise').value.trim();
+    const audience=$('audience').value.trim()||'a live audience';
+    const truth=+$('truth').value, tension=+$('tension').value, surprise=+$('surprise').value, compression=+$('compression').value;
+    const wc=words(premise);
+    const brevity=clamp(10-Math.max(0,wc-45)/9,0,10);
+    const reversal=/but|except|actually|then|free|50\/50|one percent|1%|wallet|bank|google/i.test(premise)?10:5;
+    const specificity=/\d|%|iphone|google|base|zora|new york|wallet/i.test(premise)?9:5;
+    const rhythm=wc>0?clamp(10-Math.abs(28-wc)/5,2,10):0;
+    const score=Math.round((truth*1.4+tension*1.2+surprise*1.8+compression*1.3+reversal*1.8+specificity*1.2+brevity*.7+rhythm*.6)/11*10);
+    const verdict=score>=85?'Stage-ready structure. Now test it on humans.':score>=70?'Strong bit geometry. Tighten one beat and sharpen the final word.':score>=50?'The premise has energy, but the flip or punch needs more separation.':'You have a topic, not yet a joke. Find the false expectation and break it.';
+    const formula=`C = (1.4T + 1.2N + 1.8S + 1.3K + 1.8R + 1.2P + 0.7B + 0.6Y) / 11\nC = ${score}/100\nT=truth N=tension S=surprise K=compression R=reversal P=specificity B=brevity Y=rhythm`;
+    lastPrompt=`You are a ruthless New York comedy editor working at 128 BPM.\n\nPremise: ${premise||'[ADD PREMISE]'}\nAudience: ${audience}\nForm: ${$('form').value}\n\nBuild exactly:\n1. SETUP — establish the expected reality.\n2. TURN — reveal the contradiction.\n3. PUNCH — end on the hardest, shortest word.\n4. TAG — one extra escalation only.\n\nPreserve the comedian’s voice. Do not explain the joke. Do not invent factual accusations. Return the bit first, then a compact beat map.\n\nTarget variables: truth=${truth}/10, tension=${tension}/10, surprise=${surprise}/10, compression=${compression}/10, tempo=128 BPM.`;
+    const receipt={artifact_type:'MATHEMATICAL_COMEDY_PROOF_RECEIPT',version:'0.1',tempo_bpm:128,premise_word_count:wc,form:$('form').value,metrics:{truth,tension,surprise,compression,reversal,specificity,brevity:+brevity.toFixed(2),rhythm:+rhythm.toFixed(2)},score,status:'STRUCTURALLY_SCORED_NOT_HUMAN_VALIDATED',authority:false,no_fake_green:true};
+    $('score').textContent=score;$('bar').style.width=score+'%';$('verdict').textContent=verdict;$('formula').textContent=formula;$('prompt').textContent=lastPrompt;$('receipt').textContent=JSON.stringify(receipt,null,2);
+    $('tags').innerHTML=[`128 BPM`,`${wc} words`,$('form').value,'AUTHORITY_FALSE'].map(x=>`<span class="pill">${x}</span>`).join('');
+    $('result').hidden=false;$('result').scrollIntoView({behavior:'smooth'});
+  }
+  $('prove').addEventListener('click',analyze);
+  $('copy').addEventListener('click',async()=>{if(!lastPrompt)analyze();await navigator.clipboard.writeText(lastPrompt);$('copy').textContent='Copied';setTimeout(()=>$('copy').textContent='Copy Comedian Prompt',1200)});
+</script>
+</body>
+</html>
