@@ -60,9 +60,10 @@ contract UWDiploma128Test is Test {
 
     function testStudentCannotSelfValidateEvenWithOracleRole() public {
         bytes32 receiptId = _register(student);
+        bytes32 oracleRole = diploma.ORACLE_ROLE();
 
         vm.prank(admin);
-        diploma.grantRole(diploma.ORACLE_ROLE(), student);
+        diploma.grantRole(oracleRole, student);
 
         vm.prank(student);
         vm.expectRevert(bytes("Receipt: self validation"));
