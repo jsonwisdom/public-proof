@@ -1,6 +1,6 @@
 {
   "artifact_type": "JAY_WISDOM_50_50_PROOF",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "title": "50/50 Wisdom Proof",
   "public_identity": {
     "ens": "jaywisdom.eth",
@@ -17,7 +17,18 @@
     "resource_access": "PARTIALLY_OBSERVED",
     "owner_role_present": true,
     "owner_identity_binding": "UNPROVEN",
-    "active_cli_identity": "ABSENT_IN_VELOCITY_CAPTURE",
+    "active_cli_identity": "OBSERVED_ABSENT_IN_RUN_20260710T224305Z",
+    "configured_account": "UNSET",
+    "configured_project": "UNSET",
+    "auth_inventory": "EMPTY",
+    "latest_identity_run": "20260710T224305Z",
+    "identity_capture_commit": "27dda6464636611638e0aea89c493ffe2d18d4fa",
+    "identity_capture_state": {
+      "active_gcloud_identity": "ABSENT",
+      "project_metadata": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+      "iam_policy": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+      "billing_link": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY"
+    },
     "latest_velocity_run": "20260710T223832Z",
     "velocity_capture_commit": "afea9b02d5234f8dc9f64483c7b2b999b6df1fc8",
     "local_json_trial": {
@@ -33,10 +44,7 @@
       "hashes_per_second": 867653.96
     },
     "cloud_metadata_capture": {
-      "state": "FAILED_NO_ACTIVE_GCLOUD_ACCOUNT",
-      "project_describe_exit_code": 1,
-      "enabled_services_exit_code": 1,
-      "billing_link_exit_code": 1,
+      "state": "BLOCKED_NO_ACTIVE_GCLOUD_ACCOUNT",
       "metadata_verified": false
     },
     "production_capacity": "UNPROVEN",
@@ -63,7 +71,7 @@
       "observed_role_binding",
       "resource_or_deployment_receipt"
     ],
-    "current_state": "PARTIALLY_OBSERVED_WITH_LOCAL_VELOCITY_RECEIPT"
+    "current_state": "PARTIALLY_OBSERVED_WITH_LOCAL_VELOCITY_AND_ABSENT_IDENTITY_RECEIPTS"
   },
   "wallet_signature_request": {
     "method": "personal_sign",
@@ -97,6 +105,10 @@
     "cloud_velocity_commit": "afea9b02d5234f8dc9f64483c7b2b999b6df1fc8",
     "cloud_velocity_trial_sha256": "778c4546cd12bf0f267ca1fe7dec5bdd5d87df57975957fcddd1835f40230808",
     "cloud_velocity_manifest_sha256": "42f2029e22a9314f223460a45eeb6b6e9cd20c025f0de5cd3924bb099cc1996b",
+    "gcloud_identity_receipt_directory": "receipts/gcloud_identity_v0_1/20260710T224305Z",
+    "gcloud_identity_commit": "27dda6464636611638e0aea89c493ffe2d18d4fa",
+    "gcloud_identity_state_sha256": "cf9b6778cddcf7c829af4f4be101271877366c0b8bb3068a6db9b4ff79811f8d",
+    "gcloud_identity_manifest_sha256": "d32634618adc943fd69795eedb0b2bf396f683a92ada866881333b279b9098c2",
     "wallet_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
     "iam_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
     "manifest_sha256": "PENDING_INDEPENDENT_RECOMPUTATION_AFTER_THIS_UPDATE",
@@ -126,15 +138,16 @@
     "DIVERGED"
   ],
   "current_result": "BOTH_OBSERVED_NOT_BOUND",
-  "permitted_statement": "A public Base identity claim, a partially observed Google Cloud operational surface, and committed local Cloud Shell velocity measurements are preserved in one manifest without proving wallet control, authenticated Google control, production capacity, Marketplace readiness, or income.",
+  "permitted_statement": "A public Base identity claim, committed local Cloud Shell velocity measurements, and a committed observation that no active gcloud identity was configured in one captured session are preserved without proving wallet control, Google project control, production capacity, Marketplace readiness, or income.",
   "forbidden_promotions": [
     "Wallet signature does not prove Google project ownership.",
     "Google IAM access does not prove wallet or name control.",
+    "An absent gcloud identity in one session does not prove permanent lack of project access.",
     "A shared manifest does not prove either side until the referenced receipts are independently hashed and verified.",
     "EOA recovery must not be used as the sole verification method when the claimed address is a smart account.",
     "An EAS UID does not prove binding until independently replayed.",
     "Local benchmark throughput does not prove production capacity, Marketplace eligibility, customer demand, or revenue.",
-    "A failed gcloud metadata query does not disprove the project or billing relationship.",
+    "A failed or skipped gcloud metadata query does not disprove the project or billing relationship.",
     "CI success, merge, or deployment does not create authority."
   ],
   "doctrine": [
