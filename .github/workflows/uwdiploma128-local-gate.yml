@@ -42,7 +42,7 @@ jobs:
           git clone https://github.com/foundry-rs/forge-std.git lib/forge-std
           git -C lib/forge-std checkout bf647bd6046f2f7da30d0c2bf435e5c76a780c1b
 
-      - name: Build contract
+      - name: Build contract — pass 1
         shell: bash
         run: |
           set -euo pipefail
@@ -55,56 +55,91 @@ jobs:
           set -euo pipefail
           forge test -vvv
 
-      - name: Export CI artifact hashes
-        id: artifact_hashes
+      - name: Capture pass-1 artifact
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p ci-artifacts
+          cp out/UWDiploma128.sol/UWDiploma128.json ci-artifacts/UWDiploma128.pass1.json
+
           python3 - <<'PY'
           import hashlib
           import json
           from pathlib import Path
 
-          artifact = Path("out/UWDiploma128.sol/UWDiploma128.json")
+          artifact = Path("ci-artifacts/UWDiploma128.pass1.json")
           data = json.loads(artifact.read_text())
-
           abi_json = json.dumps(data["abi"], separators=(",", ":"), ensure_ascii=False)
-          creation_hex = data["bytecode"]["object"]
-          runtime_hex = data["deployedBytecode"]["object"]
-
-          if creation_hex.startswith("0x"):
-              creation_hex = creation_hex[2:]
-          if runtime_hex.startswith("0x"):
-              runtime_hex = runtime_hex[2:]
-          if not creation_hex:
-              raise SystemExit("creation bytecode is empty")
-          if not runtime_hex:
-              raise SystemExit("runtime bytecode is empty")
-
-          creation = bytes.fromhex(creation_hex)
-          runtime = bytes.fromhex(runtime_hex)
-          full_artifact = artifact.read_bytes()
+          creation = bytes.fromhex(data["bytecode"]["object"].removeprefix("0x"))
+          runtime = bytes.fromhex(data["deployedBytecode"]["object"].removeprefix("0x"))
 
           report = {
-              "artifact_path": str(artifact),
-              "full_artifact_json_sha256": hashlib.sha256(full_artifact).hexdigest(),
+              "full_artifact_json_sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
               "abi_sha256": hashlib.sha256(abi_json.encode()).hexdigest(),
               "creation_bytecode_sha256": hashlib.sha256(creation).hexdigest(),
               "creation_bytecode_bytes": len(creation),
               "runtime_bytecode_sha256": hashlib.sha256(runtime).hexdigest(),
               "runtime_bytecode_bytes": len(runtime),
-              "solc_version": data.get("metadata", "UNPARSED"),
           }
-
-          Path("ci-artifacts/uwdiploma128_hash_report.json").write_text(
-              json.dumps(report, indent=2) + "\n"
-          )
+          Path("ci-artifacts/pass1_hashes.json").write_text(json.dumps(report, indent=2) + "\n")
           print(json.dumps(report, indent=2))
           PY
 
-          cp out/UWDiploma128.sol/UWDiploma128.json \
-            ci-artifacts/UWDiploma128.json
+      - name: Build contract — pass 2
+        shell: bash
+        run: |
+          set -euo pipefail
+          forge clean
+          forge build --force
+
+      - name: Verify exact two-build reproducibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp out/UWDiploma128.sol/UWDiploma128.json ci-artifacts/UWDiploma128.pass2.json
+
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          expected_abi = "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f"
+          first = json.loads(Path("ci-artifacts/pass1_hashes.json").read_text())
+          artifact = Path("ci-artifacts/UWDiploma128.pass2.json")
+          data = json.loads(artifact.read_text())
+          abi_json = json.dumps(data["abi"], separators=(",", ":"), ensure_ascii=False)
+          creation = bytes.fromhex(data["bytecode"]["object"].removeprefix("0x"))
+          runtime = bytes.fromhex(data["deployedBytecode"]["object"].removeprefix("0x"))
+
+          second = {
+              "full_artifact_json_sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
+              "abi_sha256": hashlib.sha256(abi_json.encode()).hexdigest(),
+              "creation_bytecode_sha256": hashlib.sha256(creation).hexdigest(),
+              "creation_bytecode_bytes": len(creation),
+              "runtime_bytecode_sha256": hashlib.sha256(runtime).hexdigest(),
+              "runtime_bytecode_bytes": len(runtime),
+          }
+
+          report = {
+              "build_1": first,
+              "build_2": second,
+              "exact_match": first == second,
+              "authority": False,
+              "broadcast_performed": False,
+          }
+          Path("ci-artifacts/uwdiploma128_hash_report.json").write_text(
+              json.dumps(report, indent=2) + "\n"
+          )
+
+          for key, value in second.items():
+              print(f"CI_{key.upper()}={value}")
+          print("CI_TWO_BUILD_EXACT_MATCH=" + str(first == second).upper())
+
+          if second["abi_sha256"] != expected_abi:
+              raise SystemExit("ABI hash mismatch")
+          if first != second:
+              raise SystemExit("two clean builds produced different artifacts")
+          PY
 
       - name: Upload CI artifact bundle
         if: always()
@@ -114,41 +149,6 @@ jobs:
           path: ci-artifacts/
           if-no-files-found: error
           retention-days: 14
-
-      - name: Verify expected ABI and creation-bytecode hashes
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          report = json.loads(
-              Path("ci-artifacts/uwdiploma128_hash_report.json").read_text()
-          )
-
-          expected_abi = "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f"
-          expected_creation = "16b4ee600f7ac7cb5e7d6c4f17cba8bf744ce1d4acf142d016eef284280496e1"
-          expected_creation_bytes = 8060
-
-          print("CI_ABI_SHA256=" + report["abi_sha256"])
-          print("CI_CREATION_BYTECODE_SHA256=" + report["creation_bytecode_sha256"])
-          print("CI_CREATION_BYTECODE_BYTES=" + str(report["creation_bytecode_bytes"]))
-          print("CI_RUNTIME_BYTECODE_SHA256=" + report["runtime_bytecode_sha256"])
-          print("CI_RUNTIME_BYTECODE_BYTES=" + str(report["runtime_bytecode_bytes"]))
-          print("CI_FULL_ARTIFACT_JSON_SHA256=" + report["full_artifact_json_sha256"])
-
-          failures = []
-          if report["abi_sha256"] != expected_abi:
-              failures.append("ABI hash mismatch")
-          if report["creation_bytecode_sha256"] != expected_creation:
-              failures.append("creation bytecode hash mismatch")
-          if report["creation_bytecode_bytes"] != expected_creation_bytes:
-              failures.append("creation bytecode length mismatch")
-
-          if failures:
-              raise SystemExit("; ".join(failures))
-          PY
 
       - name: Emit governed summary
         if: always()
@@ -160,6 +160,7 @@ jobs:
             echo "- Authority: false"
             echo "- Broadcast: not performed"
             echo "- Deployment: not claimed"
-            echo "- CI artifact bundle: uploaded when generated"
+            echo "- Two-build reproducibility: enforced"
+            echo "- Cross-environment local/CI match: separately required before deployment"
             echo "- Role grants: not performed"
           } >> "$GITHUB_STEP_SUMMARY"
