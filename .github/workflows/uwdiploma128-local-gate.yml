@@ -1,5 +1,6 @@
 name: UWDiploma128 Local Gate
 
+# Retrigger marker: metadata-hardened two-build reproducibility gate.
 on:
   pull_request:
     paths:
