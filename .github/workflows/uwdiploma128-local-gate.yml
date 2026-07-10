@@ -22,14 +22,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Foundry v1.7.1
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -L https://foundry.paradigm.xyz | bash
-          source "$HOME/.bashrc"
-          foundryup --install v1.7.1
-          echo "$HOME/.foundry/bin" >> "$GITHUB_PATH"
-          "$HOME/.foundry/bin/forge" --version
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.7.1
+          cache: false
+
+      - name: Show Forge version
+        run: forge --version
 
       - name: Install pinned Solidity dependencies
         shell: bash
