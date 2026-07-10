@@ -7,7 +7,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "node laughter-oracle-bridge.js",
-    "check": "node --check laughter-oracle-bridge.js"
+    "check": "node --check laughter-oracle-bridge.js",
+    "test:fixture": "node test-fixture.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
