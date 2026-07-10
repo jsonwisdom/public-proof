@@ -1,13 +1,14 @@
 {
   "artifact_type": "JAY_WISDOM_50_50_PROOF",
-  "version": "0.1",
+  "version": "0.1.1",
   "title": "50/50 Wisdom Proof",
   "public_identity": {
     "ens": "jaywisdom.eth",
     "basename": "jaywisdom.base.eth",
     "wallet_address": "0xa380552a27b0a5a2874ea7aa52cac09f542002e8",
     "wallet_control": "UNPROVEN",
-    "name_control": "UNPROVEN"
+    "name_control": "UNPROVEN",
+    "account_type": "UNOBSERVED"
   },
   "google_operational_surface": {
     "project_display_name": "JayWisdom Boardroom",
@@ -21,10 +22,11 @@
   "left_half": {
     "label": "CRYPTOGRAPHIC_CONTROL_SURFACE",
     "required_evidence": [
-      "domain_separated_message",
-      "wallet_signature",
-      "recovered_signer_address",
-      "exact_address_match",
+      "exact_utf8_message_bytes",
+      "personal_sign_signature",
+      "account_type_detection",
+      "eoa_recovered_signer_or_erc1271_validation",
+      "exact_address_match_or_contract_signature_validity",
       "optional_eas_attestation"
     ],
     "current_state": "UNPROVEN"
@@ -40,6 +42,29 @@
     ],
     "current_state": "PARTIALLY_OBSERVED"
   },
+  "wallet_signature_request": {
+    "method": "personal_sign",
+    "network_context": "eip155:8453",
+    "expected_address": "0xa380552a27b0a5a2874ea7aa52cac09f542002e8",
+    "message_encoding": "UTF-8",
+    "message": "JAY_WISDOM_50_50_PROOF_V0_1\n\nmanifest_commit=bfc7d22fb2d705d8de4006b8d2c2f78340eac333\nrepository=jsonwisdom/public-proof\nartifact=receipts/JAY_WISDOM_50_50_PROOF_V0_1.json\nwallet_address=0xa380552a27b0a5a2874ea7aa52cac09f542002e8\ngoogle_project_number=311690651351\npurpose=bind_cryptographic_control_surface_to_operational_evidence_manifest\nauthority=false",
+    "rpc_message_parameter": "HEX_ENCODED_UTF8_MESSAGE",
+    "signature": "PENDING",
+    "security_boundary": "No private key, seed phrase, recovery phrase, or signing secret is requested or stored."
+  },
+  "wallet_verification": {
+    "account_type_detection": "PENDING",
+    "eoa_path": {
+      "method": "recoverMessageAddress",
+      "required_result": "RECOVERED_ADDRESS_EQUALS_EXPECTED_ADDRESS"
+    },
+    "smart_account_path": {
+      "method": "ERC1271_IS_VALID_SIGNATURE_OR_EQUIVALENT_ACCOUNT_VALIDATION",
+      "required_result": "CONTRACT_SIGNATURE_VALID_FOR_EXPECTED_ACCOUNT"
+    },
+    "promotion_rule": "Promote wallet_control only after the applicable verification path succeeds against the exact frozen message.",
+    "rejection_rule": "Invalid signature, changed message bytes, wrong address, unsupported method, or failed contract validation remains UNPROVEN or becomes DIVERGED."
+  },
   "binding": {
     "repository": "jsonwisdom/public-proof",
     "branch": "proof-portal-v0",
@@ -49,14 +74,27 @@
     "iam_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
     "manifest_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
     "wallet_signature": "PENDING",
-    "recovered_signer": "PENDING",
+    "verification_method": "PENDING_ACCOUNT_TYPE_DETECTION",
+    "recovered_signer": "NOT_APPLICABLE_UNTIL_ACCOUNT_TYPE_DETECTED",
+    "contract_signature_validation": "NOT_APPLICABLE_UNTIL_ACCOUNT_TYPE_DETECTED",
     "google_workflow_reference": "PENDING",
     "eas_uid": "PENDING"
+  },
+  "developer_reference": {
+    "source": "coinbase/coinbase-wallet-sdk",
+    "source_commit": "75fdee4d8e7c287b534571a5b55a639410a5c6dc",
+    "source_path": "packages/wallet-sdk/src/sign/scw/utils/createSubAccountSigner.ts",
+    "observed_behavior": [
+      "personal_sign expects a hex-encoded message parameter",
+      "the wallet decodes the message and invokes account.signMessage",
+      "Base smart-account signing means ecrecover alone is not a universal verifier"
+    ]
   },
   "state_machine": [
     "LEFT_VERIFIED_RIGHT_UNPROVEN",
     "LEFT_UNPROVEN_RIGHT_OBSERVED",
     "BOTH_OBSERVED_NOT_BOUND",
+    "LEFT_VERIFIED_RIGHT_OBSERVED_NOT_BOUND",
     "BOTH_VERIFIED_AND_HASH_BOUND",
     "DIVERGED"
   ],
@@ -66,6 +104,7 @@
     "Wallet signature does not prove Google project ownership.",
     "Google IAM access does not prove wallet or name control.",
     "A shared manifest does not prove either side until the referenced receipts are independently hashed and verified.",
+    "EOA recovery must not be used as the sole verification method when the claimed address is a smart account.",
     "An EAS UID does not prove binding until independently replayed.",
     "CI success, merge, or deployment does not create authority."
   ],
