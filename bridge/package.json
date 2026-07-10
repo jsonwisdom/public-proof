@@ -1,0 +1,16 @@
+{
+  "name": "jaywisdom-laughter-oracle-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read-only EAS listener with bounded on-chain receipt validation for UWDiploma128.",
+  "main": "laughter-oracle-bridge.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node laughter-oracle-bridge.js",
+    "check": "node --check laughter-oracle-bridge.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.4"
+  }
+}
