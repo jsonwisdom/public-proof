@@ -1,0 +1,82 @@
+{
+  "artifact_type": "JAY_WISDOM_50_50_PROOF",
+  "version": "0.1",
+  "title": "50/50 Wisdom Proof",
+  "public_identity": {
+    "ens": "jaywisdom.eth",
+    "basename": "jaywisdom.base.eth",
+    "wallet_address": "0xa380552a27b0a5a2874ea7aa52cac09f542002e8",
+    "wallet_control": "UNPROVEN",
+    "name_control": "UNPROVEN"
+  },
+  "google_operational_surface": {
+    "project_display_name": "JayWisdom Boardroom",
+    "project_number": "311690651351",
+    "project_id": "UNOBSERVED",
+    "resource_access": "PARTIALLY_OBSERVED",
+    "owner_role_present": true,
+    "owner_identity_binding": "UNPROVEN",
+    "active_cli_identity": "ABSENT_IN_OBSERVED_SESSION"
+  },
+  "left_half": {
+    "label": "CRYPTOGRAPHIC_CONTROL_SURFACE",
+    "required_evidence": [
+      "domain_separated_message",
+      "wallet_signature",
+      "recovered_signer_address",
+      "exact_address_match",
+      "optional_eas_attestation"
+    ],
+    "current_state": "UNPROVEN"
+  },
+  "right_half": {
+    "label": "OPERATIONAL_CONTROL_SURFACE",
+    "required_evidence": [
+      "authenticated_google_principal",
+      "project_metadata_export",
+      "redacted_iam_policy_export",
+      "observed_role_binding",
+      "resource_or_deployment_receipt"
+    ],
+    "current_state": "PARTIALLY_OBSERVED"
+  },
+  "binding": {
+    "repository": "jsonwisdom/public-proof",
+    "branch": "proof-portal-v0",
+    "wallet_receipt_path": "receipts/jaywisdom_base_eth_wallet_receive_surface_v0_1.json",
+    "iam_receipt_path": "receipts/google_iam_day_closeout_v0_1.json",
+    "wallet_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
+    "iam_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
+    "manifest_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
+    "wallet_signature": "PENDING",
+    "recovered_signer": "PENDING",
+    "google_workflow_reference": "PENDING",
+    "eas_uid": "PENDING"
+  },
+  "state_machine": [
+    "LEFT_VERIFIED_RIGHT_UNPROVEN",
+    "LEFT_UNPROVEN_RIGHT_OBSERVED",
+    "BOTH_OBSERVED_NOT_BOUND",
+    "BOTH_VERIFIED_AND_HASH_BOUND",
+    "DIVERGED"
+  ],
+  "current_result": "BOTH_OBSERVED_NOT_BOUND",
+  "permitted_statement": "A public Base identity claim and a partially observed Google Cloud operational surface are preserved in one manifest without either domain impersonating the other.",
+  "forbidden_promotions": [
+    "Wallet signature does not prove Google project ownership.",
+    "Google IAM access does not prove wallet or name control.",
+    "A shared manifest does not prove either side until the referenced receipts are independently hashed and verified.",
+    "An EAS UID does not prove binding until independently replayed.",
+    "CI success, merge, or deployment does not create authority."
+  ],
+  "doctrine": [
+    "BASE_PROVES_CRYPTOGRAPHIC_CONTROL",
+    "GOOGLE_PROVES_RESOURCE_ACCESS",
+    "GITHUB_PRESERVES_THE_JOIN",
+    "EAS_WITNESSES_THE_HASH",
+    "HUMAN_REVIEW_LIMITS_THE_CLAIM"
+  ],
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}
