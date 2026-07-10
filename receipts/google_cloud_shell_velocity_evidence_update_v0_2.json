@@ -1,0 +1,101 @@
+{
+  "artifact_type": "GOOGLE_CLOUD_SHELL_VELOCITY_EVIDENCE_UPDATE",
+  "version": "0.2",
+  "source_type": "USER_PROVIDED_RAW_OUTPUT_EXCERPTS",
+  "source_context": "User supplied command strings and quoted output excerpts attributed to Google Cloud Shell diagnostics for project jaywisdom-boardroom.",
+  "project": {
+    "project_number": "311690651351",
+    "project_id_reported": "jaywisdom-boardroom",
+    "project_id_independently_resolved": false
+  },
+  "evidence": {
+    "project_describe": {
+      "command": "gcloud projects describe 311690651351",
+      "quoted_output": "ERROR: (gcloud.projects.describe) [None] does not have permission to access projects instance [311690651351] (or it may not exist): Cloud Resource Manager API has not been used in project jaywisdom-boardroom before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/cloudresourcemanager.googleapis.com/overview?project=jaywisdom-boardroom then retry. reason: SERVICE_DISABLED",
+      "classification": "SERVICE_DISABLED_ERROR_OBSERVED_IN_USER_PROVIDED_EXCERPT",
+      "limitation": "The repository does not yet contain the original terminal file, command exit code, timestamp, active principal, or SHA-256 of the raw output."
+    },
+    "enabled_services": {
+      "command": "gcloud services list --enabled --project jaywisdom-boardroom --format=json",
+      "reported_subset": [
+        {
+          "service": "bigquery.googleapis.com",
+          "state": "ENABLED"
+        },
+        {
+          "service": "storage.googleapis.com",
+          "state": "ENABLED"
+        },
+        {
+          "service": "run.googleapis.com",
+          "state": "ENABLED"
+        },
+        {
+          "service": "iam.googleapis.com",
+          "state": "ENABLED"
+        },
+        {
+          "service": "cloudaicompanion.googleapis.com",
+          "state": "ENABLED"
+        }
+      ],
+      "classification": "SUBSET_OBSERVED_IN_USER_PROVIDED_EXCERPT",
+      "limitation": "The complete raw JSON response is not attached, so completeness and exact service metadata remain unverified."
+    },
+    "billing_link": {
+      "command": "gcloud billing projects describe jaywisdom-boardroom --format=json",
+      "quoted_output": {
+        "error": {
+          "code": 501,
+          "message": "Operation is not implemented, or supported, or enabled.",
+          "status": "UNIMPLEMENTED",
+          "details": [
+            {
+              "@type": "type.googleapis.com/google.rpc.DebugInfo",
+              "detail": "Unsupported authenticator type UBER_MINT"
+            }
+          ]
+        }
+      },
+      "classification": "BILLING_QUERY_FAILURE_OBSERVED_IN_USER_PROVIDED_EXCERPT",
+      "billing_link_status": "UNOBSERVED",
+      "limitation": "The error proves only that this query path failed under the reported authenticator context; it does not prove billing state."
+    }
+  },
+  "benchmark_state": {
+    "local_json_trial": "NOT_EXECUTED",
+    "local_hash_trial": "NOT_EXECUTED",
+    "local_io_trial": "NOT_EXECUTED",
+    "machine_speed_classification": "NOT_COMPUTABLE",
+    "production_capacity": "UNPROVEN",
+    "marketplace_readiness": "UNPROVEN",
+    "revenue_potential": "UNPROVEN"
+  },
+  "promotion_rules": {
+    "service_disabled": "May be promoted to OBSERVED_IN_USER_PROVIDED_EXCERPT, but not independently replayed until the raw terminal artifact and hash are committed.",
+    "enabled_services": "Only the listed subset may be preserved; the full service inventory remains incomplete.",
+    "billing": "Must remain UNOBSERVED because the command returned UNIMPLEMENTED rather than billing metadata.",
+    "machine_speed": "No classification is allowed until the local Python benchmark JSON and SHA-256 are produced."
+  },
+  "required_next_artifacts": [
+    "project_describe.txt",
+    "enabled_services.json.log",
+    "billing_link.json.log",
+    "jay_velocity_json_trial_v0_1.json",
+    "jay_velocity_json_trial_v0_1.sha256",
+    "evidence_manifest.sha256"
+  ],
+  "current_state": {
+    "CLOUD_RESOURCE_MANAGER_API": "OBSERVED_DISABLED_IN_USER_PROVIDED_EXCERPT",
+    "ENABLED_SERVICES_SUBSET": "OBSERVED_IN_USER_PROVIDED_EXCERPT",
+    "BILLING_LINK": "UNOBSERVED_QUERY_FAILED_UNIMPLEMENTED",
+    "LOCAL_JSON_BENCHMARK": "NOT_EXECUTED",
+    "LOCAL_HASH_BENCHMARK": "NOT_EXECUTED",
+    "CLOUD_RESOURCES_CREATED": "UNOBSERVED",
+    "BILLING_MODIFIED": "UNOBSERVED",
+    "MARKETPLACE_INCOME": "UNPROVEN",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
