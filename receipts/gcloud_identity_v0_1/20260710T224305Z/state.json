@@ -1,0 +1,18 @@
+{
+  "artifact_type": "GCLOUD_IDENTITY_CAPTURE_STATE",
+  "version": "0.1",
+  "run_id": "20260710T224305Z",
+  "project_number": "311690651351",
+  "project_id_reported": "jaywisdom-boardroom",
+  "active_gcloud_identity": "ABSENT",
+  "project_metadata": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+  "iam_policy": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+  "billing_link": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+  "resources_created": false,
+  "apis_enabled": false,
+  "iam_modified": false,
+  "billing_modified": false,
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}
