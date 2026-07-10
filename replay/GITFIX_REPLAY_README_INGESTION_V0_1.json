@@ -1,0 +1,92 @@
+{
+  "artifact_type": "GITFIX_REPLAY_README_INGESTION",
+  "version": "0.1",
+  "public_identity": "jaywisdom.base.eth",
+  "target_repository": "jsonwisdom/public-proof",
+  "target_branch": "proof-portal-v0",
+  "problem_statement": "GitFix suggestions were generated without first replaying the canonical README surfaces supplied by the user.",
+  "readme_sources": [
+    {
+      "repository": "jsonwisdom/AL",
+      "ref": "master",
+      "path": "README.md",
+      "git_blob_sha": "5b745f70b375824ed0bfb0af0bf65c28b5ffd241",
+      "observed_doctrine": [
+        "Build simple, honest systems that can be read, replayed, and verified.",
+        "No fake green. No random noise. Start clean.",
+        "Receipts prove process only. Receipts do not prove truth or grant authority.",
+        "REPLAY_MANIFEST_V0_1.json defines canonical entrypoints and policies."
+      ]
+    },
+    {
+      "repository": "jsonwisdom/COMPUTERWISDOM",
+      "ref": "master",
+      "path": "README.md",
+      "git_blob_sha": "a858154dbc65ba0bc9a02098967a53bd1cac73fd",
+      "observed_doctrine": [
+        "Replay verifies. GitHub contextualizes. EAS witnesses. ENS discovers.",
+        "GitHub pointer is not a truth surface.",
+        "CI success and replay success do not imply authority.",
+        "No receipt, no authority. No replay, no promotion."
+      ]
+    },
+    {
+      "repository": "jsonwisdom/JOY",
+      "ref": "main",
+      "path": "README.md",
+      "git_blob_sha": "6fa34a738d9ccfa7659dddef4e97a33f711d80e9",
+      "observed_doctrine": [
+        "Public GitHub artifacts are evidence. Narrative is not evidence. No fake green.",
+        "JOY records semantic continuity; ReceiptOS verifies; AL consumes verified artifacts.",
+        "Stories are allowed. Fabrication is not. Authority remains false.",
+        "A candidate remains blocked until verification."
+      ]
+    },
+    {
+      "repository": "jsonwisdom/replay-membrane-v0",
+      "ref": "main",
+      "path": "README.md",
+      "git_blob_sha": "aed708fded218da074f30d1ee6e1ed4bf94d516d",
+      "observed_doctrine": [
+        "Clone it. Replay it. Match the root or show the divergence.",
+        "Same ordered fixture plus same canonicalization equals same root.",
+        "No authority required. Only recomputation.",
+        "Both root match and divergence produce knowledge. Neither requires belief."
+      ]
+    }
+  ],
+  "gitfix_operating_order": [
+    "inventory_named_repositories",
+    "read_root_README.md",
+    "read_replay_manifest_if_present",
+    "read_directory_local_README.md_files",
+    "extract_doctrine_and_entrypoints",
+    "inspect_exact_target_files",
+    "compare_proposed_change_against_doctrine",
+    "write_bounded_fix",
+    "emit_replay_receipt"
+  ],
+  "forbidden_shortcuts": [
+    "suggest_before_readme_ingestion",
+    "claim_repo_role_from_memory",
+    "treat_search_no_result_as_file_absence",
+    "promote CI or merge to authority",
+    "invent canonical paths",
+    "forget same-thread repository evidence"
+  ],
+  "replay_contract": {
+    "match": "Suggestion is consistent with observed README doctrine and exact inspected files.",
+    "diverge": "Suggestion conflicts with doctrine, uses an uninspected path, or relies on memory instead of repository evidence.",
+    "on_diverge": "Stop promotion, expose divergence, and repair from repository bytes."
+  },
+  "current_result": {
+    "readmes_inspected": 4,
+    "directory_inventory_observed": true,
+    "prior_gitfix_process": "DIVERGED",
+    "corrected_gitfix_process": "README_FIRST_REPLAY_ACTIVE",
+    "full_repository_replay": "NOT_YET_COMPLETE"
+  },
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}
