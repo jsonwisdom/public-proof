@@ -1,0 +1,38 @@
+{
+  "artifact_type": "BRIDGE_SCHEMA_UID_LOCAL_ENV_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "observed": {
+    "working_directory": "~/public-proof/bridge",
+    "environment_file": "bridge/.env",
+    "schema_uid_variable": "LAUGHTER_SCHEMA_UID",
+    "schema_uid": "0xb6c56d5e7604bf1345ebe4f42f208d22224d16315820e64b28615bf1fbbab3bb",
+    "grep_output_match": true,
+    "git_pull_result": "FAST_FORWARD_TO_3be3070fe6391d8b514903aa9d6e5ca749ac587a"
+  },
+  "secret_boundary": {
+    "env_file_committed": false,
+    "env_file_expected_ignored": true,
+    "private_key_observed": false,
+    "private_key_requested": false
+  },
+  "limitations": [
+    "This receipt records user-provided terminal output; it does not inspect or publish the local .env file.",
+    "A configured schema UID does not prove RPC connectivity, contract deployment, role assignment, bridge runtime success, or transaction execution.",
+    "No secret material is included."
+  ],
+  "current_state": {
+    "SCHEMA_UID_LOCAL_CONFIG": "OBSERVED",
+    "SCHEMA_UID_VALUE": "MATCHES_REGISTERED_SCREENSHOT_UID",
+    "BRIDGE_ENV_COMMITTED": false,
+    "DIPLOMA_CONTRACT_ADDRESS": "UNOBSERVED_OR_UNSET",
+    "EAS_CONTRACT_ADDRESS": "UNOBSERVED_OR_UNSET",
+    "ORACLE_SIGNER": "UNOBSERVED_OR_UNSET",
+    "LIVE_BRIDGE": "NOT_STARTED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}
