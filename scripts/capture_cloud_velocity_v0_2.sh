@@ -120,13 +120,17 @@ def command_payload(path: pathlib.Path) -> list[str]:
     if not path.exists():
         return []
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    ignored_prefixes = (
+        "$",
+        "EXIT_CODE=",
+        "WARNING:",
+        "Your active configuration is:",
+    )
     return [
         line.strip()
         for line in lines
         if line.strip()
-        and not line.startswith("$")
-        and not line.startswith("EXIT_CODE=")
-        and not line.startswith("WARNING:")
+        and not line.startswith(ignored_prefixes)
     ]
 
 configured_accounts = command_payload(out / "configured_account.txt")
