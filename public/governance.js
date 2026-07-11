@@ -20,6 +20,24 @@ async function fetchObservedHead() {
   return String(payload?.head?.sha || '').toLowerCase();
 }
 
+async function bindPortalCourtroomLink() {
+  const link = document.querySelector('a[href^="/governance/pr/"]');
+  if (!link) return;
+  link.setAttribute('aria-disabled', 'true');
+  link.textContent = 'Courtroom · checking HEAD';
+  try {
+    const liveHead = await fetchObservedHead();
+    if (!/^[0-9a-f]{40}$/.test(liveHead)) throw new Error('LIVE_HEAD_INVALID');
+    link.href = `/governance/pr/${liveHead}`;
+    link.textContent = 'Courtroom';
+    link.removeAttribute('aria-disabled');
+  } catch (error) {
+    link.removeAttribute('href');
+    link.textContent = 'Courtroom · HEAD unobserved';
+    link.title = String(error?.message || error);
+  }
+}
+
 export function useGovernanceState(expectedHeadSha) {
   const [observedHeadSha, setObservedHeadSha] = useState('');
   const [receipts] = useState([]);
@@ -140,4 +158,6 @@ if (expectedHeadSha) {
   document.title = 'UGS-8 Governance Courtroom';
   document.body.innerHTML = '<div id="ugs8-root"></div>';
   createRoot(document.getElementById('ugs8-root')).render(h(Courtroom, { expectedHeadSha }));
+} else {
+  bindPortalCourtroomLink();
 }
