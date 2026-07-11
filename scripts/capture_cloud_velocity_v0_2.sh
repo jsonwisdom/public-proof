@@ -32,8 +32,17 @@ capture enabled_services.json.log \
 capture billing_project_link.json.log \
   gcloud billing projects describe "$PROJECT_ID" --format=json || true
 
+capture configured_account.txt \
+  gcloud config get-value account || true
+
+capture configured_project.txt \
+  gcloud config get-value project || true
+
+capture auth_inventory.json.log \
+  gcloud auth list --format=json || true
+
 capture active_account.txt \
-  gcloud auth list --filter=status:ACTIVE --format='value(account)' || true
+  gcloud auth list --filter='status:ACTIVE' --format='value(account)' || true
 
 python3 - "$OUT" "$PROJECT_NUMBER" "$PROJECT_ID" <<'PY'
 import hashlib
@@ -105,40 +114,52 @@ digest = hashlib.sha256(path.read_bytes()).hexdigest()
 (out / "jay_velocity_json_trial_v0_2.sha256").write_text(
     f"{digest}  {path.name}\n", encoding="utf-8"
 )
+
+
+def command_payload(path: pathlib.Path) -> list[str]:
+    if not path.exists():
+        return []
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    return [
+        line.strip()
+        for line in lines
+        if line.strip()
+        and not line.startswith("$")
+        and not line.startswith("EXIT_CODE=")
+        and not line.startswith("WARNING:")
+    ]
+
+configured_accounts = command_payload(out / "configured_account.txt")
+configured_projects = command_payload(out / "configured_project.txt")
+active_accounts = command_payload(out / "active_account.txt")
+
+identity_state = "ACTIVE_IDENTITY_OBSERVED" if active_accounts else "ACTIVE_IDENTITY_ABSENT"
+
+state = {
+    "artifact_type": "CLOUD_VELOCITY_CAPTURE_STATE",
+    "version": "0.2",
+    "run_id": out.name,
+    "project_number": project_number,
+    "project_id_reported": project_id,
+    "configured_account_observed": configured_accounts[0] if configured_accounts else None,
+    "configured_project_observed": configured_projects[0] if configured_projects else None,
+    "active_accounts_observed": active_accounts,
+    "active_identity_state": identity_state,
+    "cloud_resource_manager_state": "SEE_PROJECT_DESCRIBE_RECEIPT",
+    "enabled_services_state": "SEE_ENABLED_SERVICES_RECEIPT",
+    "billing_link_state": "SEE_BILLING_PROJECT_LINK_RECEIPT",
+    "auth_inventory_state": "SEE_AUTH_INVENTORY_RECEIPT",
+    "local_json_trial": "EXECUTED",
+    "local_hash_trial": "EXECUTED",
+    "production_capacity": "UNPROVEN",
+    "marketplace_income": "UNPROVEN",
+    "authority": False,
+    "no_fake_green": True,
+    "no_fake_red": True,
+}
+(out / "state.json").write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
 PY
 
-(
-  cd "$OUT"
-  find . -maxdepth 1 -type f \
-    ! -name 'evidence_manifest.sha256' \
-    ! -name 'evidence_manifest.sha256.sha256' \
-    -print0 \
-  | sort -z \
-  | xargs -0 sha256sum > evidence_manifest.sha256
-  sha256sum evidence_manifest.sha256 > evidence_manifest.sha256.sha256
-)
-
-cat > "$OUT/state.json" <<EOF
-{
-  "artifact_type": "CLOUD_VELOCITY_CAPTURE_STATE",
-  "version": "0.2",
-  "run_id": "$RUN_ID",
-  "project_number": "$PROJECT_NUMBER",
-  "project_id_reported": "$PROJECT_ID",
-  "cloud_resource_manager_state": "SEE_PROJECT_DESCRIBE_RECEIPT",
-  "enabled_services_state": "SEE_ENABLED_SERVICES_RECEIPT",
-  "billing_link_state": "SEE_BILLING_PROJECT_LINK_RECEIPT",
-  "local_json_trial": "EXECUTED",
-  "local_hash_trial": "EXECUTED",
-  "production_capacity": "UNPROVEN",
-  "marketplace_income": "UNPROVEN",
-  "authority": false,
-  "no_fake_green": true,
-  "no_fake_red": true
-}
-EOF
-
-# Recompute manifest after state.json is created.
 (
   cd "$OUT"
   find . -maxdepth 1 -type f \
