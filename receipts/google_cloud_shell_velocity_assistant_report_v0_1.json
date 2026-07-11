@@ -1,0 +1,63 @@
+{
+  "artifact_type": "GOOGLE_CLOUD_SHELL_VELOCITY_ASSISTANT_REPORT_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_ASSISTANT_NARRATIVE",
+  "source_context": "A remote assistant response claimed to summarize Google Cloud project metadata and enabled services for jaywisdom-boardroom.",
+  "project": {
+    "display_name_claimed": "jaywisdom-boardroom",
+    "project_number_claimed": "311690651351",
+    "project_id": "UNOBSERVED_IN_THIS_RECEIPT"
+  },
+  "claims_received": {
+    "cloud_resource_manager_api_disabled": "UNVERIFIED",
+    "enabled_services": [
+      "bigquery.googleapis.com",
+      "storage.googleapis.com",
+      "run.googleapis.com",
+      "pubsub.googleapis.com",
+      "sql-component.googleapis.com",
+      "artifactregistry.googleapis.com",
+      "cloudbuild.googleapis.com",
+      "iam.googleapis.com"
+    ],
+    "enabled_services_status": "UNVERIFIED",
+    "billing_status": "UNOBSERVED",
+    "resources_created": "CLAIMED_FALSE_NOT_INDEPENDENTLY_OBSERVED",
+    "billing_modified": "CLAIMED_FALSE_NOT_INDEPENDENTLY_OBSERVED"
+  },
+  "analysis": {
+    "local_json_benchmark": "NOT_EXECUTED",
+    "local_hash_benchmark": "NOT_EXECUTED",
+    "local_io_benchmark": "NOT_EXECUTED",
+    "machine_speed_classification": "NOT_COMPUTABLE",
+    "production_capacity": "UNPROVEN",
+    "marketplace_readiness": "UNPROVEN",
+    "revenue_potential": "UNPROVEN"
+  },
+  "contradiction_check": {
+    "finding": "The narrative states the remote assistant could not execute the local benchmark, while also claiming real-time cloud data retrieval without attaching command output or receipts.",
+    "result": "TREAT_AS_NARRATIVE_UNTIL_RAW_OUTPUT_IS_PROVIDED"
+  },
+  "required_evidence_for_promotion": [
+    "raw gcloud command output",
+    "active account observation",
+    "resolved project ID",
+    "enabled services JSON output",
+    "billing project description output",
+    "local benchmark JSON receipt",
+    "SHA-256 hash of the benchmark receipt"
+  ],
+  "safe_next_step": {
+    "action": "Run the existing read-only benchmark script locally without enabling APIs or creating resources, then commit the resulting JSON and hash.",
+    "cloud_resource_manager_api_enablement": "NOT_AUTHORIZED_BY_THIS_RECEIPT"
+  },
+  "current_state": {
+    "CLOUD_SHELL_EXECUTION": "UNOBSERVED",
+    "JSON_TRIALS": "NOT_EXECUTED",
+    "GOOGLE_PROJECT_METADATA": "PARTIALLY_CLAIMED_NOT_VERIFIED",
+    "MARKETPLACE_INCOME": "UNPROVEN",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}

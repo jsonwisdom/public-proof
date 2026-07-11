@@ -1,0 +1,58 @@
+{
+  "artifact_type": "JAY_WALLET_ALLOCATION_POLICY",
+  "version": "0.1",
+  "title": "GitHub Proof Solution Marketplace Allocation Policy",
+  "identities": {
+    "research_anchor": "jaywisdom.eth",
+    "public_base_identity": "jaywisdom.base.eth",
+    "zora_profile": "https://zora.co/@jaywisdom",
+    "presented_wallet": "0xa380552a27b0a5a2874Ea7AA52CAC09f542002E8"
+  },
+  "declared_model": {
+    "one_of_ninety_nine": {
+      "enabled": true,
+      "meaning": "A declared 1-of-99 solution-edition policy. No token, sale, royalty, entitlement, or contract deployment is claimed by this declaration alone."
+    },
+    "jaywisdom_eth": {
+      "declared_percentage": 1,
+      "unit": "percent",
+      "meaning": "Identity and research-anchor allocation declaration only."
+    },
+    "jaywisdom_base_eth": {
+      "declared_split": "50/50",
+      "meaning": "Cryptographic-control and operational-control proof domains remain equally represented and independently verified."
+    },
+    "zora_profile": {
+      "access_mode": "FREE",
+      "meaning": "Public discovery and free-access surface declaration; no mint or marketplace state is asserted."
+    }
+  },
+  "automation": {
+    "enabled": true,
+    "mode": "VERIFY_ONLY",
+    "wallet_transfer": "DISABLED",
+    "payout_execution": "DISABLED",
+    "contract_deployment": "DISABLED",
+    "marketplace_publication": "UNOBSERVED",
+    "required_before_value_transfer": [
+      "wallet control independently verified",
+      "account type determined",
+      "EOA recovery or ERC-1271 validation succeeds",
+      "commercial terms reviewed",
+      "GitHub Marketplace listing approved",
+      "payment processor or smart-contract rail explicitly configured",
+      "human approval recorded"
+    ]
+  },
+  "boundaries": [
+    "GitHub Marketplace listing does not prove wallet control.",
+    "Wallet control does not prove GitHub Marketplace approval.",
+    "A percentage declaration is not an executed payout.",
+    "A 1-of-99 declaration is not evidence of token issuance or sale.",
+    "A Zora profile URL does not prove a free mint or active listing.",
+    "No automated value transfer is enabled by this file."
+  ],
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}

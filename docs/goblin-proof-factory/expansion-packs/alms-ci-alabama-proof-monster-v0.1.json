@@ -1,0 +1,77 @@
+{
+  "pack_type": "ALMS_CI_ALABAMA_PROOF_MONSTER",
+  "version": "0.1",
+  "title": "Hypertext Directory Builders at Machine Speed",
+  "public_identity": "jaywisdom.base.eth",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "mode": "MACHINE_SPEED_WITH_HUMAN_OVERSIGHT",
+  "directory_builder": {
+    "root": "docs/goblin-proof-factory/generated",
+    "machine_index": "index.json",
+    "human_index": "index.html",
+    "deterministic_sort": "UTF8_BYTE_ORDER",
+    "include_sha256": true,
+    "include_relative_links": true,
+    "include_human_summary": true
+  },
+  "alms_ci": {
+    "required_checks": [
+      "json_parse",
+      "relative_link_resolution",
+      "sha256_recompute",
+      "authority_false_check",
+      "satire_firebreak_check"
+    ],
+    "promotion_rule": "NO_CHECK_NO_PROMOTION",
+    "failure_state": "PROVISIONAL_RED_WITHOUT_GUILT",
+    "success_state": "STRUCTURALLY_VALID_NOT_FACTUALLY_PROVEN"
+  },
+  "alabama_proof_monster": {
+    "label": "SATIRICAL_VALIDATOR_PERSONA",
+    "job": "Roam the generated directory, growl at broken links, and refuse fake green.",
+    "legal_status": "NOT_A_REAL_ENTITY",
+    "authority": false
+  },
+  "super_secret_syntax": {
+    "enabled": true,
+    "classification": "PUBLIC_SATIRICAL_DSL",
+    "contains_hidden_access_material": false,
+    "tokens": {
+      "@peek": "include a public artifact in the machine index",
+      "@human": "require a human-readable oversight note",
+      "@hash": "require SHA-256 over exact bytes",
+      "@limit": "declare a non-conclusion boundary",
+      "@satire": "mark comic exaggeration",
+      "@challenge": "declare a public challenge path",
+      "@authority(false)": "lock non-authoritative posture"
+    },
+    "example": "@peek receipts/example.json | @hash | @human | @limit(wallet_control=UNPROVEN) | @satire | @challenge(PR_THREAD) | @authority(false)",
+    "warning": "Super Secret is satire. The syntax is public and carries no access authority."
+  },
+  "output_contract": {
+    "machine_index_required_fields": [
+      "path",
+      "media_type",
+      "sha256",
+      "status",
+      "limitations"
+    ],
+    "human_index_required_sections": [
+      "What exists",
+      "What was checked",
+      "What remains unproven",
+      "How to challenge",
+      "Satire firebreak"
+    ]
+  },
+  "satire_firebreak": {
+    "satire": true,
+    "comic_exaggeration": true,
+    "legal_finding": false,
+    "proof_of_intent": false
+  },
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}

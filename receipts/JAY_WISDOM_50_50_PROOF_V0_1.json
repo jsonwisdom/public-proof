@@ -1,0 +1,170 @@
+{
+  "artifact_type": "JAY_WISDOM_50_50_PROOF",
+  "version": "0.1.4",
+  "title": "50/50 Wisdom Proof",
+  "public_identity": {
+    "ens": "jaywisdom.eth",
+    "basename": "jaywisdom.base.eth",
+    "wallet_address": "0xa380552a27b0a5a2874ea7aa52cac09f542002e8",
+    "wallet_control": "UNPROVEN",
+    "name_control": "UNPROVEN",
+    "account_type": "UNOBSERVED"
+  },
+  "google_operational_surface": {
+    "project_display_name": "JayWisdom Boardroom",
+    "project_number": "311690651351",
+    "project_id": "REPORTED_AS_jaywisdom-boardroom_NOT_AUTHENTICATED_IN_CAPTURE",
+    "resource_access": "PARTIALLY_OBSERVED",
+    "owner_role_present": true,
+    "owner_identity_binding": "UNPROVEN",
+    "active_cli_identity": "OBSERVED_ABSENT_IN_RUN_20260711T001150Z",
+    "configured_account": "UNSET",
+    "configured_project": "UNSET",
+    "auth_inventory": "EMPTY",
+    "latest_identity_run": "20260710T224305Z",
+    "identity_capture_commit": "27dda6464636611638e0aea89c493ffe2d18d4fa",
+    "identity_capture_state": {
+      "active_gcloud_identity": "ABSENT",
+      "project_metadata": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+      "iam_policy": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY",
+      "billing_link": "NOT_ATTEMPTED_WITHOUT_ACTIVE_IDENTITY"
+    },
+    "latest_velocity_run": "20260711T001150Z",
+    "velocity_capture_commit": "ae7fbc8c1a6601b9f35faa4f60862aeee22fd3a9",
+    "velocity_capture_state": {
+      "configured_account_observed": "UNSET",
+      "configured_project_observed": "UNSET",
+      "active_accounts_observed": [],
+      "active_identity_state": "ACTIVE_IDENTITY_ABSENT"
+    },
+    "local_json_trial": {
+      "state": "OBSERVED_AND_COMMITTED",
+      "documents_per_trial": 10000,
+      "median_seconds": 0.07394,
+      "documents_per_second": 135244.78
+    },
+    "local_sha256_trial": {
+      "state": "OBSERVED_AND_COMMITTED",
+      "hashes_per_trial": 25000,
+      "median_seconds": 0.030652,
+      "hashes_per_second": 815620.26
+    },
+    "cloud_metadata_capture": {
+      "state": "BLOCKED_NO_ACTIVE_GCLOUD_ACCOUNT",
+      "metadata_verified": false
+    },
+    "production_capacity": "UNPROVEN",
+    "marketplace_income": "UNPROVEN"
+  },
+  "left_half": {
+    "label": "CRYPTOGRAPHIC_CONTROL_SURFACE",
+    "required_evidence": [
+      "exact_utf8_message_bytes",
+      "personal_sign_signature",
+      "account_type_detection",
+      "eoa_recovered_signer_or_erc1271_validation",
+      "exact_address_match_or_contract_signature_validity",
+      "optional_eas_attestation"
+    ],
+    "current_state": "UNPROVEN"
+  },
+  "right_half": {
+    "label": "OPERATIONAL_CONTROL_SURFACE",
+    "required_evidence": [
+      "authenticated_google_principal",
+      "project_metadata_export",
+      "redacted_iam_policy_export",
+      "observed_role_binding",
+      "resource_or_deployment_receipt"
+    ],
+    "current_state": "PARTIALLY_OBSERVED_WITH_LOCAL_VELOCITY_AND_ABSENT_IDENTITY_RECEIPTS"
+  },
+  "wallet_signature_request": {
+    "method": "personal_sign",
+    "network_context": "eip155:8453",
+    "expected_address": "0xa380552a27b0a5a2874ea7aa52cac09f542002e8",
+    "message_encoding": "UTF-8",
+    "message": "JAY_WISDOM_50_50_PROOF_V0_1\n\nmanifest_commit=bfc7d22fb2d705d8de4006b8d2c2f78340eac333\nrepository=jsonwisdom/public-proof\nartifact=receipts/JAY_WISDOM_50_50_PROOF_V0_1.json\nwallet_address=0xa380552a27b0a5a2874ea7aa52cac09f542002e8\ngoogle_project_number=311690651351\npurpose=bind_cryptographic_control_surface_to_operational_evidence_manifest\nauthority=false",
+    "rpc_message_parameter": "HEX_ENCODED_UTF8_MESSAGE",
+    "signature": "PENDING",
+    "security_boundary": "No private key, seed phrase, recovery phrase, or signing secret is requested or stored."
+  },
+  "wallet_verification": {
+    "account_type_detection": "PENDING",
+    "eoa_path": {
+      "method": "recoverMessageAddress",
+      "required_result": "RECOVERED_ADDRESS_EQUALS_EXPECTED_ADDRESS"
+    },
+    "smart_account_path": {
+      "method": "ERC1271_IS_VALID_SIGNATURE_OR_EQUIVALENT_ACCOUNT_VALIDATION",
+      "required_result": "CONTRACT_SIGNATURE_VALID_FOR_EXPECTED_ACCOUNT"
+    },
+    "promotion_rule": "Promote wallet_control only after the applicable verification path succeeds against the exact frozen message.",
+    "rejection_rule": "Invalid signature, changed message bytes, wrong address, unsupported method, or failed contract validation remains UNPROVEN or becomes DIVERGED."
+  },
+  "binding": {
+    "repository": "jsonwisdom/public-proof",
+    "branch": "proof-portal-v0",
+    "wallet_receipt_path": "receipts/jaywisdom_base_eth_wallet_receive_surface_v0_1.json",
+    "iam_receipt_path": "receipts/google_iam_day_closeout_v0_1.json",
+    "cloud_velocity_receipt_directory": "receipts/cloud_velocity_v0_2/20260711T001150Z",
+    "cloud_velocity_commit": "ae7fbc8c1a6601b9f35faa4f60862aeee22fd3a9",
+    "cloud_velocity_trial_sha256": "d956fe57ee6a36561e6b007a6b8a9ae34ac5fdc781be79b3367890c0f8ec4733",
+    "cloud_velocity_state_sha256": "ec12a8ef0b915697cc3dbbbb3e242f1d816962d5509919af9087261291191069",
+    "cloud_velocity_manifest_sha256": "6629ce583d7f25e846f682e1252739c9ba93bd7d03edba2594c55df7db3c4e43",
+    "gcloud_identity_receipt_directory": "receipts/gcloud_identity_v0_1/20260710T224305Z",
+    "gcloud_identity_commit": "27dda6464636611638e0aea89c493ffe2d18d4fa",
+    "gcloud_identity_state_sha256": "cf9b6778cddcf7c829af4f4be101271877366c0b8bb3068a6db9b4ff79811f8d",
+    "gcloud_identity_manifest_sha256": "d32634618adc943fd69795eedb0b2bf396f683a92ada866881333b279b9098c2",
+    "wallet_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
+    "iam_receipt_sha256": "PENDING_INDEPENDENT_RECOMPUTATION",
+    "manifest_sha256": "PENDING_INDEPENDENT_RECOMPUTATION_AFTER_THIS_UPDATE",
+    "wallet_signature": "PENDING",
+    "verification_method": "PENDING_ACCOUNT_TYPE_DETECTION",
+    "recovered_signer": "NOT_APPLICABLE_UNTIL_ACCOUNT_TYPE_DETECTED",
+    "contract_signature_validation": "NOT_APPLICABLE_UNTIL_ACCOUNT_TYPE_DETECTED",
+    "google_workflow_reference": "PENDING",
+    "eas_uid": "PENDING"
+  },
+  "developer_reference": {
+    "source": "coinbase/coinbase-wallet-sdk",
+    "source_commit": "75fdee4d8e7c287b534571a5b55a639410a5c6dc",
+    "source_path": "packages/wallet-sdk/src/sign/scw/utils/createSubAccountSigner.ts",
+    "observed_behavior": [
+      "personal_sign expects a hex-encoded message parameter",
+      "the wallet decodes the message and invokes account.signMessage",
+      "Base smart-account signing means ecrecover alone is not a universal verifier"
+    ]
+  },
+  "state_machine": [
+    "LEFT_VERIFIED_RIGHT_UNPROVEN",
+    "LEFT_UNPROVEN_RIGHT_OBSERVED",
+    "BOTH_OBSERVED_NOT_BOUND",
+    "LEFT_VERIFIED_RIGHT_OBSERVED_NOT_BOUND",
+    "BOTH_VERIFIED_AND_HASH_BOUND",
+    "DIVERGED"
+  ],
+  "current_result": "BOTH_OBSERVED_NOT_BOUND",
+  "permitted_statement": "A public Base identity claim, committed local Cloud Shell velocity measurements, and committed observations that no active gcloud identity was configured in the captured sessions are preserved without proving wallet control, Google project control, production capacity, Marketplace readiness, or income.",
+  "forbidden_promotions": [
+    "Wallet signature does not prove Google project ownership.",
+    "Google IAM access does not prove wallet or name control.",
+    "An absent gcloud identity in one session does not prove permanent lack of project access.",
+    "A shared manifest does not prove either side until the referenced receipts are independently hashed and verified.",
+    "EOA recovery must not be used as the sole verification method when the claimed address is a smart account.",
+    "An EAS UID does not prove binding until independently replayed.",
+    "Local benchmark throughput does not prove production capacity, Marketplace eligibility, customer demand, or revenue.",
+    "A failed or skipped gcloud metadata query does not disprove the project or billing relationship.",
+    "CI success, merge, or deployment does not create authority."
+  ],
+  "doctrine": [
+    "BASE_PROVES_CRYPTOGRAPHIC_CONTROL",
+    "GOOGLE_PROVES_RESOURCE_ACCESS",
+    "GITHUB_PRESERVES_THE_JOIN",
+    "EAS_WITNESSES_THE_HASH",
+    "HUMAN_REVIEW_LIMITS_THE_CLAIM"
+  ],
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}

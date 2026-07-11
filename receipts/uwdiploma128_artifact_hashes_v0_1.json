@@ -1,0 +1,35 @@
+{
+  "artifact_type": "UWDIPLOMA128_ARTIFACT_HASH_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "artifact": "out/UWDiploma128.sol/UWDiploma128.json",
+  "observed": {
+    "abi_canonicalization": "json.dumps(abi,separators=(\",\",\":\"),ensure_ascii=false)",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "16b4ee600f7ac7cb5e7d6c4f17cba8bf744ce1d4acf142d016eef284280496e1",
+    "creation_bytecode_bytes": 8060
+  },
+  "rejected_prior_value": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reason": "xxd was unavailable, so sha256sum hashed empty input rather than contract bytecode"
+  },
+  "limitations": [
+    "These hashes were computed from a local Foundry artifact produced in the user environment.",
+    "The ABI hash depends on the stated JSON canonicalization method.",
+    "The creation bytecode hash is not a deployed runtime bytecode hash and does not prove deployment.",
+    "No Base transaction, contract address, role grant, live bridge execution, attestation validation, or diploma mint is claimed."
+  ],
+  "current_state": {
+    "LOCAL_COMPILE": "OBSERVED_PASS_USER_TERMINAL",
+    "LOCAL_TESTS": "OBSERVED_PASS_12_OF_12_USER_TERMINAL",
+    "ABI_HASH": "OBSERVED",
+    "CREATION_BYTECODE_HASH": "OBSERVED",
+    "RUNTIME_BYTECODE_HASH": "UNOBSERVED",
+    "MAINNET_DEPLOYMENT": "BLOCKED_PENDING_HUMAN_REVIEW_AND_DEPLOYMENT_PLAN",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}

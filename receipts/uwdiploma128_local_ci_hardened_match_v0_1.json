@@ -1,0 +1,56 @@
+{
+  "artifact_type": "UWDIPLOMA128_LOCAL_CI_HARDENED_MATCH_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT_MATCHED_TO_CI_ARTIFACT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "local_observation": {
+    "git_head_before_local_build": "9a1b4ad81f15a32840d9e2aaedd61f64cdc3eccd",
+    "solc_version": "0.8.24",
+    "build_command": "forge clean && forge build --force",
+    "build_result": "PASS",
+    "full_artifact_json_sha256": "a06f2547bbeba77e9dd545764fbda5dcc62b8dfd0ee488dea828f52ff595ce06",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "27f852a32bb9298e2465d4978aa8112fd0a5b547b2799f10e66ee538d329293a",
+    "creation_bytecode_bytes": 8006,
+    "runtime_bytecode_sha256": "e6cf0e0645277f95d1db858bbe39d187f24228d5e6ee046d215fd0294f05225a",
+    "runtime_bytecode_bytes": 7292
+  },
+  "ci_reference": {
+    "workflow_run_id": 29131155802,
+    "workflow_commit": "f0bcf6f7c7a496b58f3faaff509bfc15371e0676",
+    "artifact_id": 8242064432,
+    "full_artifact_json_sha256": "a06f2547bbeba77e9dd545764fbda5dcc62b8dfd0ee488dea828f52ff595ce06",
+    "abi_sha256": "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f",
+    "creation_bytecode_sha256": "27f852a32bb9298e2465d4978aa8112fd0a5b547b2799f10e66ee538d329293a",
+    "creation_bytecode_bytes": 8006,
+    "runtime_bytecode_sha256": "e6cf0e0645277f95d1db858bbe39d187f24228d5e6ee046d215fd0294f05225a",
+    "runtime_bytecode_bytes": 7292
+  },
+  "comparison": {
+    "full_artifact_json_match": true,
+    "abi_match": true,
+    "creation_bytecode_match": true,
+    "creation_bytecode_length_match": true,
+    "runtime_bytecode_match": true,
+    "runtime_bytecode_length_match": true,
+    "exact_cross_environment_match": true
+  },
+  "limitations": [
+    "This proves equality between the reported Cloud Shell build and the previously captured GitHub Actions artifact values under the hardened Foundry configuration.",
+    "It does not prove signer control, transaction simulation, broadcast, deployment, contract address, deployed runtime code, role grants, live bridge execution, attestation validation, or diploma minting."
+  ],
+  "current_state": {
+    "CI_GATE": "GREEN",
+    "CI_TWO_BUILD_EXACT_MATCH": true,
+    "LOCAL_CI_HARDENED_MATCH": true,
+    "UNSIGNED_DEPLOYMENT_BUNDLE": "STALE_REGENERATE_REQUIRED_AFTER_METADATA_HARDENING",
+    "DRY_PREPARATION": "READY_PENDING_SAFE_PUBLIC_DEPLOYER_ADDRESS_AND_SIGNING_METHOD",
+    "BROADCAST": "NOT_AUTHORIZED",
+    "DEPLOYMENT_TX": "UNOBSERVED",
+    "CONTRACT_ADDRESS": "UNOBSERVED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}

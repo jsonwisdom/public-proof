@@ -1,0 +1,167 @@
+name: UWDiploma128 Local Gate
+
+# Retrigger marker: metadata-hardened two-build reproducibility gate.
+on:
+  pull_request:
+    paths:
+      - "contracts/UWDiploma128.sol"
+      - "test/UWDiploma128.t.sol"
+      - "foundry.toml"
+      - ".github/workflows/uwdiploma128-local-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Foundry v1.7.1
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.7.1
+          cache: false
+
+      - name: Show Forge version
+        run: forge --version
+
+      - name: Install pinned Solidity dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p lib
+
+          git clone https://github.com/OpenZeppelin/openzeppelin-contracts.git lib/openzeppelin-contracts
+          git -C lib/openzeppelin-contracts checkout 5fd1781b1454fd1ef8e722282f86f9293cacf256
+
+          git clone https://github.com/foundry-rs/forge-std.git lib/forge-std
+          git -C lib/forge-std checkout bf647bd6046f2f7da30d0c2bf435e5c76a780c1b
+
+      - name: Build contract — pass 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          forge clean
+          forge build --force
+
+      - name: Run 12-case test matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          forge test -vvv
+
+      - name: Capture pass-1 artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-artifacts
+          cp out/UWDiploma128.sol/UWDiploma128.json ci-artifacts/UWDiploma128.pass1.json
+
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          artifact = Path("ci-artifacts/UWDiploma128.pass1.json")
+          data = json.loads(artifact.read_text())
+          abi_json = json.dumps(data["abi"], separators=(",", ":"), ensure_ascii=False)
+          creation = bytes.fromhex(data["bytecode"]["object"].removeprefix("0x"))
+          runtime = bytes.fromhex(data["deployedBytecode"]["object"].removeprefix("0x"))
+
+          report = {
+              "full_artifact_json_sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
+              "abi_sha256": hashlib.sha256(abi_json.encode()).hexdigest(),
+              "creation_bytecode_sha256": hashlib.sha256(creation).hexdigest(),
+              "creation_bytecode_bytes": len(creation),
+              "runtime_bytecode_sha256": hashlib.sha256(runtime).hexdigest(),
+              "runtime_bytecode_bytes": len(runtime),
+          }
+          Path("ci-artifacts/pass1_hashes.json").write_text(json.dumps(report, indent=2) + "\n")
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Build contract — pass 2
+        shell: bash
+        run: |
+          set -euo pipefail
+          forge clean
+          forge build --force
+
+      - name: Verify exact two-build reproducibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp out/UWDiploma128.sol/UWDiploma128.json ci-artifacts/UWDiploma128.pass2.json
+
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          expected_abi = "ce6ae9bf7bc81ed2bd55fdf16a2184810efe350bf5a1e6c53c13911c431ffe8f"
+          first = json.loads(Path("ci-artifacts/pass1_hashes.json").read_text())
+          artifact = Path("ci-artifacts/UWDiploma128.pass2.json")
+          data = json.loads(artifact.read_text())
+          abi_json = json.dumps(data["abi"], separators=(",", ":"), ensure_ascii=False)
+          creation = bytes.fromhex(data["bytecode"]["object"].removeprefix("0x"))
+          runtime = bytes.fromhex(data["deployedBytecode"]["object"].removeprefix("0x"))
+
+          second = {
+              "full_artifact_json_sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
+              "abi_sha256": hashlib.sha256(abi_json.encode()).hexdigest(),
+              "creation_bytecode_sha256": hashlib.sha256(creation).hexdigest(),
+              "creation_bytecode_bytes": len(creation),
+              "runtime_bytecode_sha256": hashlib.sha256(runtime).hexdigest(),
+              "runtime_bytecode_bytes": len(runtime),
+          }
+
+          report = {
+              "build_1": first,
+              "build_2": second,
+              "exact_match": first == second,
+              "authority": False,
+              "broadcast_performed": False,
+          }
+          Path("ci-artifacts/uwdiploma128_hash_report.json").write_text(
+              json.dumps(report, indent=2) + "\n"
+          )
+
+          for key, value in second.items():
+              print(f"CI_{key.upper()}={value}")
+          print("CI_TWO_BUILD_EXACT_MATCH=" + str(first == second).upper())
+
+          if second["abi_sha256"] != expected_abi:
+              raise SystemExit("ABI hash mismatch")
+          if first != second:
+              raise SystemExit("two clean builds produced different artifacts")
+          PY
+
+      - name: Upload CI artifact bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: uwdiploma128-ci-artifacts-${{ github.run_id }}
+          path: ci-artifacts/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Emit governed summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## UWDiploma128 Local Gate"
+            echo
+            echo "- Authority: false"
+            echo "- Broadcast: not performed"
+            echo "- Deployment: not claimed"
+            echo "- Two-build reproducibility: enforced"
+            echo "- Cross-environment local/CI match: separately required before deployment"
+            echo "- Role grants: not performed"
+          } >> "$GITHUB_STEP_SUMMARY"

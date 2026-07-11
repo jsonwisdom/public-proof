@@ -1,0 +1,47 @@
+{
+  "artifact_type": "WALLET_RECEIVE_SURFACE_RECEIPT",
+  "version": "0.1",
+  "title": "JayWisdom Give-and-Get Return Proof",
+  "public_identity_claim": "jaywisdom.base.eth",
+  "presented_address": "0xa380552a27b0a5a2874ea7aa52cac09f542002e8",
+  "network_label_observed": "Ethereum",
+  "ui_claim_observed": "This address supports all assets on Ethereum, Base, Polygon, and other EVM networks.",
+  "screenshot": {
+    "filename": "4DB17056-BC96-4B66-B75B-AE7620E3F9D8.png",
+    "sha256": "e4a2f04e83a24ce2d564565131069fcdd20895277ac0508b70fa7c87a7c796b3",
+    "bytes": 330792,
+    "status": "HASHED_FROM_USER_SUPPLIED_IMAGE"
+  },
+  "observations": [
+    "The wallet receive screen visibly displays jaywisdom.base.eth.",
+    "The visible shortened address begins with 0xa38 and ends with 02e8.",
+    "The full address supplied by the user is 0xa380552a27b0a5a2874ea7aa52cac09f542002e8.",
+    "The screen presents a QR code and a Copy Wallet Address control."
+  ],
+  "field_status": {
+    "ui_name_to_shortened_address_association": "OBSERVED",
+    "user_supplied_full_address": "OBSERVED_IN_CONVERSATION",
+    "screenshot_byte_identity": "HASHED",
+    "wallet_control": "UNPROVEN",
+    "name_control": "UNPROVEN",
+    "onchain_forward_resolution": "UNVERIFIED_IN_THIS_RECEIPT",
+    "onchain_reverse_resolution": "UNVERIFIED_IN_THIS_RECEIPT",
+    "eas_binding": "UNVERIFIED_IN_THIS_RECEIPT"
+  },
+  "permitted_statement": "A user-supplied wallet receive screenshot displays jaywisdom.base.eth alongside a shortened address consistent in prefix and suffix with the full address supplied in the same conversation.",
+  "forbidden_promotions": [
+    "The screenshot alone does not prove control of the wallet.",
+    "The screenshot alone does not prove control of jaywisdom.base.eth.",
+    "The screenshot alone does not independently verify ENS or Basename resolution.",
+    "The screenshot alone does not verify any EAS attestation binding.",
+    "A receive screen does not prove ownership of funds or prior transactions."
+  ],
+  "return_proof": {
+    "give": "User supplied the wallet receive screenshot and full EVM address.",
+    "get": "Repository receipt preserving the screenshot hash, observed UI association, full presented address, and proof limits.",
+    "status": "RETURNED_AS_PUBLIC_RECEIPT"
+  },
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}

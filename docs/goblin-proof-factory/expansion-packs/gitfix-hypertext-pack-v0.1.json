@@ -1,0 +1,136 @@
+{
+  "pack_type": "GITFIX_HYPERTEXT_EXPANSION_PACK",
+  "version": "0.1",
+  "title": "GitFix Expansion Packs — Hypertext JSONs",
+  "public_identity": "jaywisdom.base.eth",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "purpose": "Provide machine-readable, human-reviewable expansion modules for the Goblin Proof Factory without promoting unresolved claims.",
+  "entrypoint": {
+    "label": "Goblin Proof Factory",
+    "href": "../index.html",
+    "media_type": "text/html"
+  },
+  "packs": [
+    {
+      "id": "gitfix-001",
+      "name": "Broken Link Barrister",
+      "type": "hypertext_audit",
+      "satirical_caption": "Counsel objects: the hyperlink has left the jurisdiction.",
+      "inputs": [
+        "source_url",
+        "expected_target",
+        "observed_status"
+      ],
+      "outputs": [
+        "machine_receipt",
+        "human_oversight_note",
+        "challenge_path"
+      ],
+      "promotion_limits": [
+        "broken_link_does_not_prove_intent",
+        "missing_target_does_not_prove_deletion",
+        "redirect_does_not_prove_ownership"
+      ]
+    },
+    {
+      "id": "gitfix-002",
+      "name": "Commit Chain Clerk",
+      "type": "repository_lineage",
+      "satirical_caption": "The clerk requests one SHA and receives twelve narratives.",
+      "inputs": [
+        "repository",
+        "path",
+        "commit_sha",
+        "blob_sha"
+      ],
+      "outputs": [
+        "lineage_receipt",
+        "field_status_map"
+      ],
+      "promotion_limits": [
+        "commit_presence_does_not_prove_truth",
+        "repository_control_does_not_prove_wallet_control"
+      ]
+    },
+    {
+      "id": "gitfix-003",
+      "name": "JSON Objection Engine",
+      "type": "schema_boundary_check",
+      "satirical_caption": "Objection sustained: that boolean is wearing a narrative trench coat.",
+      "inputs": [
+        "json_document",
+        "required_fields",
+        "forbidden_promotions"
+      ],
+      "outputs": [
+        "validation_result",
+        "boundary_violations",
+        "review_summary"
+      ],
+      "promotion_limits": [
+        "schema_valid_does_not_mean_factually_true",
+        "hash_match_does_not_mean_authoritative"
+      ]
+    },
+    {
+      "id": "gitfix-004",
+      "name": "EVM Peek Packet",
+      "type": "identity_intake",
+      "satirical_caption": "Everybody may peek; nobody may crown the address king.",
+      "inputs": [
+        "evm_address_or_name",
+        "network_context",
+        "optional_eas_uid"
+      ],
+      "outputs": [
+        "identity_intake_receipt",
+        "human_review_panel"
+      ],
+      "promotion_limits": [
+        "address_alone_does_not_prove_control",
+        "name_alone_does_not_prove_identity",
+        "eas_uid_presence_does_not_prove_binding"
+      ]
+    }
+  ],
+  "hypertext_relations": [
+    {
+      "rel": "constitution",
+      "href": "../../../constitution/GOBLIN_LAWYERIN_UNION_CONSTITUTION_V0_1.md",
+      "media_type": "text/markdown"
+    },
+    {
+      "rel": "motion",
+      "href": "../../../motions/MOTION_001_ADMIT_CONSTITUTION_AS_FOUNDING_EXHIBIT.md",
+      "media_type": "text/markdown"
+    },
+    {
+      "rel": "manifest",
+      "href": "../../../receipts/jay_identity_50_50_manifest.json",
+      "media_type": "application/json"
+    },
+    {
+      "rel": "manifest-hash",
+      "href": "../../../hashes/jay_identity_50_50_manifest.sha256",
+      "media_type": "text/plain"
+    }
+  ],
+  "runtime_posture": {
+    "client_side_only": true,
+    "network_lookup": false,
+    "wallet_connection": false,
+    "signature_verification": false,
+    "eas_verification": false,
+    "human_review_required": true
+  },
+  "satire_firebreak": {
+    "satire": true,
+    "comic_exaggeration": true,
+    "legal_finding": false,
+    "proof_of_intent": false
+  },
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}

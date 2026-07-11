@@ -1,0 +1,15 @@
+$ gcloud services list --enabled --project jaywisdom-boardroom --format=json
+ERROR: (gcloud.services.list) You do not currently have an active account selected.
+Please run:
+
+  $ gcloud auth login
+
+to obtain new credentials.
+
+If you have already logged in with a different account, run:
+
+  $ gcloud config set account ACCOUNT
+
+to select an already authenticated account to use.
+
+EXIT_CODE=1

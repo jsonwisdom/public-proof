@@ -1,0 +1,35 @@
+{
+  "artifact_type": "UWDIPLOMA128_FORGE_BUILD_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_CLOUD_SHELL_OUTPUT",
+  "repository": "jsonwisdom/public-proof",
+  "branch": "proof-portal-v0",
+  "observed": {
+    "command": "forge build",
+    "compiler": "Solc 0.8.24",
+    "compiled_files": 18,
+    "compiler_result": "Compiler run successful!",
+    "compiler_duration_ms": 473.61,
+    "openzeppelin_dependency": {
+      "package": "OpenZeppelin/openzeppelin-contracts",
+      "tag": "v5.6.1",
+      "commit": "5fd1781b1454fd1ef8e722282f86f9293cacf256"
+    }
+  },
+  "limitations": [
+    "The explicit BUILD_EXIT_CODE line was not included in the pasted terminal output.",
+    "The observed compiler success line is sufficient to record compilation success, but does not prove tests passed.",
+    "ABI and bytecode hashes were not captured in this receipt.",
+    "No deployment, role grant, live bridge execution, attestation validation transaction, or diploma mint is claimed."
+  ],
+  "current_state": {
+    "LOCAL_COMPILE": "OBSERVED_PASS_USER_TERMINAL",
+    "LOCAL_TESTS": "NOT_RUN",
+    "ABI_HASH": "UNOBSERVED",
+    "BYTECODE_HASH": "UNOBSERVED",
+    "MAINNET_DEPLOYMENT": "BLOCKED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}

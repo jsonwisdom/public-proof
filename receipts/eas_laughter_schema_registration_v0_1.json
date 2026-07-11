@@ -1,0 +1,41 @@
+{
+  "artifact_type": "EAS_SCHEMA_REGISTRATION_RECEIPT",
+  "version": "0.1",
+  "source_type": "USER_PROVIDED_EASSCAN_SCREENSHOTS",
+  "network": {
+    "name": "Base",
+    "chain_id": 8453
+  },
+  "schema": {
+    "number": 1682,
+    "uid": "0xb6c56d5e7604bf1345ebe4f42f208d22224d16315820e64b28615bf1fbbab3bb",
+    "definition": "bytes32 receiptId,address studentWallet,uint8 action,bytes32 evidenceHash",
+    "creator": "0xC345B26094c63C69222Ee775189a3d3eaead5a84",
+    "resolver": "UNOBSERVED_IN_SCREENSHOT",
+    "revocable": "UNOBSERVED_IN_SCREENSHOT"
+  },
+  "transaction": {
+    "hash": "0xe379d2462d356c818cfe73915be496d22a1ea8f89d5d4bfb8e1c74853afb981a",
+    "status": "SCREENSHOT_OBSERVED_REGISTRATION_PAGE"
+  },
+  "observed_at_display": "2026-07-10T18:08:07-05:00",
+  "limitations": [
+    "This receipt preserves values visible in user-provided EASScan screenshots.",
+    "Independent RPC or explorer replay was not completed in this receipt.",
+    "Screenshot presence does not by itself prove wallet control beyond the displayed transaction attribution.",
+    "No contract deployment, ORACLE_ROLE grant, live bridge execution, attestation validation transaction, or diploma mint is claimed."
+  ],
+  "current_state": {
+    "SCHEMA_REGISTRATION": "OBSERVED_IN_USER_SCREENSHOT",
+    "SCHEMA_UID": "OBSERVED",
+    "SCHEMA_DEFINITION": "OBSERVED_FROM_ATTESTATION_FORM",
+    "TRANSACTION_HASH": "OBSERVED",
+    "INDEPENDENT_ONCHAIN_REPLAY": "PENDING",
+    "DIPLOMA_CONTRACT": "NOT_DEPLOYED_OR_UNOBSERVED",
+    "ORACLE_ROLE": "NOT_GRANTED_OR_UNOBSERVED",
+    "LIVE_BRIDGE": "NOT_STARTED",
+    "AUTHORITY": false,
+    "NO_FAKE_GREEN": true,
+    "NO_FAKE_RED": true
+  }
+}

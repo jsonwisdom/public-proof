@@ -1,0 +1,9 @@
+JAY_WISDOM_50_50_PROOF_V0_1
+
+manifest_commit=bfc7d22fb2d705d8de4006b8d2c2f78340eac333
+repository=jsonwisdom/public-proof
+artifact=receipts/JAY_WISDOM_50_50_PROOF_V0_1.json
+wallet_address=0xa380552a27b0a5a2874ea7aa52cac09f542002e8
+google_project_number=311690651351
+purpose=bind_cryptographic_control_surface_to_operational_evidence_manifest
+authority=false

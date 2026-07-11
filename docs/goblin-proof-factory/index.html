@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Goblin Proof Factory — machine-readable EVM identity receipt with human oversight." />
+  <title>Goblin Proof Factory — JayWisdom</title>
+  <style>
+    :root {
+      --bg: #0a0b0d;
+      --panel: #13161a;
+      --ink: #f6f0df;
+      --muted: #aeb6bf;
+      --acid: #b7ff36;
+      --gold: #ffc83d;
+      --pink: #ff5faf;
+      --line: #30363d;
+      --danger: #ff725c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(183,255,54,.10), transparent 32rem),
+        radial-gradient(circle at 85% 15%, rgba(255,95,175,.08), transparent 30rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      line-height: 1.5;
+    }
+    main { width: min(1120px, 92vw); margin: 0 auto; padding: 42px 0 64px; }
+    .eyebrow { color: var(--acid); font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.3rem, 7vw, 5.8rem); line-height: .92; margin: .5rem 0 1rem; text-transform: uppercase; }
+    h1 span { color: var(--gold); }
+    .lede { max-width: 820px; color: var(--muted); font-size: 1.05rem; }
+    .banner {
+      margin: 28px 0;
+      border: 2px solid var(--acid);
+      background: rgba(183,255,54,.06);
+      padding: 14px 16px;
+      font-weight: 800;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card {
+      background: rgba(19,22,26,.94);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.28);
+    }
+    .card h2 { margin-top: 0; font-size: 1.15rem; text-transform: uppercase; letter-spacing: .08em; }
+    label { display: block; font-weight: 800; margin: 0 0 8px; }
+    input, textarea, select {
+      width: 100%;
+      background: #090b0d;
+      color: var(--ink);
+      border: 1px solid #3a424b;
+      border-radius: 10px;
+      padding: 13px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 330px; resize: vertical; }
+    input:focus, textarea:focus, select:focus { outline: 2px solid var(--acid); border-color: transparent; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      background: var(--acid);
+      color: #0a0b0d;
+    }
+    button.secondary { background: var(--gold); }
+    button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .status { margin-top: 12px; color: var(--muted); min-height: 1.5rem; }
+    .human-record {
+      border-left: 5px solid var(--pink);
+      padding-left: 16px;
+    }
+    .human-record strong { color: var(--pink); }
+    .fact { color: var(--acid); }
+    .pending { color: var(--gold); }
+    .warn { color: var(--danger); }
+    code { color: var(--gold); overflow-wrap: anywhere; }
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .seal { display: inline-block; margin-top: 10px; padding: 6px 10px; border: 1px solid var(--pink); color: var(--pink); font-weight: 900; }
+    @media (max-width: 820px) { .grid, .row { grid-template-columns: 1fr; } h1 { font-size: 3.2rem; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Goblin Lawyerin’ Union • Proof Factory</div>
+    <h1>Paste Your <span>EVM Address</span></h1>
+    <p class="lede">One side emits a machine-readable receipt. The other keeps a human in the loop while machine-speed data moves and everybody else takes a peek.</p>
+
+    <div class="banner">PINCER PARKOUR ACTIVE — MACHINE RECORD + HUMAN OVERSIGHT — AUTHORITY = FALSE</div>
+
+    <section class="card" aria-labelledby="input-heading">
+      <h2 id="input-heading">Identity Intake</h2>
+      <label for="address">EVM address or ENS/Basename</label>
+      <input id="address" value="jaywisdom.base.eth" autocomplete="off" spellcheck="false" />
+      <div class="row">
+        <div>
+          <label for="network">Network context</label>
+          <select id="network">
+            <option value="eip155:8453" selected>Base — eip155:8453</option>
+            <option value="eip155:1">Ethereum — eip155:1</option>
+            <option value="unresolved">Unresolved / user-declared</option>
+          </select>
+        </div>
+        <div>
+          <label for="eas">EAS attestation UID</label>
+          <input id="eas" placeholder="Optional: 0x…" autocomplete="off" spellcheck="false" />
+        </div>
+      </div>
+      <div class="row">
+        <button id="build">Build Receipt</button>
+        <button id="reset" class="ghost">Reset</button>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="grid" style="margin-top:18px">
+      <article class="card">
+        <h2>Machine-Readable Pincer</h2>
+        <textarea id="json" readonly aria-label="Machine-readable JSON receipt"></textarea>
+        <div class="row">
+          <button id="copyJson" class="secondary">Copy JSON</button>
+          <button id="downloadJson" class="ghost">Download JSON</button>
+        </div>
+      </article>
+
+      <article class="card human-record">
+        <h2>Human Oversight Pincer</h2>
+        <div id="human"></div>
+        <div class="seal">SATIRE FIREBREAK • NOT A LEGAL FINDING</div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2>Constitutional Boundaries</h2>
+      <p><span class="fact">Observed:</span> user supplied an identifier and optional attestation reference.</p>
+      <p><span class="pending">Unproven:</span> wallet control, name control, EAS validity, ownership, intent, identity, authority.</p>
+      <p><span class="warn">Never inferred:</span> a name or address alone does not establish control.</p>
+      <code>AUTHORITY=false • NO_FAKE_GREEN=true • NO_FAKE_RED=true • NO_SATIRE_AS_FACT=true</code>
+    </section>
+
+    <footer class="footer">
+      <strong>Goblin Proof Factory v0.1</strong><br />
+      Public identity surface: <code>jaywisdom.base.eth</code><br />
+      This page performs no wallet connection, signature verification, RPC query, EAS lookup, or transaction. It creates a local, user-reviewable receipt only.
+    </footer>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const now = () => new Date().toISOString();
+
+    function isAddress(value) {
+      return /^0x[a-fA-F0-9]{40}$/.test(value.trim());
+    }
+
+    function isName(value) {
+      return /^[a-zA-Z0-9][a-zA-Z0-9._-]*\.(eth|base\.eth)$/.test(value.trim());
+    }
+
+    function buildReceipt() {
+      const subject = $('address').value.trim();
+      const network = $('network').value;
+      const eas = $('eas').value.trim();
+      const classification = isAddress(subject) ? 'EVM_ADDRESS' : isName(subject) ? 'PUBLIC_NAME_CLAIM' : 'UNCLASSIFIED_IDENTIFIER';
+
+      const receipt = {
+        artifact_type: 'GOBLIN_PROOF_FACTORY_IDENTITY_INTAKE',
+        version: '0.1',
+        generated_at: now(),
+        subject: {
+          value: subject || 'UNOBSERVED',
+          classification,
+          network_context: network,
+          wallet_control: 'UNPROVEN',
+          name_control: 'UNPROVEN'
+        },
+        eas: {
+          uid: eas || 'UNOBSERVED',
+          validity: 'UNVERIFIED',
+          binding_to_subject: 'UNPROVEN'
+        },
+        evidence_posture: {
+          machine_readable_receipt_created: true,
+          rpc_lookup_performed: false,
+          signature_verified: false,
+          eas_lookup_performed: false,
+          human_review_required: true
+        },
+        satire_firebreak: {
+          satire_permitted: true,
+          legal_finding: false,
+          proof_of_intent: false
+        },
+        authority: false,
+        no_fake_green: true,
+        no_fake_red: true
+      };
+
+      $('json').value = JSON.stringify(receipt, null, 2) + '\n';
+      $('human').innerHTML = `
+        <p><strong>Subject presented:</strong><br><code>${escapeHtml(subject || 'UNOBSERVED')}</code></p>
+        <p><strong>Classification:</strong> ${classification}</p>
+        <p><strong>Network context:</strong> ${escapeHtml(network)}</p>
+        <p><strong>EAS reference:</strong><br><code>${escapeHtml(eas || 'UNOBSERVED')}</code></p>
+        <p><span class="fact">Receipt created locally.</span></p>
+        <p><span class="pending">Wallet control remains UNPROVEN.</span></p>
+        <p><span class="pending">EAS validity and binding remain UNVERIFIED.</span></p>
+        <p><strong>Goblin clerk’s note:</strong> Everybody may peek. Nobody gets to promote a claim without receipts.</p>`;
+      $('status').textContent = 'Receipt built locally. Review both pincers before sharing.';
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>'"]/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[ch]));
+    }
+
+    $('build').addEventListener('click', buildReceipt);
+    $('reset').addEventListener('click', () => {
+      $('address').value = 'jaywisdom.base.eth';
+      $('network').value = 'eip155:8453';
+      $('eas').value = '';
+      buildReceipt();
+    });
+    $('copyJson').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText($('json').value);
+        $('status').textContent = 'Machine-readable receipt copied.';
+      } catch {
+        $('json').select();
+        document.execCommand('copy');
+        $('status').textContent = 'Machine-readable receipt copied using fallback.';
+      }
+    });
+    $('downloadJson').addEventListener('click', () => {
+      const blob = new Blob([$('json').value], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'goblin-proof-factory-receipt.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    buildReceipt();
+  </script>
+</body>
+</html>

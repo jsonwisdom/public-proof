@@ -1,0 +1,4 @@
+$ gcloud auth list --format=json
+[]
+
+EXIT_CODE=0

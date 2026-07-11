@@ -1,0 +1,50 @@
+name: UGS-8 Governance UI Gate
+
+on:
+  pull_request:
+    paths:
+      - "public/index.html"
+      - "public/governance.js"
+      - "public/governance-state.js"
+      - "public/governance.css"
+      - "tests/governance-state.test.mjs"
+      - "scripts/validate-governance-ui.mjs"
+      - "package.json"
+      - ".github/workflows/ugs8-ui-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run deterministic state tests
+        run: npm test
+
+      - name: Validate courtroom build surface
+        run: npm run build
+
+      - name: Emit governed summary
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## UGS-8 Governance UI Gate
+
+          ```text
+          STATE_TESTS = PASS
+          BUILD_VALIDATION = PASS
+          AUTHORITY = FALSE
+          MERGE_AUTHORIZATION = ABSENT
+          DEPLOYMENT = NOT CLAIMED
+          ```
+          EOF
