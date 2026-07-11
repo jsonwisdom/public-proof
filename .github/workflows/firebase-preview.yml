@@ -23,6 +23,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate preview configuration
+        shell: bash
+        env:
+          WIF_PROVIDER: ${{ vars.GCP_WIF_PREVIEW_PROVIDER }}
+          PREVIEW_DEPLOYER: ${{ vars.GCP_FIREBASE_PREVIEW_DEPLOYER }}
+        run: |
+          set -euo pipefail
+          test -n "$WIF_PROVIDER" || { echo "ABORT: GCP_WIF_PREVIEW_PROVIDER is unset"; exit 1; }
+          test -n "$PREVIEW_DEPLOYER" || { echo "ABORT: GCP_FIREBASE_PREVIEW_DEPLOYER is unset"; exit 1; }
+          case "$WIF_PROVIDER" in
+            projects/*/locations/global/workloadIdentityPools/*/providers/*) ;;
+            *) echo "ABORT: invalid WIF provider resource name"; exit 1 ;;
+          esac
+          case "$PREVIEW_DEPLOYER" in
+            *@jaywisdom-boardroom-preview.iam.gserviceaccount.com) ;;
+            *) echo "ABORT: preview deployer must belong to jaywisdom-boardroom-preview"; exit 1 ;;
+          esac
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -36,6 +54,14 @@ jobs:
 
       - name: Install Firebase CLI
         run: npm install --global firebase-tools
+
+      - name: Verify target configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '"jaywisdom-boardroom-preview"' .firebaserc
+          grep -q '"preview"' .firebaserc
+          firebase projects:list --json >/tmp/firebase-projects.json
 
       - name: Hash and deploy preview
         id: deploy
