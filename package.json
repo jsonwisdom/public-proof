@@ -1,0 +1,10 @@
+{
+  "name": "public-proof-ugs8-courtroom",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/governance-state.test.mjs",
+    "build": "node scripts/validate-governance-ui.mjs"
+  }
+}
