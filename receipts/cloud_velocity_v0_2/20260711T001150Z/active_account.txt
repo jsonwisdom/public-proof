@@ -1,0 +1,4 @@
+$ gcloud auth list --filter=status:ACTIVE --format=value\(account\)
+WARNING: The following filter keys were not present in any resource : status
+
+EXIT_CODE=0

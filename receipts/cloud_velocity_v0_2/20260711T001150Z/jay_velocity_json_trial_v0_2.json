@@ -1,0 +1,37 @@
+{
+  "artifact_type": "JAY_VELOCITY_JSON_TRIAL",
+  "version": "0.2",
+  "run_id": "20260711T001150Z",
+  "project_number": "311690651351",
+  "project_id_reported": "jaywisdom-boardroom",
+  "json": {
+    "documents_per_trial": 10000,
+    "trial_seconds": [
+      0.073847,
+      0.074012,
+      0.073814,
+      0.07394,
+      0.075109
+    ],
+    "median_seconds": 0.07394,
+    "documents_per_second": 135244.78
+  },
+  "sha256": {
+    "hashes_per_trial": 25000,
+    "trial_seconds": [
+      0.031167,
+      0.030652,
+      0.030693,
+      0.030318,
+      0.030216
+    ],
+    "median_seconds": 0.030652,
+    "hashes_per_second": 815620.26
+  },
+  "cloud_metadata_verified": false,
+  "production_capacity_proven": false,
+  "marketplace_income_proven": false,
+  "authority": false,
+  "no_fake_green": true,
+  "no_fake_red": true
+}

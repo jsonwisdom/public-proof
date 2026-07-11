@@ -1,0 +1,5 @@
+$ gcloud config get-value project
+Your active configuration is: [cloudshell-18064]
+(unset)
+
+EXIT_CODE=0
