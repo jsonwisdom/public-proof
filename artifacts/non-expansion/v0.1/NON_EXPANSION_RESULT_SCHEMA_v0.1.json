@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jaywisdom.protocol/schemas/non-expansion-result/v0.1",
+  "title": "NON_EXPANSION_RESULT_SCHEMA_v0.1",
+  "description": "Strict result contract for the Non-Expansion Operator. Freezes the comparison of a generated claim against its source-authority claim. All semantic containment decisions that cannot be expressed in pure JSON Schema are assigned to the REFERENCE_NON_EXPANSION_EVALUATOR and must fail closed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "operator_version",
+    "claim_id",
+    "source_evidence_ids",
+    "comparison",
+    "expanded_dimensions",
+    "narrowed_dimensions",
+    "equal_dimensions",
+    "indeterminate_dimensions",
+    "reason_codes",
+    "publication_eligible",
+    "r15_triggered"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Version of this result schema. Must remain exactly \"0.1\" for conformance with NON_EXPANSION_RESULT_SCHEMA_v0.1."
+    },
+    "operator_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "Version of the Non-Expansion Operator that produced this result."
+    },
+    "schema_digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "Optional but recommended. SHA-256 digest of the canonical schema document used for validation. Format: sha256:<hex>."
+    },
+    "result_id": {
+      "type": "string",
+      "pattern": "^NR-[0-9A-Z]{4,32}$",
+      "description": "Optional unique identifier for this specific non-expansion result instance."
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$",
+      "description": "Identifier of the generated claim under evaluation (e.g., C-017)."
+    },
+    "source_evidence_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
+      },
+      "description": "Non-empty set of evidence identifiers that authorize the source claim. Order is not significant."
+    },
+    "comparison": {
+      "type": "string",
+      "enum": ["EQUAL", "NARROWED", "EXPANDED", "UNRESOLVED"],
+      "description": "Aggregate comparison status derived from the four dimension classification arrays."
+    },
+    "expanded_dimensions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/dimension_name"
+      },
+      "description": "Dimensions in which the generated claim is a strict superset of the source (expansion)."
+    },
+    "narrowed_dimensions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/dimension_name"
+      },
+      "description": "Dimensions in which the generated claim is a strict subset of the source (narrowing)."
+    },
+    "equal_dimensions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/dimension_name"
+      },
+      "description": "Dimensions in which the generated claim is equal to the source."
+    },
+    "indeterminate_dimensions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/dimension_name"
+      },
+      "description": "Dimensions for which the required subset/superset/equality/strictness relation cannot be proven. Any non-empty value forces comparison=UNRESOLVED, r15_triggered=true, and publication_eligible=false."
+    },
+    "reason_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/reason_code"
+      },
+      "description": "Closed vocabulary of machine-readable reason codes explaining the comparison outcome. Must be non-empty when comparison is not EQUAL."
+    },
+    "publication_eligible": {
+      "type": "boolean",
+      "description": "True only when comparison is EQUAL or NARROWED AND indeterminate_dimensions is empty AND no expansion exists. False in all other cases."
+    },
+    "r15_triggered": {
+      "type": "boolean",
+      "description": "Must be true exactly when indeterminate_dimensions is non-empty. Represents R15_VERIFICATION_INDETERMINATE."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 4096,
+      "description": "Optional human-readable notes. Must not be used as a substitute for reason_codes or dimension classifications."
+    }
+  },
+  "$defs": {
+    "dimension_name": {
+      "type": "string",
+      "enum": [
+        "actor",
+        "action",
+        "target",
+        "resource_boundary",
+        "permissions",
+        "allowed_side_effects",
+        "preconditions",
+        "prohibited_side_effects",
+        "termination_criteria"
+      ],
+      "description": "Closed set of dimensions evaluated by the Non-Expansion Operator."
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": [
+        "ACTOR_SET_SUPERSET",
+        "ACTION_SET_SUPERSET",
+        "TARGET_SET_SUPERSET",
+        "RESOURCE_BOUNDARY_EXPANDED",
+        "PERMISSIONS_EXPANDED",
+        "NEW_SIDE_EFFECT_INTRODUCED",
+        "PRECONDITION_WEAKENED",
+        "PROHIBITED_SIDE_EFFECTS_WEAKENED",
+        "TERMINATION_CRITERIA_RELAXED",
+        "ACTOR_SET_SUBSET",
+        "ACTION_SET_SUBSET",
+        "TARGET_SET_SUBSET",
+        "RESOURCE_BOUNDARY_NARROWED",
+        "PERMISSIONS_NARROWED",
+        "SIDE_EFFECT_REMOVED",
+        "PRECONDITION_STRENGTHENED",
+        "PROHIBITED_SIDE_EFFECTS_STRENGTHENED",
+        "TERMINATION_CRITERIA_STRICTER",
+        "DIMENSION_EQUAL",
+        "ONTOLOGY_MISMATCH",
+        "AMBIGUOUS_SCOPE",
+        "CONFLICTING_SOURCE_CLAUSES",
+        "MISSING_EVIDENCE",
+        "ILLEGIBLE_EVIDENCE",
+        "UNSUPPORTED_MEDIA_INTERPRETATION",
+        "UNCERTAIN_ACTOR",
+        "UNCERTAIN_TARGET",
+        "UNCERTAIN_JURISDICTION",
+        "UNCERTAIN_DURATION",
+        "UNCERTAIN_RESOURCE_BOUNDARY",
+        "NEGATIVE_CLAIM_UNVERIFIABLE",
+        "ASSUMPTION_REQUIRED",
+        "EXTRACTION_CONFIDENCE_INSUFFICIENT",
+        "R15_VERIFICATION_INDETERMINATE"
+      ],
+      "description": "Closed vocabulary of reason codes. R15_VERIFICATION_INDETERMINATE must appear whenever r15_triggered is true."
+    }
+  },
+  "allOf": [
+    {
+      "description": "R15 invariant: any indeterminate dimension forces UNRESOLVED + r15_triggered=true + publication_eligible=false and requires the R15 reason code.",
+      "if": {
+        "properties": {
+          "indeterminate_dimensions": {
+            "minItems": 1
+          }
+        },
+        "required": ["indeterminate_dimensions"]
+      },
+      "then": {
+        "properties": {
+          "comparison": { "const": "UNRESOLVED" },
+          "r15_triggered": { "const": true },
+          "publication_eligible": { "const": false },
+          "reason_codes": {
+            "contains": {
+              "const": "R15_VERIFICATION_INDETERMINATE"
+            }
+          }
+        },
+        "required": ["comparison", "r15_triggered", "publication_eligible", "reason_codes"]
+      }
+    },
+    {
+      "description": "No indeterminacy implies r15_triggered=false.",
+      "if": {
+        "properties": {
+          "indeterminate_dimensions": {
+            "maxItems": 0
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "r15_triggered": { "const": false }
+        }
+      }
+    },
+    {
+      "description": "Any expansion forces comparison=EXPANDED and publication_eligible=false (provided no indeterminacy, which already forces UNRESOLVED).",
+      "if": {
+        "properties": {
+          "expanded_dimensions": { "minItems": 1 },
+          "indeterminate_dimensions": { "maxItems": 0 }
+        }
+      },
+      "then": {
+        "properties": {
+          "comparison": { "const": "EXPANDED" },
+          "publication_eligible": { "const": false }
+        }
+      }
+    },
+    {
+      "description": "Narrowing without expansion or indeterminacy forces comparison=NARROWED.",
+      "if": {
+        "properties": {
+          "narrowed_dimensions": { "minItems": 1 },
+          "expanded_dimensions": { "maxItems": 0 },
+          "indeterminate_dimensions": { "maxItems": 0 }
+        }
+      },
+      "then": {
+        "properties": {
+          "comparison": { "const": "NARROWED" }
+        }
+      }
+    },
+    {
+      "description": "All dimensions equal (no expansion, narrowing, or indeterminacy) forces comparison=EQUAL.",
+      "if": {
+        "properties": {
+          "expanded_dimensions": { "maxItems": 0 },
+          "narrowed_dimensions": { "maxItems": 0 },
+          "indeterminate_dimensions": { "maxItems": 0 }
+        }
+      },
+      "then": {
+        "properties": {
+          "comparison": { "const": "EQUAL" }
+        }
+      }
+    },
+    {
+      "description": "publication_eligible may be true only for EQUAL or NARROWED with zero indeterminacy.",
+      "if": {
+        "properties": {
+          "publication_eligible": { "const": true }
+        }
+      },
+      "then": {
+        "properties": {
+          "comparison": { "enum": ["EQUAL", "NARROWED"] },
+          "indeterminate_dimensions": { "maxItems": 0 },
+          "expanded_dimensions": { "maxItems": 0 },
+          "r15_triggered": { "const": false }
+        }
+      }
+    },
+    {
+      "description": "When comparison is not EQUAL, at least one reason_code must be present.",
+      "if": {
+        "properties": {
+          "comparison": { "not": { "const": "EQUAL" } }
+        }
+      },
+      "then": {
+        "properties": {
+          "reason_codes": { "minItems": 1 }
+        }
+      }
+    }
+  ]
+}
