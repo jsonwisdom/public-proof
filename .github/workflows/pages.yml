@@ -6,6 +6,7 @@ on:
     paths:
       - "index.html"
       - "sign-t06.html"
+      - "sign-controller-v2.html"
       - ".nojekyll"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -39,9 +40,11 @@ jobs:
           mkdir -p _site
           cp index.html _site/index.html
           cp sign-t06.html _site/sign-t06.html
+          cp sign-controller-v2.html _site/sign-controller-v2.html
           touch _site/.nojekyll
           sha256sum _site/index.html | tee _site/index.sha256
           sha256sum _site/sign-t06.html | tee _site/sign-t06.sha256
+          sha256sum _site/sign-controller-v2.html | tee _site/sign-controller-v2.sha256
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
