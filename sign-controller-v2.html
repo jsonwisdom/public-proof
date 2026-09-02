@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>JayWisdom Controller Signature V2</title>
+<style>
+:root{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#eef2ff;background:#070a12}*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:12px;background:#070a12}main{width:min(760px,100%);margin:0 auto;background:#0d1220;border:1px solid #27324c;border-radius:18px;padding:18px}h1{font-size:clamp(22px,6vw,34px);margin:0 0 8px}.sub{color:#aab5d1;line-height:1.45}.label{color:#8fa2c8;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-top:16px}.mono,.status{background:#080c15;border:1px solid #202b45;border-radius:10px;padding:12px;font-size:12px;line-height:1.5;word-break:break-all}.status{font-size:14px;word-break:normal;margin:14px 0}.ok{border-color:#1d7653}.bad{border-color:#a74050}.hold{border-color:#8a6a25}button{width:100%;border:0;border-radius:12px;padding:15px 16px;margin-top:10px;font:inherit;font-weight:800;cursor:pointer;background:#eef2ff;color:#0a1020}button.secondary{background:#1a2540;color:#eef2ff;border:1px solid #35486f}button:disabled{opacity:.45}.tiny{font-size:12px;color:#8fa0bd;line-height:1.45}.hidden{display:none}.atom{white-space:pre-wrap}
+</style>
+</head>
+<body><main>
+<h1>🔐 JayWisdom Controller Signature V2</h1>
+<p class="sub">Signs the exact prepared <b>JAYWISDOM_OPERATOR_BINDING_V2</b> message from COMPUTERWISDOM with the Coinbase Smart Wallet controller candidate. Signature only. No transaction, token approval, seed phrase, or private key request.</p>
+
+<div class="label">Required wallet account</div>
+<div class="mono">0xa380552a27b0a5a2874ea7aa52cac09f542002e8</div>
+
+<div class="label">Message fingerprint</div>
+<div class="mono" id="fingerprint">checking…</div>
+
+<div id="status" class="status hold">Looking for Coinbase/Base wallet provider…</div>
+<button id="connect">Connect Coinbase / Base Wallet</button>
+<button id="sign" disabled>Sign Exact 772-Byte Binding Message</button>
+<button id="copyUrl" class="secondary">Copy This Page URL</button>
+<p class="tiny">iPhone: open the Base/Coinbase app → Discover/Explorer → paste this page URL into the address bar → open it there. Coinbase's current help flow says iOS dapps can be opened by manually entering the URL in the app explorer.</p>
+
+<div id="result" class="hidden">
+<div class="label">External signature atom</div>
+<div id="atom" class="mono atom"></div>
+<button id="copyAtom">Copy Signature Atom</button>
+</div>
+
+<p class="tiny">Boundary: EIP-1271-capable ≠ controller-signed until this returned signature is independently verified. This page does not promote identity, authority, ENS primary status, or L1/L2 bind state.</p>
+</main>
+<script>
+const TARGET='0xa380552a27b0a5a2874ea7aa52cac09f542002e8';
+const EXPECTED_BYTES=772;
+const EXPECTED_SHA='2c86524411ec74eee1c5a393148461eb65a1f3f9b6ea4f52ca90ba10b5a2fccc';
+const MESSAGE=`JAYWISDOM_OPERATOR_BINDING_V2
+ENS_NAME = jaywisdom.eth
+BASENAME = jaywisdom.base.eth
+IDENTITY_CONTROLLER = 0xa380552a27b0a5a2874ea7aa52cac09f542002e8
+EAS_BROWSER_SIGNER = 0x1dB2C056c7DeCD9f9fC574692b05F62aE34Fb8b5
+ATTESTATION_UID = 0x23b3b97514fa232cfdbcdee7a5031ff11a5fcd36aa874a5f4067805cd0ad6c84
+SCHEMA_UID = 0x244c84adef25091c97090e6e3f0b1bb932fc7022b913b7546406f4213a202cab
+TRANSACTION_HASH = 0x4cef493d67d8744d2458fd82c169aa872b14cfe2ecaf13f03329b57bd93acc35
+NETWORK = ethereum-sepolia
+DATE_UTC = 2026-06-10
+PURPOSE = Authorize and document the browser EAS signer as separate from the ENS/Base identity controller wallet for this Computer Wisdom anchor.
+AUTHORITY_CLAIMED = FALSE
+MAINNET_ANCHOR_CLAIMED = FALSE
+GLOBAL_LEGITIMACY_CLAIMED = FALSE
+NO_FAKE_GREEN = TRUE
+`;
+const $=id=>document.getElementById(id);
+const bytes=new TextEncoder().encode(MESSAGE);
+let provider=null, account=null, providerInfo=null;
+function status(s,c='hold'){const e=$('status');e.textContent=s;e.className='status '+c}
+function hex(u8){return '0x'+Array.from(u8,b=>b.toString(16).padStart(2,'0')).join('')}
+async function sha256(u8){const d=await crypto.subtle.digest('SHA-256',u8);return Array.from(new Uint8Array(d),b=>b.toString(16).padStart(2,'0')).join('')}
+async function initFingerprint(){const s=await sha256(bytes);$('fingerprint').textContent=`MESSAGE_BYTES = ${bytes.length}\nSHA256 = 0x${s}`;if(bytes.length!==EXPECTED_BYTES||s!==EXPECTED_SHA){status('FROZEN MESSAGE MISMATCH — signing disabled.','bad');$('connect').disabled=true}}
+
+const discovered=[];
+window.addEventListener('eip6963:announceProvider',ev=>{if(!discovered.some(x=>x.info?.uuid===ev.detail.info?.uuid))discovered.push(ev.detail);pickProvider()});
+window.dispatchEvent(new Event('eip6963:requestProvider'));
+function pickProvider(){
+  const cb=discovered.find(x=>/coinbase|base/i.test((x.info?.rdns||'')+' '+(x.info?.name||'')));
+  if(cb){provider=cb.provider;providerInfo=cb.info;status(`Wallet provider detected: ${cb.info?.name||'Coinbase/Base'}. Tap Connect.`,'hold');return}
+  if(window.ethereum){provider=window.ethereum;status('Injected wallet provider detected. Tap Connect.','hold');return}
+  status('No wallet provider in this browser. On iPhone, paste this exact URL into the Base/Coinbase app Discover/Explorer browser.','bad')
+}
+setTimeout(pickProvider,500);
+
+async function connect(){
+  if(!provider){pickProvider();if(!provider)return}
+  try{
+    let a=await provider.request({method:'eth_accounts'});
+    if(!a||!a.length)a=await provider.request({method:'eth_requestAccounts'});
+    account=(a?.[0]||'').toLowerCase();
+    const chain=await provider.request({method:'eth_chainId'}).catch(()=>null);
+    if(account!==TARGET){status(`Connected account is ${account||'none'} — required ${TARGET}. Select the jaywisdom.base.eth / 0xA380…002E8 smart wallet in Coinbase/Base, then retry.`,'bad');$('sign').disabled=true;return}
+    status(`Correct smart-wallet address connected${chain?' on chain '+parseInt(chain,16):''}. Ready to sign exact repo message.`,'ok');$('sign').disabled=false;
+  }catch(e){status('Connect failed: '+(e?.message||e),'bad')}
+}
+$('connect').onclick=connect;
+
+async function signMessage(){
+  try{
+    if(!provider||account!==TARGET)return;
+    const chain=await provider.request({method:'eth_chainId'}).catch(()=>null);
+    status('Approve the message signature in Coinbase/Base. This is not a transaction.','hold');
+    const sig=await provider.request({method:'personal_sign',params:[hex(bytes),account]});
+    const atom={receipt_class:'JAYWISDOM_OPERATOR_BINDING_V2_SIGNATURE',message_file:'receipts/wallet_binding_message_v2.txt',message_bytes:EXPECTED_BYTES,message_sha256:'0x'+EXPECTED_SHA,signer_target:TARGET,account_type:'COINBASE_SMART_WALLET_CONTRACT',verification_mechanism:'EIP1271',connected_chain_id:chain?parseInt(chain,16):null,signature_bytes:sig,verification_result:'NOT_YET_EVALUATED'};
+    $('atom').textContent=JSON.stringify(atom,null,2);$('result').classList.remove('hidden');status('Signature captured locally. Copy the Signature Atom and paste it back into ChatGPT for EIP-1271 verification.','ok')
+  }catch(e){status('Signing failed or was cancelled: '+(e?.message||e),'bad')}
+}
+$('sign').onclick=signMessage;
+$('copyAtom').onclick=async()=>{await navigator.clipboard.writeText($('atom').textContent);status('Signature Atom copied. Paste it into ChatGPT.','ok')};
+$('copyUrl').onclick=async()=>{await navigator.clipboard.writeText(location.href.split('#')[0]);status('Page URL copied. Paste it into the Base/Coinbase app Discover/Explorer address bar.','ok')};
+initFingerprint();pickProvider();
+</script></body></html>
