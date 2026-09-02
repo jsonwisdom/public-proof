@@ -1,180 +1,116 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
-  <title>JSONWisdom T-06 Signer</title>
-  <style>
-    :root{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#eef2ff;background:#070a12}
-    *{box-sizing:border-box} body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at top,#172038 0,#070a12 55%)}
-    main{width:min(760px,100%);background:#0d1220;border:1px solid #27324c;border-radius:18px;padding:24px;box-shadow:0 20px 70px #0008}
-    h1{margin:0 0 8px;font-size:clamp(24px,5vw,38px)} .sub{color:#9eabc8;margin:0 0 22px;line-height:1.5}
-    .status{padding:12px 14px;border-radius:12px;background:#111a2e;border:1px solid #2a385b;margin:12px 0;word-break:break-word}
-    .ok{border-color:#1d7653}.bad{border-color:#8e3845}.hold{border-color:#8a6a25}
-    button{width:100%;border:0;border-radius:12px;padding:14px 16px;margin-top:10px;font:inherit;font-weight:800;cursor:pointer;background:#eef2ff;color:#0a1020}
-    button.secondary{background:#1a2540;color:#eef2ff;border:1px solid #35486f} button:disabled{opacity:.45;cursor:not-allowed}
-    code,pre{white-space:pre-wrap;word-break:break-word} .label{color:#8fa2c8;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-top:18px}
-    .mono{background:#080c15;border:1px solid #202b45;border-radius:10px;padding:12px;font-size:12px;line-height:1.55}
-    .tiny{font-size:12px;color:#8fa0bd;line-height:1.5;margin-top:18px}.hidden{display:none}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media(max-width:580px){main{padding:18px}.row{grid-template-columns:1fr}}
-    .choice{display:flex;gap:14px;flex-wrap:wrap;padding:10px 0}.choice label{display:flex;align-items:center;gap:7px;color:#cfd7eb}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>JSONWisdom T-06 Signer</title>
+<style>
+:root{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#eef2ff;background:#070a12}*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:18px;background:radial-gradient(circle at top,#172038 0,#070a12 55%)}main{width:min(760px,100%);margin:0 auto;background:#0d1220;border:1px solid #27324c;border-radius:18px;padding:20px;box-shadow:0 20px 70px #0008}h1{margin:0 0 8px;font-size:clamp(23px,7vw,38px)}p{line-height:1.5}.sub{color:#aab5d1}.label{color:#8fa2c8;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-top:18px}.mono,.status{background:#080c15;border:1px solid #202b45;border-radius:10px;padding:12px;font-size:12px;line-height:1.55;word-break:break-all}.status{font-size:14px;word-break:normal;margin:14px 0}.ok{border-color:#1d7653}.bad{border-color:#a74050}.hold{border-color:#8a6a25}button,a.wallet{width:100%;display:block;text-align:center;text-decoration:none;border:0;border-radius:12px;padding:14px 16px;margin-top:10px;font:inherit;font-weight:800;cursor:pointer;background:#eef2ff;color:#0a1020}button.secondary,a.wallet.secondary{background:#1a2540;color:#eef2ff;border:1px solid #35486f}button:disabled{opacity:.45;cursor:not-allowed}.walletRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hidden{display:none}.tiny{font-size:12px;color:#8fa0bd}.atom{white-space:pre-wrap;word-break:break-all}.pill{display:inline-block;padding:4px 8px;border:1px solid #34476e;border-radius:999px;font-size:11px;color:#b9c6e5;margin:3px 4px 3px 0}@media(max-width:580px){main{padding:16px}.walletRow{grid-template-columns:1fr}body{padding:10px}}
+</style>
 </head>
 <body>
 <main>
-  <h1>🔒 T-06 Root Provenance Signer</h1>
-  <p class="sub">Connect the wallet that controls the frozen signer target, switch to Base, and sign exactly one EIP-191 message. No transaction, token approval, or seed phrase is requested.</p>
+<h1>🔒 T-06 Root Provenance Signer</h1>
+<p class="sub">iPhone-ready. If Safari has no wallet provider, tap <b>Open in Coinbase Wallet</b> or <b>Open in MetaMask</b>. Then connect and sign exactly one EIP-191 message. No transaction, approval, seed phrase, or private key is requested.</p>
 
-  <div class="label">Signer target</div>
-  <div class="mono" id="target">0x829adfedbe565f9885a7ea6bc78912acaef055e2</div>
+<div class="label">Signer target</div><div class="mono" id="target">0x829adfedbe565f9885a7ea6bc78912acaef055e2</div>
+<div class="label">Frozen challenge digest</div><div class="mono">0x5643151ba4809c272da833af28b65112c92485757a548dff00215dbccfcb89ae</div>
+<div class="label">Frozen message</div><div class="mono" id="messageInfo">checking bytes…</div>
 
-  <div class="label">Frozen challenge digest</div>
-  <div class="mono">0x5643151ba4809c272da833af28b65112c92485757a548dff00215dbccfcb89ae</div>
-
-  <div class="label">Frozen message</div>
-  <div class="mono" id="messageInfo">checking bytes…</div>
-
-  <div id="walletStatus" class="status hold">Wallet not connected.</div>
-  <button id="connectBtn">Connect Wallet</button>
-  <button id="switchBtn" class="secondary hidden">Switch to Base</button>
-
-  <div id="mechanismWrap" class="hidden">
-    <div class="label">Verification mechanism</div>
-    <div class="choice">
-      <label><input type="radio" name="mechanism" value="EOA_ECRECOVER" checked> EOA_ECRECOVER</label>
-      <label><input type="radio" name="mechanism" value="EIP1271"> EIP1271</label>
-    </div>
+<div id="walletStatus" class="status hold">Checking for wallet…</div>
+<div id="mobileLaunch" class="hidden">
+  <div class="walletRow">
+    <a id="coinbaseLink" class="wallet" href="#">Open in Coinbase Wallet</a>
+    <a id="metamaskLink" class="wallet secondary" href="#">Open in MetaMask</a>
   </div>
+  <button id="copyLinkBtn" class="secondary">Copy this page link</button>
+  <p class="tiny">On iPhone Safari, Web3 extensions are often unavailable. Opening this same page inside the wallet app gives the page access to that wallet's provider.</p>
+</div>
 
-  <button id="signBtn" disabled>Sign Frozen T-06 Message</button>
+<button id="connectBtn">Connect Wallet</button>
+<button id="switchBtn" class="secondary hidden">Switch to Base</button>
+<button id="signBtn" disabled>Sign Frozen T-06 Message</button>
 
-  <section id="result" class="hidden">
-    <div class="label">Signature bytes</div>
-    <div class="mono" id="signature"></div>
-    <div class="label">External ATOM</div>
-    <pre class="mono" id="atom"></pre>
-    <div class="row">
-      <button id="copyBtn" class="secondary">Copy ATOM</button>
-      <button id="downloadBtn" class="secondary">Download JSON</button>
-    </div>
-  </section>
+<div id="resultWrap" class="hidden">
+  <div class="label">Verification mechanism</div>
+  <div id="mechanism" class="mono"></div>
+  <div class="label">Signature bytes</div>
+  <div id="signature" class="mono"></div>
+  <div class="label">External ATOM</div>
+  <div id="atom" class="mono atom"></div>
+  <button id="copyAtomBtn">Copy External ATOM</button>
+</div>
 
-  <p class="tiny">Privacy: signing happens inside your wallet. This static page does not upload the signature anywhere. Copy the resulting ATOM back to the verifier. FULL_T06 PASS ≠ AUTHORITY; AUTHORITY_CREATED remains false.</p>
+<p class="tiny">Privacy: signing happens inside your wallet. This static page does not upload the signature. FULL_T06 stays HOLD until the returned artifact is independently verified. AUTHORITY_CREATED remains false.</p>
 </main>
 <script>
-(() => {
-  'use strict';
-  const TARGET = '0x829adfedbe565f9885a7ea6bc78912acaef055e2';
-  const BASE_CHAIN = '0x2105'; // 8453
-  const DIGEST = '0x5643151ba4809c272da833af28b65112c92485757a548dff00215dbccfcb89ae';
-  const PREFIX = 'JSONWISDOM_ROOT_PROVENANCE_V1';
-  const JCS = '{"artifact_revision":"identity-binding-receipt-grammar-v1","authority_claim":false,"chain_id":8453,"domain":"jsonwisdom.identity.binding.v1","nonce":"0x4444444444444444444444444444444444444444444444444444444444444444","receipt_class":"ROOT_PROVENANCE_RECEIPT_V1","root":"0xb8e845756cd09d23eab808d658293884dcd1aaa96ddb38c7111b30bf9e342464","subject":"JSONWISDOM_IDENTITY_SPINE_V1"}';
-  const MESSAGE = PREFIX + JCS;
-  const bytes = new TextEncoder().encode(MESSAGE);
-  const toHex = u8 => '0x' + Array.from(u8, b => b.toString(16).padStart(2,'0')).join('');
-  const MESSAGE_HEX = toHex(bytes);
+const TARGET='0x829adfedbe565f9885a7ea6bc78912acaef055e2';
+const DIGEST='0x5643151ba4809c272da833af28b65112c92485757a548dff00215dbccfcb89ae';
+const PREFIX='JSONWISDOM_ROOT_PROVENANCE_V1';
+const JCS='{"artifact_revision":"identity-binding-receipt-grammar-v1","authority_claim":false,"chain_id":8453,"domain":"jsonwisdom.identity.binding.v1","nonce":"0x4444444444444444444444444444444444444444444444444444444444444444","receipt_class":"ROOT_PROVENANCE_RECEIPT_V1","root":"0xb8e845756cd09d23eab808d658293884dcd1aaa96ddb38c7111b30bf9e342464","subject":"JSONWISDOM_IDENTITY_SPINE_V1"}';
+const MESSAGE=PREFIX+JCS;
+const BASE='0x2105';
+const $=id=>document.getElementById(id);
+const bytes=new TextEncoder().encode(MESSAGE);
+$('messageInfo').textContent=`MESSAGE_LEN = ${bytes.length} bytes\nEIP191_DIGEST = ${DIGEST}\nconstructor = personal_sign / EIP-191 0x45`;
 
-  const $ = id => document.getElementById(id);
-  const connectBtn = $('connectBtn'), switchBtn = $('switchBtn'), signBtn = $('signBtn');
-  const walletStatus = $('walletStatus'), mechanismWrap = $('mechanismWrap');
-  let account = null, chainId = null;
+const pageUrl=location.href.split('#')[0];
+$('coinbaseLink').href='https://go.cb-w.com/dapp?cb_url='+encodeURIComponent(pageUrl);
+const mmTarget=location.host+location.pathname+location.search;
+$('metamaskLink').href='https://metamask.app.link/dapp/'+mmTarget;
+$('copyLinkBtn').onclick=async()=>{await navigator.clipboard.writeText(pageUrl); $('walletStatus').textContent='Page link copied. Paste it into your wallet app browser.';};
 
-  $('messageInfo').textContent = `MESSAGE_LEN = ${bytes.length} bytes\nEIP191_DIGEST = ${DIGEST}\nconstructor = personal_sign / EIP-191 0x45`;
-  if (bytes.length !== 409) {
-    walletStatus.textContent = `INTERNAL HOLD: message length is ${bytes.length}, expected 409.`;
-    walletStatus.className = 'status bad';
-    connectBtn.disabled = true;
-    return;
+let provider=window.ethereum||null;
+let account=null;
+function setStatus(msg,cls='hold'){const e=$('walletStatus');e.textContent=msg;e.className='status '+cls;}
+function showMobile(){ $('mobileLaunch').classList.remove('hidden'); $('connectBtn').disabled=true; setStatus('Safari does not expose an injected Web3 wallet here. Open this same page inside your wallet app.', 'bad'); }
+if(!provider){showMobile()} else {setStatus('Wallet provider detected. Tap Connect Wallet.','hold')}
+
+async function chainId(){return provider.request({method:'eth_chainId'})}
+async function ensureBase(){
+  let c=await chainId(); if(c.toLowerCase()===BASE)return true;
+  try{await provider.request({method:'wallet_switchEthereumChain',params:[{chainId:BASE}]});return true}
+  catch(e){
+    try{await provider.request({method:'wallet_addEthereumChain',params:[{chainId:BASE,chainName:'Base',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://mainnet.base.org'],blockExplorerUrls:['https://basescan.org']}]});return true}
+    catch(_){$('switchBtn').classList.remove('hidden');setStatus('Connected, but Base is required. Tap Switch to Base.','hold');return false}
   }
+}
+async function connect(){
+  if(!provider)return showMobile();
+  try{
+    const a=await provider.request({method:'eth_requestAccounts'}); account=(a&&a[0]||'').toLowerCase();
+    if(account!==TARGET){setStatus(`Wrong wallet account: ${account||'none'}\nExpected: ${TARGET}`,'bad');$('signBtn').disabled=true;return}
+    const ok=await ensureBase(); if(!ok)return;
+    setStatus('Correct signer target connected on Base. Ready to sign.','ok');$('signBtn').disabled=false;$('switchBtn').classList.add('hidden');
+  }catch(e){setStatus('Wallet connection was cancelled or failed: '+(e.message||e),'bad')}
+}
+$('connectBtn').onclick=connect;
+$('switchBtn').onclick=async()=>{if(await ensureBase())connect()};
 
-  async function refresh() {
-    if (!window.ethereum) {
-      walletStatus.textContent = 'No injected Web3 wallet found. Open this page inside your wallet browser or install/enable a compatible wallet.';
-      walletStatus.className = 'status bad';
-      connectBtn.disabled = true;
-      return;
-    }
-    const accounts = await ethereum.request({method:'eth_accounts'});
-    chainId = await ethereum.request({method:'eth_chainId'});
-    account = accounts[0] || null;
-    if (!account) {
-      walletStatus.textContent = 'Wallet available. Tap Connect Wallet.';
-      walletStatus.className = 'status hold';
-      signBtn.disabled = true; switchBtn.classList.add('hidden'); mechanismWrap.classList.add('hidden');
-      return;
-    }
-    const match = account.toLowerCase() === TARGET.toLowerCase();
-    const onBase = chainId.toLowerCase() === BASE_CHAIN;
-    walletStatus.textContent = `Connected: ${account}\nChain: ${parseInt(chainId,16)}${!match ? '\nHOLD: connected address does not match signer_target.' : ''}${match && !onBase ? '\nHOLD: switch to Base (8453) before signing.' : ''}`;
-    walletStatus.className = `status ${match && onBase ? 'ok' : 'hold'}`;
-    switchBtn.classList.toggle('hidden', onBase);
-    mechanismWrap.classList.remove('hidden');
-    signBtn.disabled = !(match && onBase);
-    if (match && onBase) {
-      try {
-        const code = await ethereum.request({method:'eth_getCode', params:[account,'latest']});
-        const contractLike = code && code !== '0x' && code !== '0x0';
-        const chosen = document.querySelector(`input[name="mechanism"][value="${contractLike ? 'EIP1271' : 'EOA_ECRECOVER'}"]`);
-        if (chosen) chosen.checked = true;
-      } catch (_) {}
-    }
-  }
+function toHex(u8){return '0x'+Array.from(u8,b=>b.toString(16).padStart(2,'0')).join('')}
+async function sign(){
+  try{
+    if(!provider||!account)return;
+    if(account!==TARGET){setStatus('Signer target mismatch. Reconnect the correct wallet.','bad');return}
+    if(!(await ensureBase()))return;
+    const msgHex=toHex(bytes);
+    setStatus('Approve the EIP-191 message in your wallet. This is a signature only — not a transaction.','hold');
+    const sig=await provider.request({method:'personal_sign',params:[msgHex,account]});
+    const code=await provider.request({method:'eth_getCode',params:[TARGET,'latest']});
+    const mechanism=(code&&code!=='0x'&&code!=='0x0')?'EIP1271':'EOA_ECRECOVER';
+    const atom={challenge_digest:DIGEST,signer_target:TARGET,verification_mechanism:mechanism,signature:sig,verification_result:'NOT_YET_EVALUATED'};
+    $('mechanism').textContent=mechanism;
+    $('signature').textContent=sig;
+    $('atom').textContent=JSON.stringify(atom,null,2);
+    $('resultWrap').classList.remove('hidden');
+    setStatus('Signature captured locally. Copy the External ATOM and return it to the verifier.','ok');
+  }catch(e){setStatus('Signing was cancelled or failed: '+(e.message||e),'bad')}
+}
+$('signBtn').onclick=sign;
+$('copyAtomBtn').onclick=async()=>{await navigator.clipboard.writeText($('atom').textContent);setStatus('External ATOM copied. Paste it back into ChatGPT.','ok')};
 
-  connectBtn.onclick = async () => {
-    try { await ethereum.request({method:'eth_requestAccounts'}); await refresh(); }
-    catch (e) { walletStatus.textContent = `Connect cancelled/failed: ${e.message || e}`; walletStatus.className='status bad'; }
-  };
-
-  switchBtn.onclick = async () => {
-    try {
-      await ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:BASE_CHAIN}]});
-    } catch (e) {
-      if (e && e.code === 4902) {
-        await ethereum.request({method:'wallet_addEthereumChain',params:[{chainId:BASE_CHAIN,chainName:'Base',nativeCurrency:{name:'Ether',symbol:'ETH',decimals:18},rpcUrls:['https://mainnet.base.org'],blockExplorerUrls:['https://basescan.org']}]});
-      } else { walletStatus.textContent = `Network switch failed: ${e.message || e}`; walletStatus.className='status bad'; return; }
-    }
-    await refresh();
-  };
-
-  signBtn.onclick = async () => {
-    await refresh();
-    if (!account || account.toLowerCase() !== TARGET.toLowerCase() || chainId.toLowerCase() !== BASE_CHAIN) return;
-    signBtn.disabled = true; signBtn.textContent = 'Waiting for wallet signature…';
-    try {
-      const signature = await ethereum.request({method:'personal_sign',params:[MESSAGE_HEX,account]});
-      const mechanism = document.querySelector('input[name="mechanism"]:checked').value;
-      const atom = {
-        challenge_digest: DIGEST,
-        signer_target: TARGET,
-        signature_bytes: signature,
-        mechanism
-      };
-      $('signature').textContent = signature;
-      $('atom').textContent = JSON.stringify(atom,null,2);
-      $('result').classList.remove('hidden');
-      walletStatus.textContent = 'Signature received locally. Copy the ATOM to the verifier; this page has not uploaded it.';
-      walletStatus.className = 'status ok';
-    } catch (e) {
-      walletStatus.textContent = `Signature cancelled/failed: ${e.message || e}`;
-      walletStatus.className = 'status bad';
-    } finally { signBtn.disabled = false; signBtn.textContent = 'Sign Frozen T-06 Message'; }
-  };
-
-  $('copyBtn').onclick = async () => {
-    await navigator.clipboard.writeText($('atom').textContent);
-    $('copyBtn').textContent='Copied ✓'; setTimeout(()=> $('copyBtn').textContent='Copy ATOM',1200);
-  };
-  $('downloadBtn').onclick = () => {
-    const blob = new Blob([$('atom').textContent+'\n'],{type:'application/json'});
-    const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='t06-signature-atom.json'; a.click(); URL.revokeObjectURL(a.href);
-  };
-
-  if (window.ethereum) {
-    ethereum.on?.('accountsChanged', refresh); ethereum.on?.('chainChanged', refresh);
-  }
-  refresh().catch(()=>{});
-})();
+if(provider&&provider.on){provider.on('accountsChanged',()=>location.reload());provider.on('chainChanged',()=>location.reload())}
 </script>
 </body>
 </html>
