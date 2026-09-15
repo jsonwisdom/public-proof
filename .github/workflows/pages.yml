@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "index.html"
+      - "executive-game.html"
       - "sign-t06.html"
       - "sign-controller-v2.html"
       - ".nojekyll"
@@ -39,10 +40,12 @@ jobs:
           set -euo pipefail
           mkdir -p _site
           cp index.html _site/index.html
+          cp executive-game.html _site/executive-game.html
           cp sign-t06.html _site/sign-t06.html
           cp sign-controller-v2.html _site/sign-controller-v2.html
           touch _site/.nojekyll
           sha256sum _site/index.html | tee _site/index.sha256
+          sha256sum _site/executive-game.html | tee _site/executive-game.sha256
           sha256sum _site/sign-t06.html | tee _site/sign-t06.sha256
           sha256sum _site/sign-controller-v2.html | tee _site/sign-controller-v2.sha256
 
