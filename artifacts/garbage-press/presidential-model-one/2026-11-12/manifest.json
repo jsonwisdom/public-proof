@@ -1,0 +1,72 @@
+{
+  "schema": "cifirst.artifact_receipt.v1",
+  "record_id": "GP-CIFIRST-PRESIDENTIAL-MODEL-ONE-2026-11-12",
+  "title": "Garbage Press / CI-FIRST — Presidential Model One",
+  "record_type": "Public receipt and thumbnail for a private full-resolution AI-generated image",
+  "image_classification": "FICTIONAL CONCEPT / SATIRE",
+  "integrity_scope": "Verified local image bytes and public thumbnail; NOT product authentication",
+  "original_png": {
+    "filename": "presidential_model_one_power_on_display.png",
+    "size_bytes": 2970061,
+    "dimensions_px": [
+      1983,
+      793
+    ],
+    "sha256": "84454871ede6e3dbe5960cee3a685307399a5ae379ce0c865c4476dfdfaea506",
+    "generated_in_conversation": true,
+    "generation_id_claim": "e785fd18-5ba0-4e4b-a51e-087b8e1cddce",
+    "published_in_this_commit": false,
+    "provenance": "Original PNG locally verified; full-resolution image NOT deposited in this commit. Generation metadata are conversation-provided, not independently notarized."
+  },
+  "user_uploaded_jpeg": {
+    "filename": "A6207A7F-22E1-45DA-B198-FAFC68D38CA3.jpeg",
+    "dimensions_px": [
+      1536,
+      614
+    ],
+    "size_bytes": 609652,
+    "sha256": "9b2b5bf864fa334fc7e42cea9a24e9f779d6d61ce40259876a807e8b5d5bfc6e",
+    "published_in_this_commit": false
+  },
+  "public_thumbnail": {
+    "filename": "preview_192x77.jpg",
+    "dimensions_px": [
+      192,
+      77
+    ],
+    "size_bytes": 4121,
+    "sha256": "2a4a68ea8f53108b167d286b83a47bf7a29f7324379711cf0ae74cb57e7423de",
+    "github_git_blob_sha1": "b8f81842dfe4aab395ea18c4420735f50c23085e",
+    "relationship": "Downsampled lossy JPEG derivative of original PNG; not byte-identical"
+  },
+  "original_and_jpeg_comparison": {
+    "method": "Lanczos resizing, RGB Pearson pixel-value correlation",
+    "correlation": 0.994347,
+    "interpretation": "Visual correspondence, not cryptographic identity"
+  },
+  "wolfram_check": {
+    "scope": "SHA-256 of first 48 PNG bytes only",
+    "sha256": "17a88163bccbc815776de6de988294225ed717f89778aea732f653f9cba02ede",
+    "verdict": "PASS, for header bytes, not full original image"
+  },
+  "verdicts": {
+    "original_png_locally_present": "PASS",
+    "uploaded_jpeg_locally_present": "PASS",
+    "preview_publicly_deposited": "PASS upon GitHub commit and path verification",
+    "entire_original_png_publicly_deposited": "FAIL / NOT DONE",
+    "presidential_model_one_as_official_nvidia_product": "FICTION / NOT OFFICIAL",
+    "genuine_presidential_endorsement": "NOT ESTABLISHED; depicted slogan is SATIRE",
+    "independently_authenticated_original_creation_provenance": "UNKNOWN",
+    "bitcoin_or_blockchain_anchor": "NOT CLAIMED"
+  },
+  "disclosures": [
+    "FICTIONAL CONCEPT",
+    "NOT AN OFFICIAL NVIDIA PRODUCT",
+    "NO PRESIDENTIAL ENDORSEMENT",
+    "This is digital satire with stylized depictions of public officials.",
+    "SHA-256 proves byte identity only against matching bytes; not authorship, date, or real-world product authenticity.",
+    "Separate China Edition 6090 concept artifact is NOT included."
+  ],
+  "original_local_manifest_sha256": "f1baffdd17d199905242345a5b59fdee0179e3708b687a8a53f4e5fcade",
+  "archive_state": "PUBLIC GITHUB MANIFEST + THUMBNAIL ONLY. ORIGINAL PNG REMAINS UNPUBLISHED. No SHA claim about an original image hosted here."
+}
