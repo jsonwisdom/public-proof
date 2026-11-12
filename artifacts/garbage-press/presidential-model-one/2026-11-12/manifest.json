@@ -1,10 +1,10 @@
 {
-  "schema": "cifirst.artifact_receipt.v1.1",
+  "schema": "cifirst.artifact_receipt.v1.2",
   "record_id": "GP-CIFIRST-PRESIDENTIAL-MODEL-ONE-2026-11-12",
   "title": "Garbage Press / CI-FIRST — Presidential Model One",
   "record_type": "Public receipt and thumbnail for a private full-resolution AI-generated image",
   "image_classification": "FICTIONAL CONCEPT / SATIRE",
-  "integrity_scope": "Verified local image bytes and public thumbnail; NOT product authentication",
+  "integrity_scope": "Original PNG SHA-256 was checked by the artifact holder locally (SELF-ATTESTED CUSTODY ONLY); public preview independently retrievable; no source/authorship or product authentication.",
   "original_png": {
     "filename": "presidential_model_one_power_on_display.png",
     "size_bytes": 2970061,
@@ -16,8 +16,10 @@
     "generated_in_conversation": true,
     "generation_id_claim": "e785fd18-5ba0-4e4b-a51e-087b8e1cddce",
     "published_in_this_commit": false,
-    "provenance": "Original PNG locally verified; full-resolution image NOT deposited in this commit. Generation metadata are conversation-provided, not independently notarized.",
-    "sha256_local_recheck_2026_11_12": "PASS — 2,970,061 bytes, 1983 × 793, SHA-256 84454871ede6e3dbe5960cee3a685307399a5ae379ce0c865c4476dfdfaea506"
+    "provenance": "Local original SHA-256 check is SELF-ATTESTED CUSTODY only. Full-resolution original PNG not publicly deposited. Creation metadata come from this conversation and are not independently authenticated.",
+    "sha256_local_recheck_2026_11_12": "PASS — SELF-ATTESTED CUSTODY / LOCAL ONLY. 2,970,061 bytes, 1983×793, digest 84454871ede6e3dbe5960cee3a685307399a5ae379ce0c865c4476dfdfaea506. Not independently reproducible without original bytes.",
+    "verification_level": "1 — SELF-ATTESTED LOCAL CUSTODY; not publicly reproducible, not independently source-authenticated",
+    "publicly_retrievable": false
   },
   "user_uploaded_jpeg": {
     "filename": "A6207A7F-22E1-45DA-B198-FAFC68D38CA3.jpeg",
@@ -51,8 +53,8 @@
     "verdict": "PASS, for header bytes, not full original image"
   },
   "verdicts": {
-    "original_png_locally_present": "PASS",
-    "uploaded_jpeg_locally_present": "PASS",
+    "original_png_locally_present": "PASS — SELF-ATTESTED CUSTODY / LOCAL ONLY",
+    "uploaded_jpeg_locally_present": "PASS — SELF-ATTESTED CUSTODY / LOCAL ONLY",
     "preview_publicly_deposited": "PASS upon GitHub commit and path verification",
     "entire_original_png_publicly_deposited": "FAIL / NOT DONE",
     "presidential_model_one_as_official_nvidia_product": "FICTION / NOT OFFICIAL",
@@ -70,11 +72,13 @@
     "This public GitHub commit cannot authenticate the original PNG bytes that were not deposited; derivative checks are separate."
   ],
   "original_local_manifest_sha256": "f1baffdd17d199905242345a5b59fdee0179e3708b687a8a53f4e5fcade",
-  "archive_state": "PUBLIC RECEIPT + PUBLIC PREVIEW ONLY. Original PNG bytes remain UNPUBLISHED; public recomputation of original PNG SHA-256 remains BLOCKED.",
+  "archive_state": "PUBLIC RECEIPT + DERIVATIVE PREVIEW: PASS. ORIGINAL PNG VERIFIED ONLY BY HOLDER (SELF-ATTESTED). ORIGINAL PNG BYTES PUBLIC: FAIL / NOT DONE. ORIGINAL PUBLIC RECOMPUTATION + INDEPENDENT ORIGIN: UNKNOWN.",
   "receipt_history": {
     "initial_public_receipt_commit_sha_full": "c1821eb6a4ddd9ae77d17389be71e78254cbb61a",
     "initial_commit_url": "https://github.com/jsonwisdom/public-proof/commit/c1821eb6a4ddd9ae77d17389be71e78254cbb61a",
-    "note": "This updated manifest points to a PRIOR commit. Its own Git commit SHA cannot be embedded in its own bytes without a circular self-reference. Use the containing GitHub commit URL as the updated receipt identifier."
+    "note": "This updated manifest points to a PRIOR commit. Its own Git commit SHA cannot be embedded in its own bytes without a circular self-reference. Use the containing GitHub commit URL as the updated receipt identifier.",
+    "previous_correction_commit_sha_full": "3523ec32d3b8ad36f3b72351ce966bd8b09506ee",
+    "previous_correction_commit_url": "https://github.com/jsonwisdom/public-proof/commit/3523ec32d3b8ad36f3b72351ce966bd8b09506ee"
   },
   "receipt_scope": {
     "public_receipt_manifest": "PASS",
@@ -82,14 +86,22 @@
     "public_receipt_sha256_commitment": "PASS — commitment to original digest only",
     "public_preview_file": "PASS — lossy derivative published",
     "original_png_bytes_publicly_archived": "FAIL / NOT DONE",
-    "public_independent_full_png_hash_recomputation": "UNKNOWN / BLOCKED pending original bytes",
+    "public_independent_full_png_hash_recomputation": "UNKNOWN / BLOCKED — original bytes NOT PUBLIC",
     "creation_authorship_date_independently_proven": "UNKNOWN",
     "product_reality": "FICTION / NOT OFFICIAL",
-    "actual_presidential_endorsement_or_order": "UNKNOWN / NO EVIDENCE; depicted claims are SATIRE"
+    "actual_presidential_endorsement_or_order": "UNKNOWN / NO EVIDENCE; depicted claims are SATIRE",
+    "local_original_full_png_sha256": "PASS — SELF-ATTESTED CUSTODY / LOCAL ONLY",
+    "independent_source_authorship_and_creation_date": "UNKNOWN",
+    "public_preview_sha256": "PASS — PUBLICLY REPRODUCIBLE for low-resolution preview ONLY"
   },
   "procedures": {
     "preview_from_repo": "cd artifacts/garbage-press/presidential-model-one/2026-11-12 && sha256sum -c SHA256SUMS.txt",
     "original_once_provided": "cd artifacts/garbage-press/presidential-model-one/2026-11-12 && sha256sum -c ORIGINAL_SHA256SUMS.txt",
-    "warning": "The second command will fail until the complete original PNG is separately provided. Do not present a preview-only checksum pass as original PNG verification."
+    "warning": "SHA256SUMS.txt checks only the published JPEG preview. ORIGINAL_SHA256SUMS.txt checks only the original if those 2,970,061 bytes are supplied separately; no published original is claimed."
+  },
+  "verification_levels": {
+    "level_1_self_attested_local": "PASS — Holder has original bytes and recomputed SHA-256 locally; includes file size, dimensions, digest",
+    "level_2_public_byte_reproducibility": "UNKNOWN / BLOCKED — Original 2,970,061-byte PNG not available in this repository",
+    "level_3_independent_creation_source_authentication": "UNKNOWN — Authorship, timestamp and origin have not been independently attested"
   }
 }

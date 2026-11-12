@@ -6,9 +6,21 @@ This directory is a **public receipt layer** for a privately held full-resolutio
 
 ![Public low-resolution preview](preview_192x77.jpg)
 
+
+## Verification levels — keep separate
+
+| Level | What it tests | Status |
+| --- | --- | --- |
+| 1. Self-attested local custody | Holder checks original 2,970,061-byte PNG against recorded SHA-256 | **PASS — SELF-ATTESTED CUSTODY ONLY** |
+| 2. Public byte reproducibility | Any reader downloads original PNG and recomputes digest | **UNKNOWN / BLOCKED** — complete PNG not published |
+| 3. Independent provenance | External confirmation of authorship, original creation time, source | **UNKNOWN** |
+
+Publishing the complete PNG would make Level 2 reproducible but **would not** automatically establish Level 3. A crop, resized JPEG, or metadata-only release cannot verify the original PNG hash. An external archive or timestamp has **not** been established.
+
 ## Public receipt and evidence boundary
 
 - **PASS:** GitHub commit contains the manifest, README, preview, and separate SHA-256 checksum files.
+- **PASS — SELF-ATTESTED CUSTODY ONLY:** Holder locally verified the original PNG (2,970,061 bytes, SHA-256 committed). This is **not** a third-party hash verification.
 - **PASS (commitment only):** Original PNG digest published in `ORIGINAL_SHA256SUMS.txt`.
 - **PASS:** A lossy **192 × 77 JPEG preview** is committed and can be checked with `SHA256SUMS.txt`.
 - **FAIL / NOT DONE:** Original **1983 × 793 PNG bytes** are **not** committed, so their digest **cannot** be independently recalculated from this repository.
