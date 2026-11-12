@@ -1,5 +1,5 @@
 {
-  "schema": "cifirst.artifact_receipt.v1",
+  "schema": "cifirst.artifact_receipt.v1.1",
   "record_id": "GP-CIFIRST-PRESIDENTIAL-MODEL-ONE-2026-11-12",
   "title": "Garbage Press / CI-FIRST — Presidential Model One",
   "record_type": "Public receipt and thumbnail for a private full-resolution AI-generated image",
@@ -16,7 +16,8 @@
     "generated_in_conversation": true,
     "generation_id_claim": "e785fd18-5ba0-4e4b-a51e-087b8e1cddce",
     "published_in_this_commit": false,
-    "provenance": "Original PNG locally verified; full-resolution image NOT deposited in this commit. Generation metadata are conversation-provided, not independently notarized."
+    "provenance": "Original PNG locally verified; full-resolution image NOT deposited in this commit. Generation metadata are conversation-provided, not independently notarized.",
+    "sha256_local_recheck_2026_11_12": "PASS — 2,970,061 bytes, 1983 × 793, SHA-256 84454871ede6e3dbe5960cee3a685307399a5ae379ce0c865c4476dfdfaea506"
   },
   "user_uploaded_jpeg": {
     "filename": "A6207A7F-22E1-45DA-B198-FAFC68D38CA3.jpeg",
@@ -65,8 +66,30 @@
     "NO PRESIDENTIAL ENDORSEMENT",
     "This is digital satire with stylized depictions of public officials.",
     "SHA-256 proves byte identity only against matching bytes; not authorship, date, or real-world product authenticity.",
-    "Separate China Edition 6090 concept artifact is NOT included."
+    "Separate China Edition 6090 concept artifact is NOT included.",
+    "This public GitHub commit cannot authenticate the original PNG bytes that were not deposited; derivative checks are separate."
   ],
   "original_local_manifest_sha256": "f1baffdd17d199905242345a5b59fdee0179e3708b687a8a53f4e5fcade",
-  "archive_state": "PUBLIC GITHUB MANIFEST + THUMBNAIL ONLY. ORIGINAL PNG REMAINS UNPUBLISHED. No SHA claim about an original image hosted here."
+  "archive_state": "PUBLIC RECEIPT + PUBLIC PREVIEW ONLY. Original PNG bytes remain UNPUBLISHED; public recomputation of original PNG SHA-256 remains BLOCKED.",
+  "receipt_history": {
+    "initial_public_receipt_commit_sha_full": "c1821eb6a4ddd9ae77d17389be71e78254cbb61a",
+    "initial_commit_url": "https://github.com/jsonwisdom/public-proof/commit/c1821eb6a4ddd9ae77d17389be71e78254cbb61a",
+    "note": "This updated manifest points to a PRIOR commit. Its own Git commit SHA cannot be embedded in its own bytes without a circular self-reference. Use the containing GitHub commit URL as the updated receipt identifier."
+  },
+  "receipt_scope": {
+    "public_receipt_manifest": "PASS",
+    "public_receipt_readme": "PASS",
+    "public_receipt_sha256_commitment": "PASS — commitment to original digest only",
+    "public_preview_file": "PASS — lossy derivative published",
+    "original_png_bytes_publicly_archived": "FAIL / NOT DONE",
+    "public_independent_full_png_hash_recomputation": "UNKNOWN / BLOCKED pending original bytes",
+    "creation_authorship_date_independently_proven": "UNKNOWN",
+    "product_reality": "FICTION / NOT OFFICIAL",
+    "actual_presidential_endorsement_or_order": "UNKNOWN / NO EVIDENCE; depicted claims are SATIRE"
+  },
+  "procedures": {
+    "preview_from_repo": "cd artifacts/garbage-press/presidential-model-one/2026-11-12 && sha256sum -c SHA256SUMS.txt",
+    "original_once_provided": "cd artifacts/garbage-press/presidential-model-one/2026-11-12 && sha256sum -c ORIGINAL_SHA256SUMS.txt",
+    "warning": "The second command will fail until the complete original PNG is separately provided. Do not present a preview-only checksum pass as original PNG verification."
+  }
 }

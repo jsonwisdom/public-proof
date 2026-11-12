@@ -1,4 +1,2 @@
-# ORIGINAL PNG — LOCAL ONLY, NOT INCLUDED IN THIS COMMIT
-84454871ede6e3dbe5960cee3a685307399a5ae379ce0c865c4476dfdfaea506  presidential_model_one_power_on_display.png
-# ARCHIVED PREVIEW — PRESENT IN THIS COMMIT
+# Publicly deposited preview ONLY
 2a4a68ea8f53108b167d286b83a47bf7a29f7324379711cf0ae74cb57e7423de  preview_192x77.jpg
