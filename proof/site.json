@@ -1,0 +1,7 @@
+{
+  "schema": "cw-site-proof-v0.1",
+  "source_path": "site/blackbarpress/index.html",
+  "public_path": "/",
+  "source_sha256": "8e5bfc1841f2718afd4bc370edbc7a718ac400e6ba79eb46b4eef0a83d5a683a",
+  "witness_signature": null
+}
