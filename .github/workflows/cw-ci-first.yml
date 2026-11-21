@@ -1,0 +1,57 @@
+name: Computer Wisdom CI-FIRST
+on:
+  push:
+    branches: [main]
+    paths:
+      - "audits/ny/**"
+      - "audits/mn/**"
+      - "site/blackbarpress/**"
+      - "proof/**"
+      - "scripts/cw_ci.py"
+      - ".github/workflows/cw-ci-first.yml"
+  pull_request:
+    paths:
+      - "audits/ny/**"
+      - "audits/mn/**"
+      - "site/blackbarpress/**"
+      - "proof/**"
+      - "scripts/cw_ci.py"
+      - ".github/workflows/cw-ci-first.yml"
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cw-ci-first-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: false
+jobs:
+  deterministic-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate cryptographic source pins and state manifest rules
+        run: python3 -B scripts/cw_ci.py selftest
+      - name: Deterministically build site; reject SHA-256 drift
+        run: python3 -B scripts/cw_ci.py build
+      - name: Publish unsigned build receipt as CI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cw-ci-first-preview
+          path: bbp-pages-output/proof/merkle-preview.json
+          if-no-files-found: error
+          retention-days: 30
+  live-byte-parity:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: deterministic-build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Independently fetch and hash published HTML responses
+        run: python3 -B scripts/cw_ci.py verify-live
