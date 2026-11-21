@@ -1,0 +1,10 @@
+{
+  "schema": "cw-state-proof-v0.1",
+  "state": "NY",
+  "source_path": "audits/ny/ny-sadc-oversight-2026.html",
+  "public_path": "/states/ny/",
+  "source_sha256": "d8f77aaded9d3bbc2a45fef783dd84296f432ab79f0c1a49ff3ac11344dbd438",
+  "evidence_status": "HOLD",
+  "witness_signature": null,
+  "scope": "Public NY audit article; original individual records and case authentication remain unresolved"
+}
