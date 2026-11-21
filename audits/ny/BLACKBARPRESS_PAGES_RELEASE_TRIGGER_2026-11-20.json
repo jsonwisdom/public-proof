@@ -1,0 +1,13 @@
+{
+  "schema": "BBP_PAGES_RELEASE_TRIGGER_V1",
+  "project": "blackbarpress-receipts",
+  "repository": "jsonwisdom/public-proof",
+  "production_branch": "main",
+  "release_checkpoint": "audits/ny/AF_NYC_JOSHUA005_ACT4_PUBLIC_CHECKPOINT_2026-11-20.json",
+  "source_checkpoint_commit": "fad615a7cc7829bd8348b86eae78f0311400e3d1",
+  "evidence_scope": "research-file hash linkage; court records and nationwide Merkle remain unverified",
+  "request": "Trigger initial Pages production deployment; compare served receipt bytes with committed source",
+  "requested_by": "Jay Wisdom",
+  "authorization": "2026-11-20",
+  "immutable_evidence_modified": false
+}
