@@ -1,0 +1,10 @@
+{
+  "schema": "cw-state-proof-v0.1",
+  "state": "MN",
+  "source_path": "audits/mn/mn-eidbi-oversight-2026.html",
+  "public_path": "/states/mn/",
+  "source_sha256": "b3623ccea1f9bedf718c5cca7f88194fbc256d7940f24993126beb284821c461",
+  "evidence_status": "HOLD",
+  "witness_signature": null,
+  "scope": "Public Minnesota OLA review; individual case-file authenticity and provider wrongdoing not established"
+}
