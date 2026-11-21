@@ -1,0 +1,43 @@
+{
+  "schema": "cw-release-evidence-v0.1",
+  "publication": "BLACK BAR PRESS",
+  "domain": "press.jsonwisdom.com",
+  "observation_date_utc": "2026-11-21",
+  "source_repository": "jsonwisdom/public-proof",
+  "source_commit": "181fba0e623ae3e44e7278c9ca6793bbbe16b623",
+  "cloudflare_pages_project": "blackbarpress-receipts",
+  "cloudflare_deployment_id": "e770f603-12a5-4be1-819c-57196d1fc3ce",
+  "deployment_status": "SUCCESS",
+  "verification_method": "Wolfram Language URLRead HTTPRequest with Accept-Encoding identity; Hash response BodyByteArray SHA256; compare pinned GitHub source hashes",
+  "pages": [
+    {
+      "path": "/",
+      "http_status": 200,
+      "source_sha256": "8e5bfc1841f2718afd4bc370edbc7a718ac400e6ba79eb46b4eef0a83d5a683a",
+      "production_sha256": "8e5bfc1841f2718afd4bc370edbc7a718ac400e6ba79eb46b4eef0a83d5a683a",
+      "response_body_bytes": 4310,
+      "status": "PASS"
+    },
+    {
+      "path": "/states/ny/",
+      "http_status": 200,
+      "source_sha256": "d8f77aaded9d3bbc2a45fef783dd84296f432ab79f0c1a49ff3ac11344dbd438",
+      "production_sha256": "d8f77aaded9d3bbc2a45fef783dd84296f432ab79f0c1a49ff3ac11344dbd438",
+      "response_body_bytes": 11826,
+      "status": "PASS"
+    },
+    {
+      "path": "/states/mn/",
+      "http_status": 200,
+      "source_sha256": "b3623ccea1f9bedf718c5cca7f88194fbc256d7940f24993126beb284821c461",
+      "production_sha256": "b3623ccea1f9bedf718c5cca7f88194fbc256d7940f24993126beb284821c461",
+      "response_body_bytes": 7544,
+      "status": "PASS"
+    }
+  ],
+  "witness_signature": null,
+  "witness_status": "HOLD_NOT_SIGNED",
+  "evidence_record_authentication": "HOLD",
+  "github_actions_run_status": "NOT_INDEPENDENTLY_OBSERVED",
+  "conclusion": "Exact production HTML response-body parity PASS for three pages; authenticity of underlying investigation evidence and Ed25519 witness signature not established."
+}
