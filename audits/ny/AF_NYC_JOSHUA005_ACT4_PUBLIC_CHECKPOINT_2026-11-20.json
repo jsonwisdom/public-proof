@@ -1,0 +1,28 @@
+{
+  "schema": "CI_FIRST_NY_ACT4_PUBLICATION_RECEIPT_V1",
+  "mission": "AF-NYC-JOSHUA-005",
+  "authorized_by": "Jay Wisdom",
+  "authorization": "Publish to GitHub and Cloudflare Pages",
+  "authorization_date": "2026-11-20",
+  "record_type": "public_integrity_checkpoint",
+  "scope": "NY ACT3 to ACT4 research-file hash linkage only",
+  "files": [
+    {
+      "name": "AF_NYC_JOSHUA005_ARCHIVE_ACT3_2026-11-12.json",
+      "sha256": "e304399ac132629fe2ceaf7cf54a2891ff1b215777cee2938aa5803c7bdbcd14"
+    },
+    {
+      "name": "AF_NYC_JOSHUA005_ARCHIVE_ACT4_2026-11-12.json",
+      "sha256": "2043bb2d830085819f451a395c06600223a05ae1dc7465a6d6d44d01eecd3e79",
+      "recorded_parent_file_sha256": "e304399ac132629fe2ceaf7cf54a2891ff1b215777cee2938aa5803c7bdbcd14"
+    }
+  ],
+  "integrity_status": "PASS_REPORTED_AND_REPLAYED_2026-11-20",
+  "court_access_authentication": "UNKNOWN",
+  "nationwide_merkle_inclusion": "HOLD",
+  "original_source_file_state": "READ_ONLY_DRAFT_NOT_PUBLISHED_UNMODIFIED",
+  "github_record_status": "PUBLIC_ON_COMMIT",
+  "cloudflare_status": "NOT_DEPLOYED_UNVERIFIED",
+  "publication_ledger_distinction": "This GitHub checkpoint is not an X article; X verified publication count remains 0.",
+  "note": "Hashes validate research-file linkage, not actual government records, court access, agency conduct, or the complete 50-state audit. Publication does not lift evidence HOLD gates."
+}
